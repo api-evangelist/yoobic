@@ -1,0 +1,330 @@
+openapi: 3.0.0
+info:
+  title: YOOBIC Public Answers Course Categories API
+  version: ''
+  description: "Welcome to the **YOOBIC Public API** documentation.\n\nThe **YOOBIC Public API** is designed for developers and engineers who are interested in building custom applications or integrating with other systems or APIs.\nThe API allows you to manage resources in a simple, programmatic way using conventional HTTPS requests.\n\nThe endpoints are intuitive and powerful, allowing you to easily make calls to retrieve information or to execute actions.\n\nThe API documentation will start with a general overview about the design and technology that has been implemented, followed by reference information about specific endpoints.\n\n# Postman Collection\n\nA complete **YOOBIC Postman Collection** is available for download, containing all API endpoints organized by resource groups with pre-configured environments.\n\n**Download:** [YOOBIC Postman Collection](https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip)\n\nThis collection includes:\n\n- All API endpoints organized by resource groups\n\n- Pre-configured environments (sandbox, prod)\n\n- Automatic authentication handling\n\n- Example requests and responses\n\n- Ready-to-use test scripts\n\nImport the collection into Postman to quickly start testing the YOOBIC API endpoints.\n\n# What's new\n\nBelow is a list of recent enhancements/changes to the YOOBIC Public API.\n\n### July 21st, 2026\n\n* New [rate limit](#section-api-tech-requirements) for `DELETE` requests (120 per minute) across all endpoints, per client organization. See [Rate Limits](#section-api-tech-requirements).\n\n### June 3rd, 2026\n\n* Clarify `score` and `extra_scores` semantics in [missions](#group-missions) CSV import/export: the `score` column holds the numeric value only; `extra_scores` is export-only with one (translated) column per sub-score.\n\n### March 19th, 2026\n\n* Expand publish documentation on [campaigns](#group-campaigns): per-site/per-user mission creation, `user_ids` parameter, and request/response examples.\n\n* Document that a mission must be assigned before it can be booked on [missions](#group-missions).\n\n### March 4th, 2026\n\n* Document escaping of special characters in CSV import files using double quotes (see [Asynchronous Jobs](#section-async-jobs)).\n\n### January 25th, 2026\n\n* Clarify that `group_ids` on [files](#group-files) accepts an array of group ids, with an updated example.\n\n### December 29th, 2025\n\n* New automatic public api collections\n\n* Add [Bot Messages](#group-bot_messages) endpoint.\n\n* Add [Chats](#group-chats) endpoint.\n\n* Add [Upload file](#reference/files/single-file-api/create) on files.\n\n### April 10th, 2025\n\n* Add `folder_id` field on [`files`](#group-files).\n\n* Add `folder_name` field on [`files`](#group-files).\n\n### February 16th, 2025\n\n* Error messages now partially obscure usernames when relevant.\n\n### January 16th, 2025\n\n* Added support for [SCIM](#group-scim).\n\n### January 15th, 2025\n\n* Add [Communities](#group-communities) endpoint.\n\n* Add [Community Posts](#group-community-posts) endpoint.\n\n### January 1st, 2025\n\n* Add `address` field on [`events`](#group-events).\n\n* Add `virtual_event_link` field on [`events`](#group-events).\n\n* Add `total_users` field on [`events`](#group-events).\n\n### November 10th, 2024\n\n* Add `expires_in` field on [`login`](#reference/auth/group-security/Authentication) [auth](#group-security).\n\n### October 30th, 2024\n\n* Add [Export manager users](#reference/users/multiple-users-api/export-manager-users) endpoint.\n\n* Add [Import manager users](#reference/users/multiple-users-api/import-manager-users) endpoint.\n\n* Add `position` field on [users](#group-users).\n\n* Add `department` field on [users](#group-users).\n\n* Add `division` field on [users](#group-users).\n\n* Add `company` field on [users](#group-users).\n\n* Add `hiring_date` field on [users](#group-users).\n\n* Add `skills` field on [users](#group-users).\n\n* Add `cover` field on [users](#group-users).\n\n* Add `description` field on [users](#group-users).\n\n### August 1st, 2024\n\n* Add `trigger_on_every_match` field on [webhooks](#group-webhooks).\n\n### July 15, 2024\n\n* Add new type for import users `json` on [`import`](#reference/users/multiple-users-api/import) endpoint.\n\n### June 27, 2024\n\n* Add [Bots](#group-bots) endpoint.\n\n* Add `earned_points` field on [courses](#group-courses).\n\n* Add `duration` field on [courses](#group-courses).\n\n* Add `start_date` field on [courses](#group-courses).\n\n* Add `due_date` field on [courses](#group-courses).\n\n* Add `finished_date` field on [courses](#group-courses).\n\n### April 30, 2024\n\n* Add `notify` field on campaign [Publish](#reference/campaigns/single-campaign-api/publish).\n\n### April 17, 2024\n\n* New [rate limit](#section-api-tech-requirements) for `users` endpoint for POST, PATCH and DELETE requests\n\n### January 31, 2024\n\n* Add [Invite users](#reference/users/multiple-users-api/invite-users) endpoint.\n\n* Add [Export archived users](#reference/users/multiple-users-api/export-archived-users) endpoint. The exported file now includes custom fields.\n\n* Add [Export archived stores](#reference/stores/multiple-stores-api/export-archived-stores) endpoint. The exported file now includes custom fields.\n\n### November 3, 2023\n\n* Add [Mission-Comments](#group-mission_comments) endpoint.\n\n### October 23, 2023\n\n* Add `da`, `fi`, `nb` and `sv` fields on [translations](#group-translations).\n\n### August 15, 2023\n\n* Add [Import Users To Archive](#reference/users/multiple-users-api/import-users-to-archive) on users.\n\n* Add [Import Users To Un Archive](#reference/users/multiple-users-api/import-users-to-un-archive) on users.\n\n* Add [Import Stores To Archive](#reference/stores/multiple-stores-api/import-stores-to-archive) on stores.\n\n* Add [Import Stores To Un Archive](#reference/stores/multiple-stores-api/import-stores-to-un-archive) on stores.\n\n### July 26, 2023\n\n* Add extra security asymetric encryption for logins.\n\n### June 20, 2023\n\n* [webhooks](#group-webhooks) change in behavior on sandbox environment.\n\n### April 23, 2023\n\n* Add new supported topics to [webhooks](#group-webhooks).\n\n### April 18, 2023\n\n* Add [Invitees](#reference/events/single-events-api/invitees) endpoint on events.\n\n### March 2, 2023\n\n* Update `group_id` field on [groups](#group-groups).\n\n### February 7, 2023\n\n* Add `weekly_schedule` fields on [users](#group-users).\n\n* Add [Shifts](#group-shifts) endpoint.\n\n### December 20, 2022\n\n* Add `au`, `ido` and `vi` fields on [translations](#group-translations).\n\n### November 23, 2022\n\n* Add `images` field on [news](#group-news).\n\n* Removed `image` field on [news](#group-news) (deprecated).\n\n### October 31, 2022\n\n* Add [Roles](#group-roles) endpoint.\n\n### October 20, 2022\n\n* Add [Questions](#group-questions) endpoint.\n\n### October 13, 2022\n\n* Add [Answers](#group-answers) endpoint.\n\n### September 1, 2022\n\n* Add `client_ids` field on [users](#group-users).\n\n* Add `store_type_names` field on [users](#group-users).\n\n### June 26, 2022\n\n* [`Publish`](#reference/campaigns/single-campaign-api/publish) a campaign based on its current configured audience.\n\n### June 22, 2022\n\n* Add security for [webhooks](#group-webhooks).\n\n* Updated limit to the number of [`notifications`](#group-notifications) that can be sent at once to 50k.\n\n### June 14, 2022\n\n* Add [Events](#group-events) endpoint.\n\n### February 20, 2022\n\n* Add `custom_fields` field on [visits](#group-visits).\n\n### December 21, 2021\n\n* Add [Import audience](#reference/campaigns/single-campaign-api/import-audience) on campaigns.\n\n* Add [Import new campaigns from template](#reference/campaigns/single-campaign-api/import-new-campaigns-from-template) on campaigns.\n\n* Add [Get all archives](#reference/users/multiple-users-api/get-all-archives) on users.\n\n* Add [Get all archives](#reference/stores/multiple-stores-api/get-all-archives) on stores.\n\n### October 27, 2021\n\n* Add `active` field on [campaigns](#group-campaigns).\n\n* Add `archived` field on [campaigns](#group-campaigns).\n\n### September 9, 2021\n\n* Add [jobs](#group-jobs) fields' detail.\n\n* Updated the location of the file containing the errors to be under `error`.\n\n### August 15, 2021\n\n* Errors during an import job are now described in a file and returned as a `download_url` under `errors` in the job response.\n\n### May 12, 2021\n\n* Add [create question](#reference/campaigns/single-campaign-api/create-question) on campaigns.\n\n* Add [update question](#reference/campaigns/single-campaign-api/update-question) on campaigns.\n\n* Add [delete question](#reference/campaigns/single-campaign-api/delete-question) on campaigns.\n\n* Add [partial u pdate](#reference/campaigns/single-campaign-api/partial-update) on campaigns.\n\n### May 10, 2021\n\n* Add get and update a [missions](#reference/missions/single-mission-api/find-mission's-tasks) tasks.\n\n### April 7, 2021\n\n* Add ability to get the missions' answers [missions](#reference/missions/multiple-missions-api/get-all).\n\n### March 16, 2021\n\n* Add `out_of_stock` field on [products](#group-products).\n\n### March 1, 2021\n\n* Add [`Password History`](#reference/users/single-user-api/password-history) method for [users](#group-users)\n\n### January 17, 2021\n\n* Add `terms_of_acceptance_date` field on [users](#group-users).\n\n* Add [tenants](#group-tenants)\n\n### January 13, 2021\n\n* Add `vq_fields` object in [stores](#group-stores) description and endpoints to support virtual queuing\n\n### January 12, 2021\n\n* Add [webhooks](#group-webhooks) endpoint.\n\n### December 28, 2020\n\n* Add [custom-model-instances](#group-custom_model_instances)\n\n### December 7, 2020\n\n* Add `task_number` field on [missions](#group-missions) endpoint.\n\n### November 19, 2020\n\n* Add `capacity` field on [stores](#group-stores) endpoint.\n\n* Add `last_seen` field on [users](#group-users).\n\n* Add `mobile_version` field on [users](#group-users).\n\n* Add `desktop_version` field on [users](#group-users).\n\n### November 10, 2020\n\n* Add `group_ids` field on [inventory](#group-inventory).\n\n### October 26, 2020\n\n* Add [`unarchive`](#reference/stores/single-store-api/unarchive) method for [stores](#group-stores)\n\n* Add [`unarchive`](#reference/users/single-user-api/unarchive) method for [users](#group-users)\n\n### October 22, 2020\n\n* Add [`archive`](#reference/stores/single-store-api/archive) method for [stores](#group-stores)\n\n* Add [`archive`](#reference/users/single-user-api/archive) method for [users](#group-users)\n\n### October 14, 2020\n\n* Add `allow_local_login` field on [users](#group-news).\n\n### September 14, 2020\n\n* Add `tags` field on [news](#group-news).\n\n* Add POST, DELETE and PATCH endpoints for [news](#group-news).\n\n### September 10, 2020\n\n* Add `client_role_extension` field on [users](#group-users).\n\n### August 19, 2020\n\n* Add `action_plan_progress` field on [missions](#group-missions) table.\n\n### July 23, 2020\n\n* Add `available-slots` method on [waitlist-yoobic-visits](#group-waitlist-yoobic-visits) endpoint.\n\n* Update `waitlist-yoobic-visits` response to return store `client_id` and store `title` on [waitlist-yoobic-visits](#group-waitlist-yoobic-visits) endpoints.\n\n### July 05, 2020\n\n* Add [waitlist-yoobic-visits](#group-waitlist-yoobic-visits)\n\n### June 28, 2020\n\n* Add [waitlist-customers](#group-waitlist-customers)\n\n### May 18, 2020\n\n* Add BOOST endpoint ([incentives-kpi](#group-incentives-kpi))\n\n### May 11, 2020\n\n* Add `timezone` field on [stores](#group-stores) endpoint.\n\n### May 5, 2020\n\n* Add `page_titles` field on [campaigns](#group-campaigns) endpoint.\n\n### April 16, 2020\n\n* Add [`delete`](#reference/campaigns/single-campaign-api/delete) method for [campaigns](#group-campaigns)\n\n### February 19, 2020\n\n* Add to [campaigns](#group-campaigns) [`publish`](#reference/campaigns/single-campaign-api/publish) the ability to provide default answers.\n\n### February 13, 2020\n\n* Add [`assign`](#reference/plans/single-plan-api/assign) method for [plans](#group-plans)\n\n### February 5, 2020\n\n* Add `timezone` field on [stores](#group-stores) endpoint.\n\n### February 4, 2020\n\n* Add [`create`](#reference/visits/multiple-visits-api/create) method for [visits](#group-visits)\n\n* Add [`import`](#reference/visits/multiple-visits-api/import) method for [visits](#group-visits)\n\n### January 28, 2020\n\n* Add properties on [campaigns](#group-campaigns) [`publish`](#reference/campaigns/single-campaign-api/publish)\n\n### November 5, 2019\n\n* Add `create` method for [campaigns](#group-campaigns) endpoint.\n\n* Add `create` method for [photos](#group-photos) endpoint.\n\n### October 2, 2019\n\n* Add `store_id` field on [visit](#group-visits).\n\n* Add `user_id` field on [visit](#group-visits).\n\n* Add `creator_id` field on [visit](#group-visits).\n\n### September 5, 2019\n\n* Add [visit](#group-visits) endpoint.\n\n### September 3, 2019\n\n* Add `group_ids` field on [notifications](#group-notifications).\n\n### August 8, 2019\n\n* Add [inventory](#group-inventory) endpoint.\n\n### August 5, 2019\n\n* Add `scoring` field on [campaigns](#group-campaigns).\n\n* Add `recurring` field on [campaigns](#group-campaigns).\n\n* Add `body` field on [notifications](#group-notifications).\n\n* Add `user_ids` field on [notifications](#group-notifications).\n\n* Add `badge_type` field on [notifications](#group-notifications).\n\n* Add `manufacturer` field on [products](#group-products).\n\n* Add `brand` field on [products](#group-products).\n\n* Add `category` field on [products](#group-products).\n\n* Add `images` field on [products](#group-products).\n\n### July 9, 2019\n\n* Add `authorised_viewers` field on [news](#group-news).\n\n* Add `description` field on [news](#group-news).\n\n* Add `group_ids` field on [news](#group-news).\n\n### June 13, 2019\n\n* Add `available_on_book` field on [missions](#group-missions).\n\n* Add `available_on_finished` field on [missions](#group-missions).\n\n### June 3, 2019\n\n* Add `average_completed_lesson` field on [plans](#group-plans).\n\n* Add `photo` field on [stores](#group-stores).\n\n* Add `address` field on [users](#group-users).\n\n### May 16, 2019\n\n* Add `duration` field on [missions](#group-missions).\n\n* Add `duration` field on [lessons](#group-lessons).\n\n### May 8, 2019\n\n* Add `markup_url` field on [photos](#group-photos).\n\n### April 30, 2019\n\n* Add `catalog_title` field on [products](#group-products).\n\n### Mar 24, 2019\n\n* Add `vip` field on [stores](#group-stores).\n\n### Mar 11, 2019\n\n* Remove support for the replace (PUT) resource, in favor of partial update (PATCH).\n\n### Mar 6, 2019\n\n* Document [Current User API](#reference/users/current-user-api/get)\n\n* Document company name restriction on  `Groups` [`create`](#reference/groups/multiple-groups-api/create) and [`import`](#reference/groups/multiple-groups-api/import)\n\n### Feb 25, 2019\n\n* Add endpoint to get a store's [`Health Score`](#reference/stores/single-store-api/health-score-of-a-store-api)\n\n* Add BOOST endpoints ([plans](#group-plans), [courses](#group-courses), [lessons](#group-lessons))\n\n### API Resources Overview\n\n| Resource                                 | GET | POST | PATCH  | DELETE | IMPORT | EXPORT | COUNT |\n|------------------------------------------|:---:|:----:|:------:|:------:|:------:|:------:|:-----:|\n|[`auth`](#group-security)                 |     |  x   |        |        |        |        |       |\n|[`answers`](#group-answers)               |  x  |      |        |        |        |    x   |   x   |\n|[`badges`](#group-badges)                 |  x  |      |        |        |        |    x   |   x   |\n|[`bots`](#group-bots)                     |  x  |      |        |        |        |    x   |   x   |\n|[`bot-messages`](#group-bot_messages)     |     |      |        |        |        |    x   |       |\n|[`campaigns`](#group-campaigns)           |  x  |  x   |   x    |   x    |        |    x   |   x   |\n|[`catalogs`](#group-catalogs)             |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`chats`](#group-chats)                   |     |  x   |        |        |        |        |       |\n|[`comments`](#group-comments)             |  x  |      |        |        |        |    x   |   x   |\n|[`communities`](#group-communities)       |  x  |  x   |   x    |        |        |    x   |   x   |\n|[`community-posts`](#group-community-posts) |  x  |  x   |        |        |    x   |    x   |   x   |\n|[`competencies`](#group-competencies)     |  x  |      |        |        |        |    x   |   x   |\n|[`course-categories`](#group-course-categories)     |  x  |      |        |        |        |    x   |   x   |\n|[`courses`](#group-courses)               |  x  |      |        |        |        |    x   |   x   |\n|[`custom-model-instances`](#group-custom_model_instances)|  |   |    |   |   x    |    x   |       |\n|[`events`](#group-events)                 |  x  |  x   |   x    |   x    |   x    |    x   |   x   |\n|[`files`](#group-files)                   |  x  |  x   |        |        |        |    x   |   x   |\n|[`geofilters`](#group-geofilters)         |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`groups`](#group-groups)                 |  x  |  x   |        |   x    |   x    |    x   |   x   |\n|[`incentives-kpi`](#group-incentives-kpi) |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`inventory`](#group-inventory)           |  x  |      |        |        |        |    x   |   x   |\n|[`lessons`](#group-lessons)               |  x  |      |        |        |        |    x   |   x   |\n|[`missions`](#group-missions)             |  x  |      |    x   |   x    |   x    |    x   |   x   |\n|[`mission_comments`](#group-mission_comments)   |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`news`](#group-news)                     |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`notifications`](#group-notifications)   |  x  |  x   |        |        |        |    x   |   x   |\n|[`photos`](#group-photos)                 |  x  |  x   |        |        |        |    x   |   x   |\n|[`plans`](#group-plans)                   |  x  |      |        |        |        |    x   |   x   |\n|[`products`](#group-products)             |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`questions`](#group-questions)           |  x  |      |        |        |        |    x   |   x   |\n|[`roles`](#group-roles)                   |  x  |      |        |        |        |    x   |   x   |\n|[`salesdata`](#group-salesdata)           |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`shifts`](#group-shifts)                 |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`store-types`](#group-store_types)       |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`stores`](#group-stores)                 |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`tenants`](#group-tenants)               |  x  |      |        |        |        |        |       |\n|[`translations`](#group-translations)     |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`users`](#group-users)                   |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`visits`](#group-visits)                 |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`webhooks`](#group-webhooks)             |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`jobs`](#group-jobs)                     |  x  |      |        |        |        |        |       |\n\n# Table of Contents\n\n- [API Help](#section-api-help) - We're here to help!\n\n- [API Access](#section-api-access) - API access authentication\n\n- [API Technical Requirements](#section-api-tech-requirements) - Technical requirements for communicating with the API - security protocols and rate limits\n\n- [API Requests](#section-api-requests) - Formatting of requests sent to the **RESTful** YOOBIC API\n    - [Filter](#section-api-requests-filter) - Filter the results using different criteria\n        - [Order](#section-api-requests-filter-order) - Ordering the results\n        - [Paging](#section-api-requests-filter-paging) - Paging through your results\n        - [Where](#section-api-requests-filter-where) - Matching your results\n        - [Fields](#section-api-requests-filter-fields) - including specific fields to your results\n    - [CRUD Requests](#section-api-requests-crud-requests) - Creating/updating/deleting resources\n\n- [API Responses](#section-api-responses) - The common response format of each request\n\n- [Asynchronous Jobs](#section-async-jobs) - How data is requested asynchronously for endpoints\n  - [Export file section](#section-export-jobs)\n  - [Import file section](#section-import-jobs)\n\n- [Endpoint Documentation](#section-endpoint-documentation) - Documentation specific for each endpoint. You may also use the links on the table on the sidebar to navigate to any endpoint.\n    - [Security](#group-security)\n    - [Answers](#group-answers)\n    - [Badges](#group-badges)\n    - [Bots](#group-bots)\n    - [Bot Messages](#group-bot_messages)\n    - [Campaigns](#group-campaigns)\n    - [Catalogs](#group-catalogs)\n    - [Chats](#group-chats)\n    - [Comments](#group-comments)\n    - [Communities](#group-communities)\n    - [Comments](#group-community-posts)\n    - [Competencies](#group-competencies)\n    - [Course-categories](#group-course-categories)\n    - [Courses](#group-courses)\n    - [Custom-model-instances](#group-custom_model_instances)\n    - [Events](#group-events)\n    - [Files](#group-files)\n    - [Geofilters](#group-geofilters)\n    - [Groups](#group-groups)\n    - [Incentives Kpi](#group-incentives-kpi)\n    - [Inventory](#group-inventory)\n    - [Lessons](#group-lessons)\n    - [Missions](#group-missions)\n    - [Missions](#group-mission_comments)\n    - [News](#group-news)\n    - [Notifications](#group-notifications)\n    - [Photos](#group-photos)\n    - [Plans](#group-plans)\n    - [Products](#group-products)\n    - [Questions](#group-questions)\n    - [Roles](#group-roles)\n    - [Salesdata](#group-salesdata)\n    - [SCIM](#group-scim)\n    - [Shifts](#group-shifts)\n    - [Store Types](#group-store_types)\n    - [Stores](#group-stores)\n    - [Tenants](#group-tenants)\n    - [Translations](#group-translations)\n    - [Users](#group-users)\n    - [Visits](#group-visits)\n    - [Webhooks](#group-webhooks)\n    - [Jobs](#group-async-jobs)\n\n<a id=\"section-api-help\"></a>\n\n## API Help\n\nHave questions or need support?\nEmail your YOOBIC Customer Success Manager or [support@yoobic.com](mailto:support@yoobic.com).\n\n<a id=\"section-api-access\"></a>\n\n## API Access\n\nAuthentication to the YOOBIC API uses JWT tokens. They are required for accessing API.    \nJWT tokens are set in the `Authorization` header for your requests as follows:\n\n```\nAuthorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\n```\n\nTo obtain a valid token you can either:\n\n- Use the [`auth/login`](#group-security) endpoint\n\n- Contact your YOOBIC Customer Success Manager or [support@yoobic.com](mailto:support@yoobic.com) to obtain credentials to use in the /auth/login endpoint.\n\n- Please note that in the case you are using a reverse proxy you must set the parameter `proxy_ssl_server_name` to on to successfully connect to the prod environment.\n\n<a id=\"section-api-tech-requirements\"></a>\n\n## API Technical Requirements\n\n### Protocol and Communication\n\n- The api is only accessible via HTTPS, using TLS 1.2 or better. We forward secrecy and AES-GCM, and prohibit insecure connections using SSL 3.0 or RC4.\n\n- Environments    \n      We provide both a Sandbox and a Production environment. Every Friday at 21:55 UTC, Sandbox is refreshed by taking a snapshot of the Production environment. Since this refresh process takes several hours, please avoid using Sandbox during that time. It is available for testing purposes outside of the refresh period.\n\n- Template structure of a request:   \n    - Base url Production: **https://api.yoobic.com/public/api**\n    - Base url Sandbox: **https://api-sandbox.yoobic.com/public/api**\n    - The `<base_url>` variable in the example requests is either `api.yoobic.com` or `api-sandbox.yoobic.com`.\n    - Get all (GET): `/{endpoint}?filter={ \"where\": { \"property\": \"value\" }, \"skip\": 0, \"limit\": 100, \"order\": \"updated_date DESC\", \"fields\": [\"property\"] }`\n    - Count (GET):  `/{endpoint}?where={ \"property\": \"value\" }`\n    - Create (POST): `/{endpoint}` should include a valid JSON object as the body.\n    - Update (PATCH): `/{endpoint}/:id` should include a valid JSON object as the body.\n    - Delete (DELETE): `/{endpoint}/:id`\n\n### Rate Limits\n\nAll limits are applied per client organization. Exceeding a limit returns HTTP error `429 Too Many Requests (Rate Limit Exceeded)`; wait for the current one-minute window to pass and retry.\n\n- **Interval Limit**: 10 requests per second overall. Send requests serially (one at a time); bursts of concurrent requests may be rejected.\n\n- **Delete Limit**: 120 `DELETE` requests per minute across all endpoints.\n\n- **Users Write Limit**: 180 requests per minute (3 per second) for `POST`, `PATCH` and `DELETE` on the `/users` endpoint. These requests also count toward the limits above.\n\n- **Daily Limit**: 100,000 requests per day.\nIf you need higher limits to support your specific use case, please contact your YOOBIC Customer Success Manager or [support@yoobic.com](mailto:support@yoobic.com) — limits can be adjusted per organization.\n\n<a id=\"section-api-requests\"></a>\n\n## API Requests\n\nRequests for the YOOBIC API are all RESTful, with parameters following the endpoint path or in request body.\nEach request in the documentation is displayed with the appropriate HTTP method and sample parameters.\nData may be sent in as parameters or in the request body as JSON.\nThe requests on the YOOBIC API allow for ordering, paging and filtering on a per entity basis.\n\n<a id=\"section-api-requests-filter\"></a>\n\n### Filter\n\nA where filter specifies criteria for returning data.\nWe supports the following kind of filters:\n\n- [Order filter](#section-api-requests-filter-order)\n\n- [Paging filter](#section-api-requests-filter-paging)\n\n- [Where filter](#section-api-requests-filter-where)\n\n- [Fields filter](#section-api-requests-filter-fields)\n\nA filter must be a JSON encoded string (`{\"something\":\"value\"}`).    \nTo do this, simply use the following syntax:\n\n```\n?filter={ Stringified-JSON }\n```\n\nIn the JSON all text keys/strings must be enclosed in quotes (\").\n\n**Important**:     \nWhen using stringified JSON, you must use an equal sign after ?filter in the query string.    \nFor example:\n\n```\nGET /entity?filter={\"where\": { \"entity_id\": 1234 }, \"order\": \"updated_date DESC\", \"limit\": 100, \"fields\": [\"property\", \"property\"] }\n```\n\n<a id=\"section-api-requests-filter-order\"></a>\n\n#### Order Filter\n\nAn *order* filter specifies how to sort the results: ascending (ASC) or descending (DESC) based on the specified property.   \nOrder by one property:\n\n```json\n{ \"order\": \"property <ASC|DESC>\" }\n```\n\nOrder by two or more properties:\n\n```json\n{ \"order\": [\"property <ASC|DESC>\", \"property <ASC|DESC>\",...] }\n```\n\nWhere:\n\n- *property* is the name of the property (field) to sort by.\n\n- *<ASC|DESC>* signifies either ASC for ascending order or DESC for descending order.\n\n**Important**:     \nBy default ordering will be performed according to the *updated_date* property.    \nEach endpoint's table, contains information, to the properties ordering could be performed on.\n\n<a id=\"section-api-requests-filter-paging\"></a>\n\n#### Paging Filter\n\nPaging can be achieved by a combination of *limit* and *skip* parameters.\n\n* *limit* filter limits the number of records returned to the specified number (or less).    \n    The maximum number of records that could be fetched is `1000`.    \n    For anything above that, you might want to consider using the [export](#section-async-jobs) endpoint.    \n    ```json\n        { \"limit\": 5 }\n    ```\n\n* *skip* filter omits the specified number of returned records.\n    ```json\n        { \"skip\": 5 } \n    ```\n\n* If `paging.total > paging.limit` in the response of a request:\n\n    It is possible to use the *skip* filter. Here is an example on how to use it with the users endpoint:    \n    `https://api-sandbox.yoobic.com/public/api/users?filter={\"skip\": 1000}`    \n    The recommended solution is to add a condition to the API script to loop requests if there are too many elements until all of them are returned.    \n    The condition would monitor that `paging.total - paging.limit <= paging.skip` in the response of each request, and if not send another request with `newSkip = Skip + 1000` after receiving the last one.    \n    The other way to manage large requests is to use asynchronous requests. For example with Users, it is possible to export a CSV file of all or some users. See the [export](#section-async-jobs) section for this.\n\n<a id=\"section-api-requests-filter-where\"></a>\n\n#### Where Filter\n\nA *where* filter specifies a set of logical conditions to match, similar to a WHERE clause in a SQL query.\n\nUse the first form below to test equivalence, that is, whether property equals value. Use the second form below for all other conditions.\n\n```json\n{ \"where\": { \"property\": value } }\n```\n\n```json\n{ \"where\": { \"property\": { \"op\" : value } } }\n```\n\n```json\n{ \"where\": { \"and|or\": [{ \"property\": { \"op\" : value } }, { \"property\": { \"op\" : value } }] } }\n```\n\nWhere:\n\n- *property* is the name of a property (field) in the model being queried.\n\n- *value* is a literal value.\n\n- *op* is one of the operators listed below.\n\n| Operator      | Description                                                                                                |\n|---------------|------------------------------------------------------------------------------------------------------------|\n|gt, gte        | Numerical greater than (>); greater than or equal (>=). Valid only for numerical and date values.| \n|lt, lte        | Numerical less than (<); less than or equal (<=). Valid only for numerical and date values. |\n|between        | True if the value is between the two specified values: greater than or equal to first value and less than or equal to second value.| \n|inq, nin       | In / not in an array of values.|\n|neq            | Not equal (!=) |\n\n<a id=\"section-api-requests-filter-fields\"></a>\n\n#### Fields Filter\n\nA *fields* filter specifies properties (fields) to include from the results.\n\n```json\n{ \"fields\": [\"property\", \"property\", ...] }\n```\n\nWhere:\n\n- *property* is the name of the proeprty (field) to include.\n\nBy default, queries return all properties in results. However, if you specify at least one fields filter, then by default the query will include only those you specifically include with filters.\n\n**Important**:     \nThe *export* resource for all endpoints does not allow the *fields* filter.\n\n<a id=\"section-api-requests-crud-requests\"></a>\n\n## CRUD Requests\n\nCreate, update and delete requests follow standard RESTful practices. While some fields\nare available on a resource, you may not be able to set values for *readonly* fields such as `created_date` during\na CREATE, UPDATE or DELETE action (it would just be ignored). The allowed parameters are listed at the beginning of each CRUD section for a particular resource.\n\n<a id=\"section-api-responses\"></a>\n\n## API Responses\n\nThe Response format varies depending on the type of request:\n\n- Single API requests - simple hash, whether it be an error or not.\n\n- Multiple API requests - a hash containing two lists \n  - `data` for successfull requests.\n  - `error` for failed requests.\n\nThe two correspond to the order in the request.\n\n```json\n{\n     \"data\": [],\n     \"error\": []\n}\n```\n\nFor find requests an `error` **or** `data` with an additional `paging` hash -\n\n```json\n{\n    \"data\": [],\n    \"error\": [],\n    \"paging\": {\n          \"skip\": 0,\n          \"limit\": 1000,\n          \"total\": 10000,\n    }\n}\n\n```\n\n- `skip` - The currently requested page. Defaults to `0` if no page is given in the request.\n\n- `limit` - The maximum amount of records that may be returned in this response. If not given in the filter parameter, defaults to `1000`.\n\n- `total` - The total records that match this request, regardless of current paging results.\n\n### Response Headers\n\n- content-type: application/json; charset=utf-8\n\n- status: 200 OK\n\n- ratelimit-limit: 1200\n\n- ratelimit-remaining: 1137\n\n- ratelimit-reset: 1415984218\n\n### Multiple Response Body\n\n#### Description Of Usual Server Responses:\n\n- 200 `OK` - the request was successful (some API calls may return 201 instead).\n\n- 201 `Created` - the request was successful and a resource was created.\n\n- 204 `No Content` - the request was successful but there is no representation to return (i.e. the response is empty).\n\n- 400 `Bad Request` - the request could not be understood or was missing required parameters.\n\n- 401 `Unauthorized` - authentication failed or user doesn't have permissions for requested operation.\n\n- 403 `Forbidden` - access denied.\n\n- 404 `Not Found` - resource was not found.\n\n- 405 `Method Not Allowed` - requested method is not supported for resource.\n\n- 429 `Too Many Requests` - rate limit exceeded.\n\n- 501 `Not Implemented` - the server lacks the ability to fulfill the request. Usually this implies future availability.\n\n<a id=\"section-async-jobs\"></a>\n\n## Asynchronous Jobs\n\nThere are 2 endpoints for async jobs\n\n- `/import`: Import a csv/excel file\n\n- `/export`: Export data as a csv/excel file\n\nBy default, all requests to the External API are synchronous and all data requested are returned within the same request/response cycle.\nOne limitation of this approach is that all responses are limited to a maximum number of records as defined in the [Paging section](#section-api-requests-filter-paging).\nTo enable returning an unlimited number of records, you are able to create a job to be executed asynchronously to return all records that match your current query.\n\n#### Async Jobs\n\n- `GET entity/export`\n\n- `POST entity/import`\n\nGiven the following request to get the stores:\n\n`https://api.yoobic.com/public/api/stores`\n\nIt can be converted into an asynchronous job:\n\n`https://api.yoobic.com/public/api/stores/export?type=csv`\n\n#### Response Structure and Return Codes\n\nWhen an asynchronous job is successfully created, a code of `200` will be returned. Any errors will result in a return code of `400` and error messages will be returned in the standard format.\n\nThe response structure of a requested asynchronous job includes a `job_id` that you use on the [Jobs endpoint](#group-jobs)\nto query for the current status of the endpoint. This structure is almost identical to what is returned from the [Jobs endpoint](#group-jobs).\nPlease refer to that endpoint for more details about obtaining the status of your job.\n\n```json\n{\n  \"name\": \"Export csv\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:37:23.088Z\",\n  \"_id\": \"5b97e133952d1c8776c9e723\"\n}\n```\n\n#### Export File Format\n\n<a id=\"section-export-jobs\"></a>\n\nThe file formats supported for exporting all records via an asynchronous job are CSV or Excel (xlsx). Once a job is completed, the response\nbody of the [Jobs endpoint](#group-jobs) request will return the `download_url` key that is the URL of the CSV or Excel.\nFor example, the above request will result in a file containing example data delimited by the default delimiter, with headers as follows:\n\n```json\n{\n  \"job_id\": \"5b97e133952d1c8776c9e723\",\n  \"name\": \"Export file\",\n  \"data\": {\n    \"authorization\": \"\",\n    \"input\": {\n      \"filter\": null,\n      \"type\": \"csv\",\n      \"modelName\": \"stores\"\n    },\n    \"output\": {\n      \"errors\": [],\n      \"data\": {\n          \"download_url\": \"https://s3.eu-west-1.amazonaws.com/yoobic.transient-file-storage/stores_6b97e133952d1c8776c9e723.csv\"\n        }\n    },\n    \"stats\": {\n      \"execution_time_milliseconds\": 556.81776,\n      \"execution_time\": \"556.81776 ms\",\n      \"errors\": 0,\n      \"success\": 1\n    }\n  },\n  \"progress\": 1,\n  \"lastFinishedAt\": \"2018-09-11T15:37:28.496Z\"\n}\n```\n\n- Response \"data.input\" object\nThe input parameters when creating the job.\n\n- Response \"data.output.data\" object.    \nThe `data` object in the results hash may be either a hash or an array, depending on the endpoint action.\n\n- Response \"data.output.errors\" hash.    \nThe `errors` array only appears in results to inform the client of errors such as incorrect field formats, model validation errors or server errors.\n\n- Response \"data.stats\" hash.    \nThe `stats` object informs about the total execution time and number of errors and/or successes.\n\n##### Resulting CSV example:\n\n```\n    id; title; address; latitude; longitude; client_id; store_type_id; store_type_name; created_date; updated_date\n    5b97e017952d1c8776c9e71e; Home; Statue of Liberty, New York, USA; 40.6895453; -74.0449292; 001; 5b97e00411ec54f2e3a0936e; TEST; 2018-09-11T15:32:39.607Z; 2018-09-11T15:32:39.607Z\n```\n\n#### Resulting Excel example:\n\nIn case of a request to export an excel file `https://api.yoobic.com/public/api/stores/export?type=excel` it would result in:    \n<img src=\"https://res.cloudinary.com/www-yoobic-com/image/upload/v1554025223/export_excel_example.png\" >\n\n##### Export File Expiration\n\nCurrently all exports are set to expire **one day** after they are created at which point they will be inaccessible.\n\n#### Import File\n\n<a id=\"section-import-jobs\"></a>\n\n<a id=\"section-asynchronous-jobs-import\"></a>\nImport a CSV/Excel file.    \nThis action is asynchronous and returns the id of a job. See [`jobs`](#group-jobs) endpoint to query the status of the job.\nMake sure that you make a multipart/form-data query, passing the CSV/Excel file as named parameter `file`.\nWhen you create a CSV/Excel file to import, you'll probably generate this list from some other information management system or database. Most of these systems have some facility for creating a CSV/Excel export file. If you need to create the list from scratch you can use a program like Microsoft Excel or OpenOffice.org Calc.\n\n**Important**:\n\n- To ensure correct handling of special characters, you must generate the CSV/Excel file using the UTF-8 character encoding.\n\n- The first row of the file is the header row, and you must include it in the file.\n\n- The header row must contain any required fields in the table below, plus any other fields listed in the table below that you want to include.\n\n- Empty columns of data in the file will overwrite any existing data for that entity (empty column is treated as a *null* value).\n\n- For Excel files, array type fields (i.e.: `tags` for users or stores, `client_ids` for users…) must be comma separated string i.e.: Tag1,Tag2,Tag3 or Tag1, Tag2, Tag3\n\n- For CSV files, array type fields can be either comma separated strings (i.e.: Tag1,Tag2,Tag3 or Tag1, Tag2, Tag3) or JSON array with quotes (i.e.: `\"[\"Tag1\",\"Tag2\",\"Tag3\"]\"`)- In Addition for CSV the field separator is `;` and line separator is `line-break`.\n\n- Make sure there are no duplicates by the defined primary keys as there is no guarantee on the order in which the import iterates over the rows.\n\n- Date values should comply with the ISO format, i.e. 2019-12-31 or 2019-12-31T23:59:59:999.\n\n- Escape special characters in CSV files with double quotes, for example: `\"<a href=\"\"https://example.com\"\">Link</a>\"`."
+servers:
+- url: https://<base_url>/
+tags:
+- name: Course Categories
+  description: '<a id="group-course-categories"></a>
+
+    Category in courses allows grouping available courses by topics or themes in the Discover section of the app. Each course can be linked to only one category.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`course_category_id`  |  string        |    x     |    x     |         | Unique id of the course category    |
+
+    |`creator_id`          |  string        |          |    x     |         | Unique id of the course category creator    |
+
+    |`title`               |  string        |          |    x     |         | Course category title     |
+
+    |`icon`                |  string        |          |    x     |         | Course category icon name |
+
+    |`created_date`        |  date          |          |    x     |         | Creation date             |
+
+    |`updated_date`        |  date          |          |    x     |    x    | Last update date          |'
+paths:
+  /public/api/course-categories/{id}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  category_id:
+                    type: string
+                  creator_id:
+                    type: string
+                  title:
+                    type: string
+                  tenant:
+                    type: string
+                  created_date:
+                    type: string
+                  updated_date:
+                    type: string
+                example:
+                  category_id: 61c058d4d1ae7c00388ef198
+                  creator_id: 5f3cfa761e8fdf003bf1fab7
+                  title: Sales AI
+                  tenant: vitaltest
+                  created_date: '2021-12-20T10:20:04.206Z'
+                  updated_date: '2021-12-20T10:20:04.206Z'
+              examples:
+                response:
+                  value:
+                    category_id: 61c058d4d1ae7c00388ef198
+                    creator_id: 5f3cfa761e8fdf003bf1fab7
+                    title: Sales AI
+                    tenant: vitaltest
+                    created_date: '2021-12-20T10:20:04.206Z'
+                    updated_date: '2021-12-20T10:20:04.206Z'
+      summary: Get
+      operationId: Get
+      description: Get a course for the given id.
+      tags:
+      - Course Categories
+      parameters:
+      - name: id
+        in: path
+        description: The id of the course
+        required: true
+        example: 5c6e7bd9d6313e003a5b73e1
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: e.g. application/json
+        required: false
+        example: application/json
+        schema:
+          type: string
+      security:
+      - oauth2: []
+  /public/api/course-categories?filter={filter}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paging:
+                    type: object
+                    properties:
+                      total:
+                        type: number
+                      skip:
+                        type: number
+                      limit:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        category_id:
+                          type: string
+                        creator_id:
+                          type: string
+                        title:
+                          type: string
+                        tenant:
+                          type: string
+                        created_date:
+                          type: string
+                        updated_date:
+                          type: string
+                      required:
+                      - category_id
+                      - creator_id
+                      - title
+                      - tenant
+                      - created_date
+                      - updated_date
+                example:
+                  paging:
+                    total: 2
+                    skip: 0
+                    limit: 1000
+                  data:
+                  - category_id: 61b86bea8300b200252164e4
+                    creator_id: 5e1356f0c5f0e0003d305072
+                    title: hello
+                    tenant: testproductv6_boost
+                    created_date: '2021-12-14T10:03:22.232Z'
+                    updated_date: '2021-12-14T10:03:22.232Z'
+                  - category_id: 61aa12c62e6c8a003d8f71c2
+                    creator_id: 61125f8d7e10d10034973329
+                    title: Blabla
+                    tenant: testproduct
+                    created_date: '2021-12-03T12:51:18.855Z'
+                    updated_date: '2021-12-03T12:51:18.855Z'
+              examples:
+                response:
+                  value:
+                    paging:
+                      total: 2
+                      skip: 0
+                      limit: 1000
+                    data:
+                    - category_id: 61b86bea8300b200252164e4
+                      creator_id: 5e1356f0c5f0e0003d305072
+                      title: hello
+                      tenant: testproductv6_boost
+                      created_date: '2021-12-14T10:03:22.232Z'
+                      updated_date: '2021-12-14T10:03:22.232Z'
+                    - category_id: 61aa12c62e6c8a003d8f71c2
+                      creator_id: 61125f8d7e10d10034973329
+                      title: Blabla
+                      tenant: testproduct
+                      created_date: '2021-12-03T12:51:18.855Z'
+                      updated_date: '2021-12-03T12:51:18.855Z'
+      summary: Get All
+      operationId: Get All
+      description: Get all the course-categories.
+      tags:
+      - Course Categories
+      parameters:
+      - name: filter
+        in: query
+        description: A valid JSON filter object
+        required: false
+        example: '{}'
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: e.g. application/json
+        required: false
+        example: application/json
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Get_AllBody'
+  /public/api/course-categories/count?where={where}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                example:
+                  count: 10
+              examples:
+                response:
+                  value:
+                    count: 10
+      summary: Count
+      operationId: Count
+      description: Count all the existing entities based on the where filter
+      tags:
+      - Course Categories
+      parameters:
+      - name: where
+        in: query
+        description: A valid JSON [Where filter](#section-api-requests-filter-where)
+        required: false
+        example: '{ "property": "value" }'
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: e.g. application/json
+        required: false
+        example: application/json
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Get_AllBody'
+  /public/api/course-categories/export?type={type}&filter={filter}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  type:
+                    type: string
+                  priority:
+                    type: number
+                  nextRunAt:
+                    type: string
+                  _id:
+                    type: string
+                example:
+                  name: Export file
+                  type: normal
+                  priority: 0
+                  nextRunAt: '2018-09-11T15:56:05.387Z'
+                  _id: 5b97e5954b99568b4b9101af
+              examples:
+                response:
+                  value:
+                    name: Export file
+                    type: normal
+                    priority: 0
+                    nextRunAt: '2018-09-11T15:56:05.387Z'
+                    _id: 5b97e5954b99568b4b9101af
+      summary: Export
+      operationId: Export
+      description: "Export all results as a file.    \nThis action is asynchronous and returns the id of a job. See [`jobs`](#group-jobs) endpoint to query the status of the job. The file will contain the results with all of the fields specified on the resource."
+      tags:
+      - Course Categories
+      parameters:
+      - name: type
+        in: path
+        description: The type of file, either `csv` (default value) or `excel`
+        required: true
+        example: csv
+        schema:
+          type: string
+      - name: filter
+        in: query
+        description: A valid JSON filter object (does not accept a `fields` filter)
+        required: false
+        example: '{}'
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: e.g. application/json
+        required: false
+        example: application/json
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Get_AllBody'
+components:
+  schemas:
+    Default_Header:
+      type: object
+      required:
+      - Authorization
+      properties:
+        Authorization:
+          type: string
+          example: Bearer JWT
+  requestBodies:
+    Get_AllBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Authorization:
+                $ref: '#/components/schemas/Default_Header'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /
+          tokenUrl: /
+          scopes: {}
