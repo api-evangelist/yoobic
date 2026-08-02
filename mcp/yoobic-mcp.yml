@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/yoobic-openapi.json
+status: candidate
+notes: >-
+  No official YOOBIC-hosted or remote MCP server was found. This is a CANDIDATE
+  tool surface derived from the Public API OpenAPI (265 operations across 41
+  resource groups) to illustrate what an MCP server over the YOOBIC API could
+  expose. Not an endorsement of a live server.
+server:
+  name: yoobic-public-api
+  transport: none-published
+  base_url: https://api.yoobic.com/public/api
+  auth: JWT bearer (POST /auth/login)
+candidate_tools:
+- name: login
+  op: POST /public/api/auth/login
+  description: Exchange issued credentials for a JWT bearer token.
+- name: list_users
+  op: GET /public/api/users?filter={filter}
+  description: List/filter platform users.
+- name: create_user
+  op: POST /public/api/users
+  description: Create a user.
+- name: list_stores
+  op: GET /public/api/stores?filter={filter}
+  description: List retail sites/stores.
+- name: store_health_score
+  op: GET /public/api/stores/{id}/health-score
+  description: Retrieve a store's health score.
+- name: list_missions
+  op: GET /public/api/missions?filter={filter}
+  description: List tasks/missions.
+- name: assign_mission
+  op: POST /public/api/missions/{id}/assign
+  description: Assign a mission to a user.
+- name: validate_mission
+  op: POST /public/api/missions/{id}/validate
+  description: Validate a completed mission.
+- name: publish_campaign
+  op: POST /public/api/campaigns/{id}/publish
+  description: Publish a campaign to its audience.
+- name: create_webhook
+  op: POST /public/api/webhooks
+  description: Register a webhook subscription.

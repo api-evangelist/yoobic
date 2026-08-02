@@ -1,0 +1,22 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.yoobic.com/api.html
+docs: https://docs.yoobic.com/api.html#section-api-access
+notes: >-
+  YOOBIC publishes a dedicated sandbox environment alongside production. Both use
+  the same JWT-bearer auth; credentials are issued per organization by YOOBIC
+  (contact a Customer Success Manager or support@yoobic.com). No self-serve test
+  keys, test cards, or synthetic fixtures are published. The downloadable Postman
+  collection ships pre-configured `sandbox` and `prod` environments.
+environments:
+- name: sandbox
+  base_url: https://api-sandbox.yoobic.com/public/api
+  token_endpoint: https://api-sandbox.yoobic.com/public/api/auth/login
+- name: prod
+  base_url: https://api.yoobic.com/public/api
+  token_endpoint: https://api.yoobic.com/public/api/auth/login
+credentials:
+  self_serve: false
+  provisioning: Issued per organization by YOOBIC (CSM or support@yoobic.com).
+postman_collection: https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+test_values: none-published

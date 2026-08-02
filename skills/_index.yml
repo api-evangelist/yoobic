@@ -1,0 +1,18 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/yoobic-openapi.json + https://docs.yoobic.com/api.html
+notes: >-
+  Packaged Agent Skills mirroring marquee YOOBIC Public API flows. Steps are
+  grounded in real endpoints from the published OpenAPI (operationIds are
+  non-unique generic verbs, so operations are referenced by method + path).
+  No provider-published skills/AGENTS.md were found.
+skills:
+- file: yoobic-provision-users.md
+  name: Provision YOOBIC users
+  api: YOOBIC Public API
+- file: yoobic-run-campaign.md
+  name: Publish a YOOBIC campaign
+- file: yoobic-manage-missions.md
+  name: Assign and validate YOOBIC missions
+- file: yoobic-register-webhook.md
+  name: Register a YOOBIC webhook subscription

@@ -1,0 +1,41 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.yoobic.com/api.html
+docs: https://docs.yoobic.com/api.html#section-api-responses
+format: custom
+notes: >-
+  The YOOBIC Public API does not use RFC 9457 problem+json. Errors are returned
+  as a JSON body carrying `data` and `error` arrays (single requests may return a
+  simple hash). The documentation enumerates the HTTP status codes below as the
+  "usual server responses". Error messages partially obscure usernames where
+  relevant. The published OpenAPI does not declare per-operation 4xx/5xx response
+  schemas, so this catalog is sourced from the docs response reference.
+envelope:
+  fields:
+  - data
+  - error
+status_codes:
+- code: 200
+  meaning: OK — the request was successful (some calls return 201 instead).
+- code: 201
+  meaning: Created — the request succeeded and a resource was created.
+- code: 204
+  meaning: No Content — success with no representation to return.
+- code: 400
+  meaning: Bad Request — request could not be understood or was missing required parameters.
+  remediation: Check required parameters and JSON body formatting.
+- code: 401
+  meaning: Unauthorized — authentication failed or missing permissions.
+  remediation: Obtain/refresh a JWT via /auth/login and set the Authorization header.
+- code: 403
+  meaning: Forbidden — access denied.
+  remediation: Verify the account has rights to the resource/operation.
+- code: 404
+  meaning: Not Found — resource was not found.
+- code: 405
+  meaning: Method Not Allowed — requested method not supported for the resource.
+- code: 429
+  meaning: Too Many Requests — rate limit exceeded.
+  remediation: Wait for the current one-minute window to pass, then retry serially.
+- code: 501
+  meaning: Not Implemented — server lacks the ability to fulfill the request (future availability).

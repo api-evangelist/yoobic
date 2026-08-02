@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/yoobic-openapi.json + https://docs.yoobic.com/api.html
+docs: https://docs.yoobic.com/api.html#group-webhooks
+type: Webhooks
+notes: >-
+  YOOBIC exposes webhooks as a managed subscription resource in the Public API:
+  callers register HTTP callback subscriptions via CRUD endpoints and YOOBIC
+  posts events to the registered URL. The published OpenAPI does not enumerate a
+  machine-readable event-type catalog or AsyncAPI document, so no AsyncAPI spec
+  is emitted (none is published — not fabricated). Subscriptions support a
+  `trigger_on_every_match` flag (added 2024-08-01).
+management_operations:
+- method: POST
+  path: /public/api/webhooks
+  summary: Create a webhook subscription.
+- method: GET
+  path: /public/api/webhooks?filter={filter}
+  summary: List webhook subscriptions.
+- method: GET
+  path: /public/api/webhooks/{id}
+  summary: Get a webhook subscription.
+- method: PATCH
+  path: /public/api/webhooks/{id}
+  summary: Partially update a webhook subscription.
+- method: GET
+  path: /public/api/webhooks/count?where={where}
+  summary: Count webhook subscriptions.
+- method: GET
+  path: /public/api/webhooks/export?type={type}&filter={filter}
+  summary: Export webhook subscriptions.
+- method: POST
+  path: /public/api/webhooks/import?type={type}
+  summary: Bulk-import webhook subscriptions.
+subscription_fields:
+- trigger_on_every_match
+event_catalog: not-published
+asyncapi_spec: none-published

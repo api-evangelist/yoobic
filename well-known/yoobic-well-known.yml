@@ -1,0 +1,24 @@
+generated: '2026-07-21'
+method: probed
+source: live probes of api.yoobic.com, www.yoobic.com, docs.yoobic.com
+notes: No /.well-known/ documents are published. All probes returned 404.
+probes:
+- host: api.yoobic.com
+  path: /.well-known/security.txt
+  status: 404
+- host: www.yoobic.com
+  path: /.well-known/security.txt
+  status: 404
+- host: api.yoobic.com
+  path: /.well-known/openid-configuration
+  status: 404
+- host: api.yoobic.com
+  path: /.well-known/oauth-authorization-server
+  status: 404
+- host: api.yoobic.com
+  path: /.well-known/api-catalog
+  status: 404
+- host: docs.yoobic.com
+  path: /.well-known/ai-plugin.json
+  status: 404
+found: []

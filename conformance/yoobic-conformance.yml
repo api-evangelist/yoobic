@@ -1,0 +1,39 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/yoobic-openapi.json + https://docs.yoobic.com/api.html
+docs: https://docs.yoobic.com/api.html
+notes: >-
+  Cross-cutting standards conformance for the YOOBIC Public API, asserted from the
+  documentation and the published OpenAPI. Absence is recorded as conforms:false
+  with evidence, not omitted.
+standards:
+- id: scim
+  conforms: true
+  evidence: >-
+    Docs and changelog (2025-01-16) state "Added support for SCIM"; the API
+    exposes a SCIM group of endpoints for user provisioning.
+- id: oauth2
+  conforms: false
+  evidence: >-
+    The OpenAPI declares an oauth2 securityScheme but it is a placeholder (empty
+    scopes, "/" auth/token URLs). The operative mechanism is a JWT bearer token
+    obtained from /auth/login, not a standard OAuth 2.0 authorization-code flow.
+- id: pagination
+  conforms: true
+  evidence: Documented limit/skip offset paging with a paging{skip,limit,total} response envelope.
+- id: rate-limiting
+  conforms: true
+  evidence: >-
+    Documented per-organization rate limits with ratelimit-limit / ratelimit-remaining /
+    ratelimit-reset response headers and HTTP 429 on breach.
+- id: rfc9457
+  conforms: false
+  evidence: Errors use a custom {data,error} envelope, not application/problem+json.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency key or replay-safety mechanism is documented.
+- id: openapi
+  conforms: true
+  evidence: >-
+    A complete OpenAPI 3.0.0 description is published at
+    https://docs.yoobic.com/openapi.json (230 paths, 265 operations, 41 tags).

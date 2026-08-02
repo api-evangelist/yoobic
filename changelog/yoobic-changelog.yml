@@ -1,0 +1,65 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.yoobic.com/api.html
+docs: https://docs.yoobic.com/api.html#whats-new
+scheme: dated-narrative
+notes: >-
+  YOOBIC maintains a dated "What's new" changelog embedded in the Public API
+  documentation (also the OpenAPI info.description). Entries are additive field
+  and endpoint additions plus rate-limit and documentation clarifications; no
+  API version number is exposed. Recent window shown below.
+entries:
+- date: '2026-07-21'
+  breaking: false
+  highlights:
+  - New rate limit for DELETE requests (120 per minute per client organization).
+- date: '2026-06-03'
+  breaking: false
+  highlights:
+  - Clarified score and extra_scores semantics in missions CSV import/export.
+- date: '2026-03-19'
+  breaking: false
+  highlights:
+  - Expanded campaigns publish docs (per-site/per-user mission creation, user_ids).
+  - Documented that a mission must be assigned before it can be booked.
+- date: '2026-03-04'
+  breaking: false
+  highlights:
+  - Documented CSV special-character escaping via double quotes for async jobs.
+- date: '2026-01-25'
+  breaking: false
+  highlights:
+  - Clarified group_ids on files accepts an array of group ids.
+- date: '2025-12-29'
+  breaking: false
+  additions:
+  - Bot Messages endpoint.
+  - Chats endpoint.
+  - Single-file upload on files.
+  highlights:
+  - New automatic public API collections.
+- date: '2025-01-16'
+  breaking: false
+  additions:
+  - SCIM support.
+- date: '2025-01-15'
+  breaking: false
+  additions:
+  - Communities endpoint.
+  - Community Posts endpoint.
+- date: '2024-11-10'
+  breaking: false
+  additions:
+  - expires_in field on login auth response.
+- date: '2024-08-01'
+  breaking: false
+  additions:
+  - trigger_on_every_match field on webhooks.
+- date: '2024-06-27'
+  breaking: false
+  additions:
+  - Bots endpoint.
+- date: '2024-04-17'
+  breaking: false
+  highlights:
+  - New rate limit for users endpoint POST/PATCH/DELETE requests.

@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.yoobic.com/api.html
+docs: https://docs.yoobic.com/api.html
+notes: >-
+  Lifecycle posture for the YOOBIC Public API. The API is unversioned
+  (path /public/api) and evolves additively; changes are announced through the
+  dated "What's new" changelog. No formal Sunset/Deprecation (RFC 8594) header
+  policy or published SLA/uptime commitment was found in the public docs.
+versioning:
+  scheme: unversioned-path
+  path: /public/api
+  policy: Additive changes announced in the changelog; no version negotiation.
+  ref: changelog/yoobic-changelog.yml
+deprecation:
+  policy_published: false
+  rfc8594_headers: not-documented
+  deprecated_operations: []
+status_page:
+  url: https://status.yoobic.com/
+  provider: Atlassian Statuspage
+  http_status: 200
+sla:
+  published: false
+support:
+  email: support@yoobic.com
+  channel: Customer Success Manager

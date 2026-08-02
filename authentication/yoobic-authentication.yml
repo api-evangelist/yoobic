@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.yoobic.com/api.html
+docs: https://docs.yoobic.com/api.html#section-api-access
+summary:
+  types:
+  - http-bearer
+  primary: JWT bearer token
+notes: >-
+  The published OpenAPI declares a placeholder `oauth2` securityScheme
+  (authorizationCode flow with empty scopes and "/" URLs), but the documented
+  and operative mechanism is a JWT bearer token. Callers obtain a token from the
+  POST /public/api/auth/login endpoint using credentials issued by YOOBIC, then
+  present it as `Authorization: Bearer <jwt>` on every request. Tokens carry an
+  `expires_in`. A companion POST /public/api/auth/invalidate_token endpoint
+  revokes a token. Optional asymmetric RSA-OAEP request encryption is available.
+schemes:
+- name: bearer-jwt
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  header: Authorization
+  token_endpoint: https://api.yoobic.com/public/api/auth/login
+  invalidate_endpoint: https://api.yoobic.com/public/api/auth/invalidate_token
+  sandbox_token_endpoint: https://api-sandbox.yoobic.com/public/api/auth/login
+  sources:
+  - https://docs.yoobic.com/api.html
+- name: oauth2
+  type: oauth2
+  status: placeholder-in-spec
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /
+    tokenUrl: /
+    scopes: 0
+  sources:
+  - openapi/yoobic-openapi.json

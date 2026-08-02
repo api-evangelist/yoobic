@@ -1,0 +1,69 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.yoobic.com/api.html
+docs: https://docs.yoobic.com/api.html
+notes: >-
+  Cross-cutting runtime semantics for the YOOBIC Public API, sourced from the
+  documentation and the published OpenAPI. Cross-links: authentication/,
+  errors/yoobic-problem-types.yml, lifecycle/yoobic-lifecycle.yml.
+auth:
+  style: JWT bearer token in the Authorization header (Bearer <jwt>).
+  token_endpoint: POST /public/api/auth/login
+  ref: authentication/yoobic-authentication.yml
+base_path: /public/api
+idempotency:
+  supported: false
+  notes: No idempotency key or replay-safety mechanism is documented.
+pagination:
+  style: limit/skip offset paging via a JSON `filter` query parameter
+  params:
+  - name: limit
+    in: filter
+    default: 1000
+    max: 1000
+    description: Maximum records returned; use export jobs for larger sets.
+  - name: skip
+    in: filter
+    description: Number of leading records to omit (offset).
+  response_fields:
+    envelope: paging
+    fields:
+    - skip
+    - limit
+    - total
+  loop_rule: >-
+    Continue paging while paging.total - paging.limit > paging.skip, adding 1000
+    to skip each request; beyond 1000 records prefer the async export endpoint.
+filtering:
+  param: filter
+  encoding: URL-encoded JSON object
+  operators:
+  - name: order
+    description: Sort records by field(s).
+  - name: where
+    description: Constrain records by field conditions.
+  - name: fields
+    description: Sparse fieldset — select which fields are returned.
+  - name: limit
+  - name: skip
+  count_endpoints: 'Most resources expose /{resource}/count?where={where}.'
+rate_limit_signaling:
+  headers:
+  - ratelimit-limit
+  - ratelimit-remaining
+  - ratelimit-reset
+  over_limit_status: 429
+  ref: lifecycle/yoobic-lifecycle.yml
+error_envelope:
+  shape: 'JSON body with `data` and `error` arrays; single requests may return a simple hash.'
+  ref: errors/yoobic-problem-types.yml
+async_jobs:
+  export: GET /{resource}/export?type={csv|excel}
+  import: POST /{resource}/import?type={csv|excel|json} (multipart form-data)
+  status: Returns a job id; poll /jobs for status.
+versioning:
+  scheme: unversioned path (/public/api); changes are additive and announced in the changelog.
+  ref: changelog/yoobic-changelog.yml
+transport:
+  https_only: true
+  min_tls: TLSv1.2

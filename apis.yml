@@ -1,7 +1,27 @@
 aid: yoobic
 name: Yoobic
-description: Yoobic is a company surfaced as a portfolio company of insight-partners and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  YOOBIC is an AI-powered frontline employee experience and retail operations
+  platform that unifies task management, internal communications, and mobile
+  microlearning, giving headquarters real-time visibility and frontline teams
+  the tools to execute in-store. It serves retail, grocery, fashion and luxury,
+  convenience, pharmacy, restaurant/QSR, and fitness brands. The YOOBIC Public
+  API is a RESTful JSON API (OpenAPI 3.0, 230 paths / 265 operations across 41
+  resource groups) for programmatically managing users, stores, missions,
+  campaigns, learning, communities, and webhooks, secured with JWT bearer tokens.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://yoobic.com/wp-content/uploads/2025/11/cropped-favicon-1-1-270x270.png
 url: https://raw.githubusercontent.com/api-evangelist/yoobic/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,10 +31,3271 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Retail
+- Frontline Operations
+- Task Management
+- Workforce
+- Microlearning
+- Employee Experience
+- REST
+- Webhooks
+- SCIM
+apis:
+- aid: yoobic:yoobic-answers-api
+  name: Yoobic Answers API
+  description: "<a id=\"group-answers\"></a>\nAnswers are the users’ replies to the questions raised by\
+    \ their colleagues in the Questions menu. Other users can vote for answers they think are best, like\
+    \ them, and a user with the right permission can also validate an answer to indicate it is the right\
+    \ or best one.\n\n### Fields\n\n| Field                | Type        | Required | Readonly   | OrderBy\
+    \ | Description               |\n|----------------------|:-----------:|:--------:|:----------:|:-------:|---------------------------|\n\
+    |`answer_id`           |  string     |    x     |     x      |         | Unique id of the answer |\n\
+    |`question_id`         |  string     |          |     x      |         | Reference to the question\
+    \ |\n|`user_id`             |  string     |          |     x      |         | User id answering this\
+    \ question |\n|`text`                |  string     |          |     x      |         | The answer\
+    \        |\n|`image`               |  string     |          |     x      |         | The url to the\
+    \ image  |\n|`is_verified`         |  boolean    |          |     x      |         | Whether or not\
+    \ this is a verified answer | \n|`user_verified`       |  string     |          |     x      |   \
+    \      | User id verifying this answer | \n|`likes`               |  number     |          |     x\
+    \      |         | Likes count | \n|`created_date`        |  date       |          |     x      |\
+    \         | Creation date             |\n|`updated_date`        |  date       |          |     x \
+    \     |    x    | Last update date          |"
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Answers
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-answers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-badges-api
+  name: Yoobic Badges API
+  description: >-
+    <a id="group-badges"></a>
+
+    A badge is a customized reward earned by a learner after completing a lesson.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`badge_id`            |  string        |    x     |    x     |         | Unique id of the badge    |
+
+    |`creator_id`          |  string        |          |    x     |         | Unique id of the badge creator    |
+
+    |`title`               |  string        |          |    x     |         | Badge title     |
+
+    |`icon`                |  string        |          |    x     |         | Badge icon name |
+
+    |`created_date`        |  date          |          |    x     |         | Creation date             |
+
+    |`updated_date`        |  date          |          |    x     |    x    | Last update date          |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Badges
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-badges-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-bot-messages-api
+  name: Yoobic Bot Messages API
+  description: >-
+    <a id="group-bot_messages"></a>
+
+    Bot analytics allow you to improve your bots by understanding how your teams use them and how satisfied
+    they are with the answers. The key metrics available can be used to monitor the usage of the feature
+    and to analyze frequent questions where knowledge is lacking in order to create new content and add
+    it to the NEO Chatbot sources.
+
+
+    ### Fields
+
+
+    | Field | Type | Required | Readonly | OrderBy | Description |
+
+    |-------|:----:|:--------:|:--------:|:-------:|-------------|
+
+    |`bot_id`| string | | x | | Unique id of the bot |
+
+    |`bot_message_id`| string | | x | | Unique if of the message sent to the bot |
+
+    |`user_id`| string | | x | | Unique id of the user that sent the question |
+
+    |`username`| string | | x | | Username of the user that sent the question |
+
+    |`question`| string | | x | | Question of the user |
+
+    |`answer`| string | | x | | Answer of the bot to the question of the user |
+
+    |`feedback`| boolean | | x | | True if the user put a ‘thumbs up’ and false if the user put a ‘thumbs
+    down' on the answer of the bot |
+
+    |`answered`| boolean | | x | | True if the question was answered and false if it wasn’t (equivalent
+    to ‘I don’t know' response from the bot') |
+
+    |`created_date`| date | | x | | Created Date |
+
+    |`updated_date`| date | | x | | Updated Date |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Bot Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-bot-messages-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-bots-api
+  name: Yoobic Bots API
+  description: >-
+    <a id="group-bots"></a>
+
+    This API is exclusively used to handle bots external to YOOBIC. External bots are an AI feature of
+    the YOOBIC chat that enhances user interactions by automating workflows and streamlining processes
+    to boost efficiency. By using third party bot APIs on top of the YOOBIC NEO chatbots, we enable users
+    to access an unlimited number of specialised bots for back-office automations, HR, IT help, and more.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`bot_id`              |  string        |          |    x     |         | Unique id of the bot      |
+
+    |`creator_id`          |  string        |          |    x     |         | Unique id of the badge creator    |
+
+    |`name`                |  string        |          |          |         | Bot name     |
+
+    |`is_active`           |  boolean       |          |          |         | Enable or disable this bot
+    (default: true) |
+
+    |`webhook_url`         |  string        |          |          |         | Unique http target url to
+    the bot |
+
+    |`created_date`        |  date          |          |    x     |         | Creation date             |
+
+    |`updated_date`        |  date          |          |    x     |    x    | Last update date          |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Bots
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-bots-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-business-kpis-data-salesdata-api
+  name: Yoobic Business KPIs data - salesdata API
+  description: >-
+    <a id="group-salesdata"></a>
+
+    Business KPIs data allows integration of external business data per location. This is the data that
+    will be used to display Business KPIs in the Activity Hub or Today's focus widget of the application.
+
+
+    Periods can be: yearly, monthly, weekly, or daily.
+
+
+    Salesdata uniqueness is determined by:
+
+
+    - store_id
+
+
+    - reporting_date
+
+
+    - title
+
+
+    - category
+
+
+    - value_frequency
+
+
+    - target
+
+
+    In case a new salesdata is created with values for the latter five which already exist in a salesdata,
+    then the salesdata will be updated. Otherwise, a new salesdata entry will be created
+
+
+    The category parameter refers to which KPI will use this data point to calculate the value in the
+    app. For example, the 5 predefined KPIs are based on the following categories:
+
+
+    - `sales` for the Sales KPI, calculated as the Sum of all sales data in the KPI's frequency
+
+
+    - `sales` and `transactions` for the Average Basket KPI, calculated as SUM(sales) / SUM(transactions)
+    in the KPI's frequency
+
+
+    - `items` and `transactions` for the UPT KPI, calculated as SUM(items) / SUM(transactions) in the
+    KPI's frequency
+
+
+    - `transactions` and `traffic` for the Conversion rate KPI, calculated as SUM(transactions) / SUM(traffic)
+    in the KPI's frequency
+
+
+    - `reviews` for the Reviews, calculated as AVG(reviews) in the KPI's frequency
+
+
+    - **For Custom KPIs**, the category must match the category defined in the **Business KPI configuration
+    menu**.
+
+
+    **Reporting Date**
+
+
+    - The `reporting_date` must correspond to the expected calculation period of the KPI.
+
+
+    - Example: For daily sales data, push one entry per store each day (e.g., timestamp at store closing
+    time).
+
+
+    **Targets**
+
+
+    - Define a target with the parameter `target: true`.
+
+
+    - The `reporting_date` should correspond to the target's period.
+      - For weekly targets, use the timestamp for the start of the week.
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`salesdata_id`        |  string        |          |    x     |         | Unique id of the salesdata|
+
+    |`store_id`            |  string        |          |          |    x    | Unique id of the store    |
+
+    |`store_client_id`     |  string        |          |          |         | client_id of the store.
+    Can be used instead of the store_id |
+
+    |`reporting_date`      |  date          |     x    |          |         | Reporting date            |
+
+    |`title`               |  string        |     x    |          |    x    | The salesdata report title|
+
+    |`category`            |  string        |     x    |          |    x    | Salesdata name      |
+
+    |`value`               |  number        |     x    |          |         | Salesdata value         |
+
+    |`value_currency`      |  string        |          |          |         | Salesdata currency      |
+
+    |`value_frequency`     |  string        |     x    |          |         | The product measuring frequency
+    : yearly / monthly / weekly / daily / hourly     |
+
+    |`target`              |  boolean       |          |          |         | Indicates if the associated
+    value is a target |
+
+    |`created_date`        |  date          |          |    x     |         | Creation date             |
+
+    |`updated_date`        |  date          |          |    x     |    x    | Last update date          |
+
+
+    Either store_id or store_client_id can be used.
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Business KPIs data - salesdata
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-business-kpis-data-salesdata-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-campaigns-api
+  name: Yoobic Campaigns API
+  description: "<a id=\"group-campaigns\"></a>\nA campaign is the main structure used to send tasks to\
+    \ frontline teams and collect data about how they execute them. It is essentially a configurable form\
+    \ with instructions and fields (checklists, buttons, photos, open text, etc.) that users fill in from\
+    \ the field. They are used for many operational needs like audits, promotions, checklists, surveys,\
+    \ health and safety monitoring, and other day-to-day activities.\n\nThere are 4 different types of\
+    \ campaigns available in YOOBIC:\n\n- Quick task\n\n- Memo\n\n- Form\n\n- Workflow\n\nArchived campaigns\
+    \ are visible in the [campaigns_archive](#group-campaigns_archive) table.\n\n### Fields\n\n| Field\
+    \                | Type        | Required | Readonly   | OrderBy | Description               |\n|----------------------|:-----------:|:--------:|:----------:|:-------:|---------------------------|\n\
+    |`campaign_id`         |  string     |    x     |     x      |         | Unique id of the campaign\
+    \ |\n|`title`               |  string     |    x     |            |         | The campaign title \
+    \       |\n|`description`         |  string     |          |            |         | The campaign description\
+    \  |\n|`type`                |  string     |    x     |            |         | The campaign type \
+    \ (mission, service, todo, poll, lesson, visit)     |\n|`group_ids`           |  array      |    x\
+    \     |            |         | Group ids that can see this campaign |\n|`user_ids`            |  array\
+    \      |          |            |         | User ids that can see this campaign |\n|`tags`        \
+    \        |  array      |          |            |         | The list of tags          |\n|`scoring`\
+    \             |  boolean    |          |            |         | true if scoring is enabled for missions\
+    \ from this campaign, false otherwise | \n|`recurring`           |  boolean    |          |      \
+    \      |         | true if this campaign is recurring, false if it is a one-off campaign | \n|`active`\
+    \              |  boolean    |          |    x       |         | true if campaign is neither paused\
+    \ nor archived | \n|`archived`            |  boolean    |          |    x       |         | true if\
+    \ campaign is paused | \n|`icon_url`            |  string     |          |            |         |\
+    \ `_downloadURL` of a File or a `url` of a Photo. Icon size recommendation is 100px X 100px. |\n|`background_url`\
+    \      |  string     |          |            |         | `_downloadURL` of a File or a `url` of a\
+    \ Photo. |\n|`page_titles`         |  array      |          |            |         | An ordered list\
+    \ of page titles i.e. first title is the first page title etc. |\n|`questions`           |  array\
+    \      |          |            |         | The campaign's questions  |\n|`created_date`        | \
+    \ date       |          |     x      |         | Creation date             |\n|`updated_date`    \
+    \    |  date       |          |     x      |    x    | Last update date          |\n\nThe `questions`\
+    \ field is defined as an array of:\n| Field                | Type           | Description        \
+    \       |\n|----------------------|----------------|---------------------------|\n|`question_id` \
+    \        |  string        | Unique id of the question |\n|`question_type`       |  string        |\
+    \ The type of the question. Supported types: `text`, `textarea`, `toggle`, `checkbox`, `information`,\
+    \ `todo`, `photo`, `multiphotos`, `selectbuttons`, `select`, `selectmulti`, `address`, `date`, `number`,\
+    \ `starrating`, `image`. |\n|`question`            |  string        | The title of the question |\n\
+    |`question_description`|  string        | The description of the question |\n|`mandatory`        \
+    \   |  boolean       | If `true`, the question has to be answered. Defaults to `false` |\n|`page_number`\
+    \         |  number        | The number of the page the question appears in |\n|`question_number`\
+    \     |  number        | The number of the question |\n|`hide_mobile`         |  boolean       | Hide\
+    \ the question on mobile devices. Defaults to `false`. |\n|`question_attributes` |  object       \
+    \ | Question attributes for specific question types.|\n\nThe `question_attributes` field is defined\
+    \ as an object with the following fields:\n| Field                | Type           | Description \
+    \              |\n|----------------------|----------------|---------------------------|\n|`max_photos`\
+    \          |  number        | Maximum of allowed photos to upload. Applies only to questions of type\
+    \ `multiphotos`.         |\n|`values`              |  array         | Values to be displayed as options\
+    \ to choose from in the question. Applies only to questions of type `selectbuttons`, `select`, `selectmulti`.\
+    \           |\n|`min`                 |  number        | If present, value must be above or including\
+    \ it. Applies only to questions of type `number`. |\n|`max`                 |  number        | If\
+    \ present, value must be below or including it. Applies only to questions of type `number`, `starrating`.\
+    \ |\n\n#### Question Types\n\n<a id=\"group-campaigns-question-types\"></a>\n**Important**    \nBelow\
+    \ is a list of the supported types and their value types:\n\n| question_type | Type           | Description\
+    \ |\n|---------------|:--------------:|-------------|\n| address       |  string        |        \
+    \     |\n| date          |  string        |             |\n| information   |  string        |    \
+    \         |\n| select        |  string        | Single value chosen from the `values` defined in `question_attributes`\
+    \ |\n| textarea      |  string        |             |\n| text          |  string        |        \
+    \     |\n| photo         |  URL           | A valid image URL      |\n| multiphotos   |  array of\
+    \ URLs | Valid image URLs and up to `max_photos` defined in `question_attributes`     |\n| selectbuttons\
+    \ |  array         | Multiple values chosen from the `values` defined in `question_attributes`   \
+    \   |\n| selectmulti   |  array         | Multiple values chosen from the `values` defined in `question_attributes`\
+    \      |\n| number        |  number        | Might have min, max borders as defined in `question_attributes`\
+    \      |\n| starrating    |  number        | Might have max border as defined in `question_attributes`.\
+    \ No negatives allowed.      |\n| checkbox      |  boolean       |             |\n| toggle       \
+    \ |  boolean       |             |\n| image         |                | This is a readonly property\
+    \ (informative) which does not have a value. |\n\n**Important**\n\n- If `page_titles` does not have\
+    \ a title for a given page then a default will be given -    \nSo i.e. if the values are -    \n```json\n\
+    [ \"first chapter\", \"second chapter\" ]\n``` \nand there are three pages in total, then the title\
+    \ for the third page will be `Page 3`.\n\n- To filter on `live` campaigns only you should filter accordingly:\
+    \ \n```json\n{ \"active\": true,  \"archived\": { \"neq\": true } }\n```"
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-campaigns-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-catalogs-api
+  name: Yoobic Catalogs API
+  description: >-
+    <a id="group-catalogs"></a>
+
+    Holds a list of catalogs and their relevant data.
+
+    Each catalog contains a list of [`products`](#group-products).
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|-------------|
+
+    |`catalog_id`          |  string        |     x    |    x     |    x    | Unique id of the catalog  |
+
+    |`title`               |  string        |     x    |          |         | The catalog title         |
+
+    |`group_ids`           |  array         |     x    |          |         | Group ids that can see this
+    catalog     |
+
+    |`user _ids`           |  array         |          |          |         | User ids that can see this
+    catalog     |
+
+    |`created_date`        |  date          |          |    x     |         | Creation date             |
+
+    |`updated_date`        |  date          |          |    x     |    x    | Last update date          |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Catalogs
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-catalogs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-chats-api
+  name: Yoobic Chats API
+  description: >-
+    <a id="group-chats"></a>
+
+    Chats are used for internal communication between users directly in the YOOBIC app.
+
+
+    ### Fields
+
+
+    | Field | Type | Required | Readonly | OrderBy | Description |
+
+    |-------|:----:|:--------:|:--------:|:-------:|-------------|
+
+    |`sender_id`| string | x | | | Unique id of the user account from which the message is sent |
+
+    |`recipient_id`| string | x | | | Unique id of the user that will receive the message |
+
+    |`text`| string | x | | | Text of the message |
+
+    |`attachments`| file | | | | File link |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Chats
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-chats-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-comments-api
+  name: Yoobic Comments API
+  description: >-
+    <a id="group-comments"></a>
+
+    Get all feeds comments.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description                                                        |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------                                         |
+
+    |`comment_id`          |  string        |          |    x     |         | Unique id of the comment                                           |
+
+    |`news_id`             |  string        |          |    x     |         | Related feed reference                                             |
+
+    |`user_id`             |  string        |          |    x     |         | Related user reference                                             |
+
+    |`text`                |  string        |          |    x     |         | comment text                                                       |
+
+    |`text_en`             |  string        |          |    x     |         | Comment text translated
+    to English                                 |
+
+    |`language`            |  string        |          |    x     |         | Comment text automatically
+    detected language                       |
+
+    |`sentiment`           |  number        |          |    x     |         | Comment text sentiment represented
+    by a number between -1 and 1    |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Comments
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-comments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-communities-api
+  name: Yoobic Communities API
+  description: >-
+    <a id="group-communities"></a>
+
+    Communities are a sub-section of the general Newsfeed tab in YOOBIC. Unlike the Newsfeed, where you
+    can read all the posts shared for your company, a community can be narrowed to a specific topic and
+    a specific audience, chosen by the Community creator. Depending on the Community Type ('open', ‘secret’
+    or ‘compulsory’), users can join or leave communities to decide what kind of content they want to
+    see in their feed. This feature customises the content in the newsfeed for each user.
+
+
+    ### Fields
+
+
+    | Field                     | Type       | Required     | Readonly     | OrderBy     | Description                                               |
+
+    |---------------------------|:----------:|:------------:|:------------:|:-----------:|-----------------------------------------------------------|
+
+    | `community_id`            | String     |              | x            |             | Unique id of
+    the community                                                  |
+
+    | `name`                    | String     | x            |              |             | Name of the
+    community                                                       |
+
+    | `description`             | String     |              |              |             | Description
+    of the community                                                |
+
+    | `creator_id`              | String     |              | x            |             | Unique id of
+    a user who created the community                               |
+
+    | `type`                    | String     | x            |              |             | Type of the
+    community, can be “open”, “secret” or "compulsory"              |
+
+    | `audience_id`             | String     | x            |              |             | Audience id
+    that has access to this community                               |
+
+    | `allow_posts_from_all`    | Boolean    |              |              |             | Enable all
+    members of the community to post                                 |
+
+    | `disable_notifications`   | Boolean    |              |              |             | Disable notifications
+    for new posts from this community                     |
+
+    | `hide_posts_from_newsfeed`| Boolean    |              |              |             | Don’t show
+    the posts from this community in the main newsfeed               |
+
+    | `created_date`            | Date       |              | x            |             | Created Date                                                                |
+
+    | `updated_date`            | Date       |              |              |             | Updated Date                                                                |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Communities
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-communities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-community-posts-api
+  name: Yoobic Community Posts API
+  description: >-
+    <a id="group-community-posts"></a>
+
+    The posts made in the communities appear both in the community newsfeed and in the main newsfeed,
+    along with the posts in the normal newsfeed (unless otherwise configured in the Community).
+
+
+    ### Post Fields
+
+
+    | Field            | Type   | Required | Readonly | OrderBy | Description                          |
+
+    |------------------|:------:|:--------:|:--------:|:-------:|--------------------------------------|
+
+    | `post_id`        | String |          | x        |         | Unique id of the post                |
+
+    | `description`    | String | x        |          |         | Content of the post                  |
+
+    | `community_id`   | String | x        |          |         | Community id where the post is published
+    |
+
+    | `user_id`        | String | x        |          |         | Unique ID of the user who will be shown
+    as the publisher of the post |
+
+    | `publish_type`   | String | x        |          |         | Type of posting, can be “postnow” or
+    “schedule” |
+
+    | `publish_date`   | Date   |          |          |         | Required field, only if you set the
+    publish_type to ‘schedule’, to define the date when the post will appear in the community |
+
+    | `images`         | Array  |          |          |         | List of URLs of images in the post   |
+
+    | `created_date`   | Date   |          | x        |         | Created Date                         |
+
+    | `updated_date`   | Date   |          | x        | x       | Updated Date                         |
+
+
+    ### Post Comments Fields
+
+
+    | Field              | Type   | Required | Readonly | OrderBy | Description                                   |
+
+    |--------------------|:------:|:--------:|:--------:|:-------:|-----------------------------------------------|
+
+    | `comment_id`       | String |          | x        |         | Unique id of the post comment                 |
+
+    | `comment`          | String | x        |          |         | Content of the post comment                   |
+
+    | `user_id`          | String | x        |          |         | Unique id of a user who created the
+    comment |
+
+    | `community_post_id`| String |          |          |         | Community post id where the comment
+    appears   |
+
+    | `community_id`     | String |          | x        |         | Community id where the original post
+    is published |
+
+    | `created_date`     | Date   |          | x        |         | Created Date                                  |
+
+    | `updated_date`     | Date   |          | x        | x       | Updated Date                                  |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Community Posts
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-community-posts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-competencies-api
+  name: Yoobic Competencies API
+  description: >-
+    <a id="group-competencies"></a>
+
+    A competency of a course allows measuring the success rate of a learner on all courses linked to that
+    competency. Each course can be linked to only one competency.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`competency_id`       |  string        |    x     |    x     |         | Unique id of the competency    |
+
+    |`creator_id`          |  string        |          |    x     |         | Unique id of the competency
+    creator     |
+
+    |`title`               |  string        |          |    x     |         | Competency title     |
+
+    |`description`         |  date          |          |    x     |         | Competency description |
+
+    |`created_date`        |  date          |          |    x     |         | Creation date             |
+
+    |`updated_date`        |  date          |          |    x     |    x    | Last update date          |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Competencies
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-competencies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-course-categories-api
+  name: Yoobic Course Categories API
+  description: >-
+    <a id="group-course-categories"></a>
+
+    Category in courses allows grouping available courses by topics or themes in the Discover section
+    of the app. Each course can be linked to only one category.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`course_category_id`  |  string        |    x     |    x     |         | Unique id of the course
+    category    |
+
+    |`creator_id`          |  string        |          |    x     |         | Unique id of the course
+    category creator    |
+
+    |`title`               |  string        |          |    x     |         | Course category title     |
+
+    |`icon`                |  string        |          |    x     |         | Course category icon name
+    |
+
+    |`created_date`        |  date          |          |    x     |         | Creation date             |
+
+    |`updated_date`        |  date          |          |    x     |    x    | Last update date          |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Course Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-course-categories-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-courses-api
+  name: Yoobic Courses API
+  description: >-
+    <a id="group-courses"></a>
+
+    When a plan is assigned to a user it creates a course.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`course_id`           |  string        |    x     |    x     |         | Unique id of the course    |
+
+    |`plan_id`             |  string        |    x     |          |         | Unique id of the plan     |
+
+    |`user_id`             |  string        |    x     |          |         | Unique id of the user     |
+
+    |`assignment_date`     |  date          |          |    x     |         | Date when the user has been
+    assigned to the plan |
+
+    |`earned_points`       |  number        |          |    x     |         | Number of points earned
+    by the user for this course |
+
+    |`start_date`          |  date          |          |    x     |         | Date when the user finished
+    their first lesson of the course |
+
+    |`duration`            |  number        |          |    x     |         | Minutes spent on this course
+    |
+
+    |`finished_date`       |  date          |          |    x     |         | Date when the user completed
+    the course |
+
+    |`due_date`            |  date          |          |    x     |         | Due date of the course     |
+
+    |`created_date`        |  date          |          |    x     |         | Creation date             |
+
+    |`updated_date`        |  date          |          |    x     |    x    | Last update date          |
+
+
+    #### Course IDs
+
+
+    <a id="group-courses-ids"></a>
+
+    Below, you can find detailed descriptions of some of the course-related IDs mentioned above:
+
+
+    | ID             | Description |
+
+    |----------------|-------------|
+
+    | `plan_id`      | The course object that Admins can see in the Course Manager. This is the ID of
+    that course. |
+
+    | `course_id`    | The course object that a learner can see in their Courses menu. It's unique for
+    each learner, meaning that even if two learners see the same course in their courses menu, the course
+    they see has a different `course_id`. |
+
+    | `lesson_id`    | The ID of a completed lesson. This ID is unique for each learner, meaning that
+    if two learners completed the same lesson, their completed lesson has a different `lesson_id`. |
+
+    | `campaign_id`  | The lesson object linked to a course. This is the ID of the lesson. |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Courses
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-courses-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-custom-model-instances-datasets-api
+  name: Yoobic Custom Model Instances - Datasets API
+  description: "<a id=\"group-custom_model_instances\"></a>\nDatasets are where all your data is stored.\
+    \ They have some similarities to spreadsheets, for example they look similar and support some of the\
+    \ same functions and formulas. But, in terms of power, efficiency, and elasticity, datasets tend to\
+    \ behave more like a database. Datasets in Yoobic can used all the different data types available\
+    \ in a Yoobic Campaign.\n\nDatasets can be used to:\n\n- Display your data dynamically in Yoobic’s\
+    \ missions\n\n- Update dynamically your data based on Yoobic’s missions\n\n- Filter, sort, summarise,\
+    \ and link data\n\n- Preserve data integrity\n\n- Trigger automations and run calculation\n\n### Endpoint:\
+    \ Inventory\n\nYOOBIC’s dataset collection is stored in the inventory collection therefore we refer\
+    \ to the inventory endpoint to create or update a dataset.\n\n### Custom Model definition\n\nA dataset\
+    \ is identified in YOOBIC’s public API by a custom_model_id . We refer to datasets as a Custom Model\
+    \ because each dataset object is customizable (different field type available for each of the fields).\
+    \ Consequently, each row of a dataset (aka Custom_model) is referred to as a custom_model_instances.\n\
+    \n### How to create new instances in a dataset\n\nImport a csv/excel file containing in the header\
+    \ the name of the field and in the cells the value you want to import. If you are not sure of the\
+    \ format of the csv/excel file, we recommend you to first export your dataset to a csv/excel file\
+    \ and then to use this file as a template for the import.\n\n### How to update existing instances\
+    \ in a dataset\n\nImport a csv/excel file containing in the header the name of the field and in the\
+    \ cells the value you want to import. If you wish to update the value, you have to provide in the\
+    \ custom_model_instances_id column the value of the instance you wish to update. It’s a unique identifier\
+    \ generated by YOOBIC. The easiest way to do it is to export the existing dataset, then to modify\
+    \ the value directly in the file and finally to import it into YOOBIC.\n\n### Fields\n\n| Field  \
+    \                           | Type           | Required | Readonly | OrderBy | Description       \
+    \        |\n|-----------------------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|\n\
+    |`custom_model_instances_id`        |  string        |          |    x     |         | Unique identifier\
+    \         |\n\n**Important**    \nThe columns of the export/import depend on the inventory's questions.\
+    \    \nEach `question_id` is a column header. See [`inventory`](#group-inventory) for more details."
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Custom Model Instances - Datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-custom-model-instances-datasets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-events-api
+  name: Yoobic Events API
+  description: >-
+    <a id="group-events"></a>
+
+    Events can be created and managed through the YOOBIC app and are displayed in the calendar. Events
+    can be public (visible to all users sharing at least one group with it) or private (visible only to
+    users invited to it).
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`event_id`            |  string        |          |    x     |         | Unique id of the event    |
+
+    |`title`               |  string        |    x     |          |         | The title of the event    |
+
+    |`description`         |  string        |    x     |          |         | The description of the event.
+    HTML can be used for formatting|
+
+    |`start_date`          |  date          |    x     |          |         | Start date of the event
+    in UTC|
+
+    |`end_date`            |  date          |    x     |          |         | End date of the event in
+    UTC|
+
+    |`event_type`          |  string        |    x     |          |         | `private` or `public`      |
+
+    |`all_day`             |  boolean       |          |          |         | `true` or `false`. if `true`,
+    start_date should equal to end_date|
+
+    |`tags`                |  array         |          |          |         | Event’s list of tags      |
+
+    |`event_category`      |  string        |          |          |         | Category of the event. Categories
+    need to be defined in the database in the `translations` collection|
+
+    |`user_ids`            |  array         |          |          |         | Required for private events
+    only. Ignored for public events. User ids that are invited to this event|
+
+    |`group_ids`           |  array         |          |          |         | Required for public events.
+    Ignored for private events. Group ids of users who should be invited to this event|
+
+    |`images`              |  array         |          |          |         | Links to uploaded images.
+    Used as illustration on the event page. Max 3 images per event|
+
+    |`store_id`            |  string        |          |          |         | Store the event is linked
+    to|
+
+    |`shared`              |  boolean       |          |    x     |         | If event shared on feeds
+    (true/false)|
+
+    |`timezone`            |  string        |          |          |         | The Time Zone allows to
+    display the hourly sales data in the store insights in the local time of the store. |
+
+    |`address`             |  string        |          |          |         | The address of the event
+    |
+
+    |`virtual_event_link`  |  string        |          |          |         | Any link e.g. video call
+    |
+
+    |`total_users`         |  number        |          |          |         | Total user count attending
+    |
+
+    |`created_date`        |  date          |          |          |         | Creation date             |
+
+    |`updated_date`        |  date          |          |          |    x    | Last update date          |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-files-api
+  name: Yoobic Files API
+  description: >-
+    <a id="group-files"></a>
+
+    Files provides information about the external files used in the application.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`file_id`             |  string        |    x     |    x     |         | Unique id of the file     |
+
+    |`folder_id`           |  string        |          |    x     |         | Unique id of the parent
+    folder of the file     |
+
+    |`group_ids`           |  string        |          |          |         | Unique id of the groups
+    that have visibility of the file     |
+
+    |`size`                |  Number        |          |    x     |         | The size of the file in
+    bytes      |
+
+    |`folder_name`         |  string        |          |    x     |         | Name of the parent folder
+    of the file      |
+
+    |`filename`            |  string        |          |    x     |         | The name of the file      |
+
+    |`download_url`        |  string        |          |    x     |         | The url of the file       |
+
+    |`mime_type`           |  string        |          |    x     |         | The mime type of the file
+    |
+
+    |`created_date`        |  date          |          |    x     |         | Creation date             |
+
+    |`updated_date`        |  date          |          |    x     |    x    | Last update date          |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-files-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-geofilters-api
+  name: Yoobic Geofilters API
+  description: >-
+    <a id="group-geofilters"></a>
+
+    provides a mapping between users and the stores they have permission to visit
+
+
+    - Each user may have more than one store mapped. If enabled, users could only book missions to the
+    specified stores.
+
+
+    - Geographic filters are extremely important in Operations. They are what control which stores a user
+    can or can't see.
+
+
+    - Geographic filters are assigned to stores and store types.
+
+
+    - There are two types of geographic filters: non-dynamic and dynamic. Non dynamic filters are made
+    by attaching stores to a user, dynamic filters are made by attaching store types to a user.
+
+    <img src="https://user-images.githubusercontent.com/31584145/46032347-06a05180-c104-11e8-87f3-1bddb628a90c.png">
+
+
+    - With the exception of Stores, geographic filters should always be dynamic. This is because it is
+    easier to add a store to a type so that it inherits its geographic filter than it is to add a store
+    to each geographic filter it needs to be in.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`geofilter_id`        |  string        |     x    |    x     |         | Unique geofilter id       |
+
+    |`user_id`             |  string        |     x    |          |    x    | Unique user id            |
+
+    |`store_ids`           |  array         |          |          |    x    | Unique store ids           |
+
+    |`store_client_ids`    |  array         |          |          |         | External unique ids of the
+    stores as it may exists in your Information System|
+
+    |`store_type_names`    |  array         |          |          |         | The names of the store types
+    |
+
+    |`store_type_ids`      |  array         |          |          |    x    | The ids of the store types
+    |
+
+    |`created_date`        |  date          |          |    x     |         | Created Date |
+
+    |`updated_date`        |  date          |          |    x     |    x    | Updated Date |
+
+
+    One of either fields is required in order to resolve the mapping between a user and store/s:
+
+
+    - store_ids
+
+
+    - store_client_ids
+
+
+    - store_type_ids
+
+
+    - store_type_names
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Geofilters
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-geofilters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-groups-api
+  name: Yoobic Groups API
+  description: "<a id=\"group-groups\"></a>\nGroups are used to manage users. This is VERY important as\
+    \ Groups are what make using the application much simpler. By adding Users to Groups, when you need\
+    \ to modify sets of Users, you just change the groups properties and all the Users in the Group inherit\
+    \ these properties (much better than changing each individual user manually). Moreover, Groups allow\
+    \ to restrict visibility when some entities are shared (Missions, News, Documents, ...)\n\n### How\
+    \ do I structure my groups ?\n\nEach Group usually corresponds to a population of Users (ex: Admin,\
+    \ HQ, VM Managers, Retail Area Managers, Stores, etc.).\n<img src=\"https://user-images.githubusercontent.com/4806944/41535702-fd95441a-730b-11e8-8fbe-603f8a43f51f.png\"\
+    >\n\n### General Group\n\nUsually there is a general group, which has the name of the tenant.\nThis\
+    \ group will contain all of the other Groups and will give the Users access to shared information.\n\
+    \nThen you will usually find a Group for each type of user. \nThese usually fall into one of these\
+    \ categories:\n\n* Admin\n\n* Area Managers\n\n* HQ\n\n* Itinerants\n\n* Store Users\n\n### Fields\n\
+    \n| Field                       | Type     | Required | Readonly | OrderBy | Description         \
+    \     |\n|-----------------------------|:--------:|:--------:|:--------:|:-------:| -------------------------|\n\
+    |`group_id`                   |  string  |          |    x     |         | The group_id corresponds\
+    \ to the Group title in lowercase letters, with `_` instead of spaces, and without special characters\
+    \ |\n|`title`                      |  string  |     x    |          |         | Group Title |\n|`description`\
+    \                |  string  |          |          |         | Group Description |\n|`group_ids`  \
+    \                |  array   |          |          |    x    | group ids that belong to this group\
+    \                |\n|`user_ids`                   |  array   |          |          |    x    | user\
+    \ ids that belong to this group                |\n|`created_date`               |  date    |     \
+    \     |    x     |         | Created Date |\n|`updated_date`               |  date    |          |\
+    \    x     |    x    | Updated Date |\n|`icon_url`                   |  string  |          |     \
+    \     |         | Icon URL |\n\n### Tip\n\nTo summarise, remember that:\n\n* Users are organised in\
+    \ groups\n\n* Groups must be created prior to importing any users to the database\n\n* A user can\
+    \ belong to multiple groups\n\n* There can be sub-groups\n\n* Users inherit their level or rights\
+    \ from the group(s) they belong to\n<img src=\"https://user-images.githubusercontent.com/4806944/41536506-7949d9d4-730e-11e8-81d8-62c0bc39c9e3.png\"\
+    >"
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-incentives-kpi-api
+  name: Yoobic Incentives Kpi API
+  description: >-
+    <a id="group-incentives-kpi"></a>
+
+    Incentives-KPIs are an indicator for users’ progress within an incentive. Each incentives-kpi represents
+    the sale of one or more items of a single product. When a user submits new progress for an incentive,
+    the data is then broken down product by product, creating one or several new kpis. In case there are
+    no products involved, submitting new progress will generate a single incentive kpi with an empty product
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description                                    |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|------------------------------------------------|
+
+    |`incentive_kpi_id`    |  string        |          |    x     |         | Unique id incentive_kpi                        |
+
+    |`incentive_id`        |  string        |    x     |          |         | The incentive_id                               |
+
+    |`owner_id`            |  string        |    x     |          |         | The user who submitted the
+    kpi                 |
+
+    |`username`            |  string        |          |    x     |         | The owner username                             |
+
+    |`first_name`          |  string        |          |    x     |         | The owner first name                           |
+
+    |`last_name`           |  string        |          |    x     |         | The owner last name                            |
+
+    |`participant_type`    |  string        |    x     |          |         | Type of incentives-kpi ('individual'
+    or 'team')|
+
+    |`start_time`          |  date          |    x     |          |         | The start time of the kpi                      |
+
+    |`end_time`            |  date          |    x     |          |         | The end time of the kpi                        |
+
+    |`participant_user_id` |  string        |          |          |         | The participant user in
+    kpi                    |
+
+    |`participant_group_id`|  string        |          |          |         | The participant group in
+    kpi                   |
+
+    |`product_id`          |  string        |          |          |         | product_id involved in the
+    kpi                 |
+
+    |`price`               |  number        |          |    x     |         | The product's price                            |
+
+    |`count`               |  number        |          |          |         | Number of units in the kpi                     |
+
+    |`weight`              |  number        |          |    x     |         | Weight of product in total
+    calculation         |
+
+    |`total`               |  number        |          |          |         | Total value of the kpi                         |
+
+    |`created_date`        |  date          |          |    x     |         | KPI submission date                            |
+
+    |`updated_date`        |  date          |          |    x     |    x    | Last update date                               |
+
+
+    Only one of these fields is required:
+
+
+    - participant_user_id
+
+
+    - participant_group_id
+
+
+    **Important:**
+
+
+    - If `participant_type` equals `teams`, `participant_group_id` must be filled with `group_id` value.
+
+
+    - If `participant_type` equals `individual`, `participant_user_id` must be filled with `user_id` value.
+
+
+    - `product_id` is optional and appear only if product is part of the related incentive.
+
+
+    - `price` has a value only if a `product_id` exists.
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Incentives Kpi
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-incentives-kpi-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-inventory-api
+  name: Yoobic Inventory API
+  description: "<a id=\"group-inventory\"></a>\nAn Inventory is a custom data structure to manage and\
+    \ use data in a similar way as in a spreadsheet or database directly from the YOOBIC Platform. Each\
+    \ inventory has a defined structure that rely on the same fields as in a YOOBIC campaign.\n\n### Fields\n\
+    \n| Field                | Type           | Required | Readonly | OrderBy | Description          \
+    \     |\n|----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|\n\
+    |`inventory_id`        |  string        |    x     |    x     |         | Unique id of the inventory\
+    \ |\n|`description`         |  string        |          |    x     |         | The inventory description\
+    \ |\n|`name`                |  string        |          |    x     |         | The inventory name\
+    \ |\n|`title`               |  string        |          |    x     |         | The inventory title\
+    \       |\n|`group_ids`           |  array         |          |    x     |         | Group ids that\
+    \ can see this inventory |\n|`page_titles`         |  array         |          |    x     |      \
+    \   | An ordered list of page titles i.e. first title is the first page title etc. |\n|`questions`\
+    \           |  array         |          |    x     |         | The inventory's questions  |\n|`created_date`\
+    \        |  date          |          |    x     |         | Creation date             |\n|`updated_date`\
+    \        |  date          |          |    x     |    x    | Last update date          |\n\nThe `questions`\
+    \ field is defined as an array of:\n| Field                | Type           | Description        \
+    \       |\n|----------------------|----------------|---------------------------|\n|`question_id` \
+    \        |  string        | Unique id of the question |\n|`question_type`       |  string        |\
+    \ The type of the question. Supported types: `text`, `textarea`, `toggle`, `checkbox`, `information`,\
+    \ `todo`, `photo`, `multiphotos`, `selectbuttons`, `select`, `selectmulti`, `address`, `date`, `number`,\
+    \ `starrating`, `image`. |\n|`question`            |  string        | The title of the question |\n\
+    |`question_description`|  string        | The description of the question |\n|`mandatory`        \
+    \   |  boolean       | If `true`, the question has to be answered. Defaults to `false` |\n|`page_number`\
+    \         |  number        | The number of the page the question appears in |\n|`question_number`\
+    \     |  number        | The number of the question |\n|`hide_mobile`         |  boolean       | Hide\
+    \ the question on mobile devices. Defaults to `false`. |\n|`question_attributes` |  object       \
+    \ | Question attributes for specific question types.|\n\nThe `question_attributes` field is defined\
+    \ as an object with the following fields:\n| Field                | Type           | Description \
+    \              |\n|----------------------|----------------|---------------------------|\n|`max_photos`\
+    \          |  number        | Maximum of allowed photos to upload. Applies only to questions of type\
+    \ `multiphotos`.         |\n|`values`              |  array         | Values to be displayed as options\
+    \ to choose from in the question. Applies only to questions of type `selectbuttons`, `select`, `selectmulti`.\
+    \           |\n|`min`                 |  number        | If present, value must be above or including\
+    \ it. Applies only to questions of type `number`. |\n|`max`                 |  number        | If\
+    \ present, value must be below or including it. Applies only to questions of type `number`, `starrating`.\
+    \ |\n\n#### Question Types\n\n<a id=\"group-campaigns-question-types\"></a>\n**Important**    \nBelow\
+    \ is a list of the supported types and their value types:\n\n| question_type | Type           | Description\
+    \ |\n|---------------|:--------------:|-------------|\n| address       |  string        |        \
+    \     |\n| date          |  string        |             |\n| information   |  string        |    \
+    \         |\n| select        |  string        | Single value chosen from the `values` defined in `question_attributes`\
+    \ |\n| textarea      |  string        |             |\n| text          |  string        |        \
+    \     |\n| photo         |  URL           | A valid image URL      |\n| multiphotos   |  array of\
+    \ URLs | Valid image URLs and up to `max_photos` defined in `question_attributes`     |\n| selectbuttons\
+    \ |  array         | Multiple values chosen from the `values` defined in `question_attributes`   \
+    \   |\n| selectmulti   |  array         | Multiple values chosen from the `values` defined in `question_attributes`\
+    \      |\n| number        |  number        | Might have min, max borders as defined in `question_attributes`\
+    \      |\n| starrating    |  number        | Might have max border as defined in `question_attributes`.\
+    \ No negatives allowed.      |\n| checkbox      |  boolean       |             |\n| toggle       \
+    \ |  boolean       |             |\n| image         |                | This is a readonly property\
+    \ (informative) which does not have a value. |\n\n**Important**\n\n- If `page_titles` does not have\
+    \ a title for a given page then a default will be given -    \nSo i.e. if the values are -    \n```json\n\
+    [ \"first chapter\", \"second chapter\" ]\n``` \nand there are three pages in total, then the title\
+    \ for the third page will be `Page 3`.\n\n- To filter on `live` campaigns only you should filter accordingly:\
+    \ \n```json\n{ \"active\": true,  \"archived\": { \"neq\": true } }\n```"
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Inventory
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-inventory-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-jobs-api
+  name: Yoobic Jobs API
+  description: >-
+    <a id="group-jobs"></a>
+
+    The Jobs endpoint allows you to query the status of your asynchronous jobs, whether they are queued,
+    running, completed, or expired.
+
+    The `id` required to request status is returned from your requests that are queued asynchronously
+    on enabled endpoints.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`job_id`              |  string        |    x     |    x     |         | Unique id of the inventory
+    |
+
+    |`name`                |  string        |          |    x     |         | Job name suffixed with a
+    UUID |
+
+    |`progress`            |  number        |          |    x     |         | Between 0-1, the progress
+    of a job, 1 being complete |
+
+    |`lastFinishedAt`      |  date          |          |    x     |         | The date the job finished
+    |
+
+    |`data.stats.execution_time_milliseconds` |  number | |    x  |         | How long the job ran in
+    milliseconds |
+
+    |`data.stats.execution_time` |  number  |          |    x     |         | How long the job ran in
+    words |
+
+    |`data.stats.errors`   |  number        |          |    x     |         | Number of errors in the
+    run |
+
+    |`data.stats.success`  |  number        |          |    x     |         | Number of successes in the
+    run |
+
+    |`data.input`          |  object        |          |    x     |         | Request parameters supplied
+    to the job (see below details for export/import) |
+
+    |`data.output`         |  object        |          |    x     |         | Response parameters of the
+    job (see below details for export/import) |
+
+
+    #### Fields Export
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`data.input.filter`   |  object        |          |    x     |         | The filter object passed
+    to the request  |
+
+    |`data.input.modelName`|  string        |          |    x     |         | The endpoint's entity name  |
+
+    |`data.input.type`     |  string        |          |    x     |         | The exported file type (csv/xlsx)  |
+
+    |`data.output.errors`  |  array         |          |    x     |         | General error or errors
+    that may have occurred for this export job   |
+
+    |`data.output.data.download_url`  |  string |       |    x     |         | The exported file |
+
+    |`data.output.data.expires_at`   |  string |       |    x     |         | The date at which the file
+    will no longer be available for download |
+
+
+    #### Fields Import
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`data.input.originalFilename`   |  string        |          |    x     |         | The file passed
+    to the request  |
+
+    |`data.input.modelName`|  string        |          |    x     |         | The endpoint's entity name  |
+
+    |`data.input.type`     |  string        |          |    x     |         | The imported file type (csv/xlsx)  |
+
+    |`data.output.error.download_url`  |  string |      |    x     |         | The file containing all
+    errors (if any) |
+
+    |`data.output.error.expires_at`   |  date |        |    x     |         | The date at which the file
+    will no longer be available for download |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-lessons-api
+  name: Yoobic Lessons API
+  description: >-
+    <a id="group-lessons"></a>
+
+    Lessons are the activities the users perform during their trainings.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`lesson_id`           |  string        |    x     |    x     |         | Unique id of the lesson   |
+
+    |`title`               |  string        |          |    x     |         | Title of the lesson       |
+
+    |`type`                |  string        |          |    x     |         | Type of lesson (currently
+    just lesson) |
+
+    |`campaign_id`         |  string        |          |    x     |    x    | Unique id of the campaign
+    |
+
+    |`plan_id`             |  string        |          |    x     |         | Unique id of the plan     |
+
+    |`course_id`           |  string        |          |    x     |         | Unique id of the course   |
+
+    |`user_id`             |  string        |          |    x     |         | Unique id of the user     |
+
+    |`status`              |  string        |          |    x     |    x    | Whether the lesson is finished
+    or not     |
+
+    |`points`              |  number        |          |    x     |         | Number of points of the
+    lesson |
+
+    |`score`               |  object        |          |    x     |         | Score of the user      |
+
+    |`duration`            |  number        |          |    x     |         | Time spent on the lesson
+    (in minutes)      |
+
+    |`validated`           |  boolean       |          |    x     |         | Whether the lesson is successfull
+    or a failure      |
+
+    |`created_date`        |  date          |          |    x     |         | Creation date             |
+
+    |`updated_date`        |  date          |          |    x     |    x    | Last update date          |
+
+
+    The `answers` field is defined as an array of:
+
+    | Field                | Type           | Required  | Readonly  | Description               |
+
+    |----------------------|:--------------:|:---------:|:---------:|---------------------------|
+
+    |`question_id`         |  string        |           |     x     | Unique id of the question |
+
+    |`question_type`       |  string        |           |     x     | The type of the question  |
+
+    |`question`            |  string        |           |     x     | The title of the question |
+
+    |`page_number`         |  number        |           |     x     | The number of the page the question
+    appears in |
+
+    |`question_number`     |  number        |           |     x     | The number of the question on the
+    page |
+
+    |`answer`              |  string        |           |     x     | The value of the answer |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Lessons
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-lessons-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-mission-comments-api
+  name: Yoobic Mission Comments API
+  description: >-
+    <a id="group-mission_comments"></a>
+
+    Perform operations on comments linked to missions.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description                                                        |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------                                         |
+
+    |`comment_id`          |  string        |          |    x     |         | Unique id of the comment                                           |
+
+    | user_id              |  string        |    x     |          |         | Id of the user who created
+    the comment                                    |
+
+    | mission_id           |  string        |    x     |          |         | Id of the mission that was
+    interacted with this comment |
+
+    |`text`                |  string        |    x     |          |         | Comment text                                                       |
+
+    |`photo_url`           |  string        |    x     |          |         | Comment photo                                                       |
+
+    |`comment_date`        |  date          |          |          |         | The date of the comment          |
+
+    |`updated_date`        |  date          |          |          |    x    | Last update date          |
+
+    |`created_date`        |  date          |          |          |         | Creation date             |
+
+
+    **Important**:
+
+
+    - Either `text` or `photo_url` are required
+
+
+    - The message can be only a single text or a single photo url. The photo url to be visible in YOOBIC
+    should be a valid url to an image (jpg, png, gif, etc...).
+
+
+    - The mission comment does not support sub comments or reply to comments or reaction to comments.
+    It is a simple comment with no reference to the original comment.
+
+
+    - To handle historical comment you should use the `comment_date` field. In case the `comment_date`
+    is not provided, the `updated_date` will be used instead.
+
+
+    - The text of the comment is limited to 2000 characters.
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Mission Comments
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-mission-comments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-missions-api
+  name: Yoobic Missions API
+  description: "<a id=\"group-missions\"></a>\nMissions are the basic campaign type. The store users will\
+    \ receive missions with fields to complete, for example send a photo of their display or change the\
+    \ location of the new collection in store. The mission creator will define its content from the dashboard,\
+    \ then he will publish it to the appropriate stores. Once the users have completed the mission they\
+    \ will be able to submit it. The managers responsible for the store will then be able to define the\
+    \ mission as compliant (if they deem the answers acceptable) or non compliant (if they believe there\
+    \ is room for improvement). If a mission is evaluated as non compliant, the manager can choose for\
+    \ the user to retake the mission entirely or he can specify which parts of the mission need improving\
+    \ and republish the mission to the store with the rest of the answers already filled in.\n\nTips:\
+    \ a mission is an entity of a campaign published on a store.\n\n<img src=\"https://user-images.githubusercontent.com/4806944/46027402-7576ae00-c0f6-11e8-9579-808251a4aa97.png\"\
+    \ >\n\nA mission is either available, ongoing or finished.\n<img src=\"https://user-images.githubusercontent.com/4806944/46028408-2e3dec80-c0f9-11e8-92c4-673fc5ef4794.png\"\
+    \ >\n\nA finished mission is either \"to validate\", \"compliant\" or \"not compliant\".\n\n- **Available**\
+    \ : a mission is available as soon as it has been published on a store, and hasn't been started yet\
+    \ by a user.\n\n- **Ongoing**: as soon as a user starts or loads a mission, the status of the mission\
+    \ goes from \"available\" to \"ongoing\" (known as `booked` under the status field of a mission)\n\
+    \n- **Finished** : once the mission has been submitted, it is finished.\n    - **To validate**: if\
+    \ the mission hasn't been validated yet  and marked as \"compliant\" or \"not compliant\", or isn't\
+    \ configured to be automatically marked as compliant.\n    - **Compliant** \n    - **Not compliant**\n\
+    \n- **Scheduled**: a mission is scheduled as soon as it has been published on a store and if `valid_from`\
+    \ date did not reach the current date yet.\n\n- **Archived**: a mission gets status archived as soon\
+    \ as it’s archived\n\n### Fields\n\n<a id=\"group-missions-fields\"></a>\n| Field                \
+    \          | Type         | Required | Readonly | OrderBy | Description     |\n|--------------------------------|--------------|:--------:|:--------:|:-------:|-----------------|\n\
+    |`mission_id`                    |  string      |     x    |     x    |         | Unique id of the\
+    \ mission  |\n|`title`                         |  string      |          |          |         | The\
+    \ title of the mission  |\n|`type`                          |  string      |          |          |\
+    \    x    | Mission type             |\n|`campaign_id`                   |  string      |        \
+    \  |     x    |    x    | Unique id of the mission's parent campaign |\n|`user_id`               \
+    \        |  string      |          |     x    |    x    | Unique id of the user who performs the mission\
+    \   |\n|`creator_id`                    |  string      |          |          |    x    | Unique id\
+    \ of the mission creator  |\n|`store_id`                      |  string      |          |     x  \
+    \  |    x    | Unique id of associated store  |\n|`status`                        |  string      |\
+    \          |     x    |    x    | Current status of the mission if set: `\"scheduled\"`, `\"booked\"\
+    `, `\"finished\"`, `\"archived\"`  |\n|`valid_from`                    |  timestamp   |          |\
+    \     x    |         | Mission available from   |\n|`republish_count`               |  number    \
+    \  |          |          |         | The number of times the mission was republished  |\n|`available_on_book`\
+    \             |  boolean     |          |     x    |         | If `true`, a new copy of this mission\
+    \ would be created when the mission is started |\n|`available_on_finished`         |  boolean    \
+    \ |          |     x    |         | If `true`, a new copy of this mission would be created on finish\
+    \ |\n|`booked_date`                   |  timestamp   |          |     x    |         | The date on\
+    \ which the mission was booked to a user  |\n|`due_date`                      |  timestamp   |   \
+    \       |     x    |         | The date by which the mission must be completed |\n|`duration`    \
+    \                  |  number      |          |     x    |         | Time spent on the mission (in\
+    \ minutes)      |\n|`finished_date`                 |  timestamp   |          |     x    |    x  \
+    \  | The date on which the mission was finished  |\n|`score`                         |  object   \
+    \   |          |          |         | The score of the mission as a JSON object `{\"title\": \"my\
+    \ score\", \"value\": 10}`  |\n|`extra_scores`                  |  object      |          |      \
+    \    |         | The extra scores of the mission as a JSON object `{\"score1\": { \"title\": \"my\
+    \ score\", \"value\": 10}}`  |\n|`compliant`                     |  boolean     |          |    x\
+    \     |         | The compliance of the mission as marked by an area manager: `true` if marked compliant,\
+    \ `false` if marked noncompliant. If nothing is specified and if the mission is finished, `status`\
+    \ will be \"to validate\" |\n|`compliant_by_default`          |  boolean     |          |        \
+    \  |         | If `true` the mission is automatically marked compliant on finish |\n|`validated_date`\
+    \                |  timestamp   |          |     x    |         | The date on which the mission was\
+    \ validated  |\n|`reason_noncompliant`           |  string      |          |          |         |\
+    \ The reason provided by the area manager to explain why the mission was marked noncompliant |\n|`republished_with_answers`\
+    \      |  boolean     |          |     x    |         | Has the mission been repulished with the previous\
+    \ answers after being marked noncompliant |\n|`original_mission_id`           |  string      |   \
+    \       |     x    |         | If present, the `mission_id` of the mission that this mission was republished\
+    \ from |\n|`original_reason_noncompliant`  |  string      |          |     x    |         | The `reason_noncompliant`\
+    \ from the original mission that was republished. |\n|`updated_date`                  |  timestamp\
+    \   |          |     x    |    x    | Mission's last update date  |\n|`created_date`             \
+    \     |  timestamp   |          |     x    |         | Mission's creation date     |\n|`answers` \
+    \                      |  array       |          |          |         | Mission's questions and answers,\
+    \ if misssion is finished (see below) |\n|`group_ids`                     |  array       |       \
+    \   |          |         | Group ids that can see this mission |\n|`user_ids`                    \
+    \  |  array       |          |          |         | User ids that can see this mission |\n|`action_plan_progress`\
+    \          |  number      |          |     x    |         | Completion rate of an action plan.   \
+    \   |\n|`task_number`                   |  number      |          |     x    |         | Auto generated\
+    \ when a new mission is created. The value is unique within a campaign      |\n\n**Important**:  \
+    \  \nPlease note that to retrieve the value of the answers for a specific mission, you will need to\
+    \ use the single mission endpoint.\n\nThe `answers` field is defined as an array of:\n| Field    \
+    \            | Type           | Description               |\n|----------------------|----------------|---------------------------|\n\
+    |`question_id`         |  string        | Unique id of the question |\n|`question_type`       |  string\
+    \        | The type of the question  |\n|`question`            |  string        | The title of the\
+    \ question |\n|`page_number`         |  number        | The number of the page the question appears\
+    \ in |\n|`question_number`     |  number        | The number of the question on the page |\n|`answer`\
+    \              |  string        | The value of the answer |"
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Missions
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-missions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-news-api
+  name: Yoobic News API
+  description: >-
+    <a id="group-news"></a>
+
+    Contains information coming from the news feed tab
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`news_id`             |  string        |          |    x     |         | Unique id of the news     |
+
+    |`user_id`             |  string        |    x     |          |    x    | Unique id of a user who
+    published the news |
+
+    |`title`               |  string        |          |          |         | The title of news         |
+
+    |`description`         |  string        |    x     |          |         | The html content of the
+    news feed         |
+
+    |`group_ids`           |  array         |    x     |          |         | Group ids that can see this
+    news         |
+
+    |`user_ids`            |  array         |          |          |         | User ids that can see this
+    news |
+
+    |`views`               |  number        |          |    x     |         | News item views count     |
+
+    |`likes`               |  number        |          |    x     |         | News item likes count     |
+
+    |`authorised_viewers`  |  number        |          |    x     |         | Number of users allowed
+    to view this news feed    |
+
+    |`images`              |  array         |          |          |         | Images to illustrate the
+    news. Max 20 images per news    |
+
+    |`tags`                |  array         |          |          |         | News' list of tags        |
+
+    |`created_date`        |  date          |          |    x     |         | News item creation date   |
+
+    |`updated_date`        |  date          |          |    x     |    x    | News item last update date|
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - News
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-news-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-notifications-api
+  name: Yoobic Notifications API
+  description: >-
+    <a id="group-notifications"></a>
+
+    Notifications provide information about the internal notifications sent to users in the application.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`notification_id`     |  string        |    x     |    x     |         | Unique id of the notification     |
+
+    |`title`               |  string        |    x     |          |         | The title of notification         |
+
+    |`mode`                |  string        |          |          |         | The way in which the notification
+    is sent. Possible values (`push`, `email`, `all`) |
+
+    |`body`                |  string        |    x     |          |         | Notification body |
+
+    |`user_ids`            |  array         |    x     |          |         | Target user ids to send
+    the notification |
+
+    |`group_ids`           |  array         |          |          |         | Send notification to all
+    users in group_ids, but not to users from imbricated groups  |
+
+    |`badge_type`          |  string        |          |    x     |         | Specifies which badge in
+    the Operations or Boost app should be incremented for recipients of this notification |
+
+    |`sender_id`           |  string        |          |    x     |         | Unique id of the user triggering
+    the notification |
+
+    |`push_recipients`     |  number        |          |    x     |         | Number of recipients    |
+
+    |`entity_type`         |  string        |          |          |         | The entity's type for which
+    the notification was created. Possible values (`missions`, `news`, `campaigns`) |
+
+    |`entity_id`           |  string        |          |          |         | The unique id of the entity
+    |
+
+    |`created_date`        |  date          |          |    x     |         | Creation date   |
+
+    |`updated_date`        |  date          |          |    x     |    x    | Last update date |
+
+
+    **Important**:
+
+
+    - `entity_type` and `entity_id` are used to redirect the user once he/she click on the notification.
+
+
+    - `group_ids` is used only when creating the notification. Therefore, it won't be provided on the
+    response. Instead, all the recipients.
+
+
+    - There is a limit of 50k notifications. If you need to send more than this, you can split the recipients
+    in separate requests targetting different groups.
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-photos-api
+  name: Yoobic Photos API
+  description: >-
+    <a id="group-photos"></a>
+
+    contains information about uploaded photos and photos taken as part of a mission and its relations
+    to the mission.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`photo_id`            |  string        |    x     |     x    |         | Unique id of the photo    |
+
+    |`mission_id`          |  string        |          |     x    |    x    | Unique id of the mission  |
+
+    |`campaign_id`         |  string        |          |     x    |    x    | Unique id of the campaign
+    |
+
+    |`store_id`            |  string        |          |     x    |         | Unique id of the store    |
+
+    |`title`               |  string        |          |     x    |         | The photo title           |
+
+    |`url`                 |  string        |          |     x    |         | The url to the image      |
+
+    |`markup_url`          |  string        |          |     x    |         | The markup url to the image
+    |
+
+    |`question_id`         |  string        |          |     x    |    x    | Unique id of the question
+    |
+
+    |`phash`               |  string        |          |     x    |    x    | Perceptual hash (fingerprint)
+    |
+
+    |`tags`                |  array         |          |     x    |         | Tags assigned to the photo
+    |
+
+    |`created_date`        |  date          |          |     x    |         | Creation date             |
+
+    |`updated_date`        |  date          |          |     x    |    x    | Last update date          |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Photos
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-photos-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-plans-api
+  name: Yoobic Plans API
+  description: >-
+    <a id="group-plans"></a>
+
+    A plan is the main description of a course that's assigned to users.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`plan_id`             |  string        |    x     |    x     |         | Unique id of the plan    |
+
+    |`title`               |  string        |          |    x     |         | The plan title           |
+
+    |`description`         |  string        |          |    x     |         | Description of the plan
+    |
+
+    |`enable_journey`      |  boolean       |          |    x     |         | Journey parameter activated
+    or not |
+
+    |`average_completed_lesson` |  number   |          |    x     |         | Average progression in the
+    course |
+
+    |`user_ids`            |  array         |          |          |         | User ids that are assigned
+    to the plan             |
+
+    |`creator_id`          |  string        |          |          |         |              |
+
+    |`category_id`         |  string        |          |          |         |              |
+
+    |`competency_id`       |  string        |          |          |         |              |
+
+    |`created_date`        |  date          |          |    x     |         | Creation date             |
+
+    |`updated_date`        |  date          |          |    x     |    x    | Last update date          |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-plans-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-products-api
+  name: Yoobic Products API
+  description: "<a id=\"group-products\"></a>\nProducts represent usually physical products and are organised\
+    \ by [`catalog`](#group-catalogs)\n\n### Fields\n\n| Field                | Type           | Required\
+    \ | Readonly | OrderBy | Description               |\n|----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|\n\
+    |`product_id`          |  string        |          |    x     |         | Unique id of the product\
+    \  |\n|`title`               |  string        |    x     |          |         | The product title\
+    \         |\n|`price`               |  number        |          |          |         | The product\
+    \ price         |\n|`reference`           |  string        |    x     |          |         | The product\
+    \ reference (SKU) |\n|`image`               |  string        |          |          |         | The\
+    \ url to the image        |\n|`short_desc`          |  string        |          |          |     \
+    \    | Short description of the product         |\n|`description`         |  string        |     \
+    \     |          |         | Description of the product |\n|`catalog_id`          |  string      \
+    \  |    x     |          |    x    | Unique id of the catalog  |\n|`catalog_title`       |  string\
+    \        |    x     |          |         | Title of the catalog  |\n|`tags`                |  array\
+    \         |          |          |         | Tags assigned to the product |\n|`manufacturer`      \
+    \  |  string        |          |          |         | The manufacturer name of the product |\n|`brand`\
+    \               |  string        |          |          |         | The brand name of the product |\
+    \  \n|`category`            |  string        |          |          |         | The category name of\
+    \ the product |  \n|`images`              |  array         |          |          |         | The images\
+    \ associated with this product | \n|`out_of_stock`        |  boolean       |          |          |\
+    \         | Whether or not product is available | \n|`created_date`        |  date          |    \
+    \      |    x     |         | Creation date             |\n|`updated_date`        |  date        \
+    \  |          |    x     |    x    | Last update date          |\n|`custom_fields`       |  object\
+    \        |          |          |         | Dynamic properties (optional)|\n\nOne of either fields\
+    \ is required:\n\n- catalog_id\n\n- catalog_title\n\n**Important:**\n\n- The `image` property should\
+    \ be a secured public URL (HTTPS).\n\n- For best experience in the app, its recommended that the `image`\
+    \ be a square picture.\n\n- `custom_fields` contains new attributes that can be used to describe more\
+    \ precisely a product.    \nCustom fields provide a new way to customize your product data by allowing\
+    \ you to filter and select the relevant data in the application.    \nYou can create your own custom\
+    \ fields in the YOOBIC Web Application in order to enrich your product data.    \nFor the full list\
+    \ of supported field types see [campaigns](#group-campaigns-question-types)\n\n- `reference` is unique\
+    \ per catalog. If a product is uploaded with a combination of `catalog_id` or `catalog_title` and\
+    \ reference that already exist, then the corresponding product is updated."
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-products-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-questions-api
+  name: Yoobic Questions API
+  description: "<a id=\"group-questions\"></a>\nQuestions are a Social Learning feature, allowing users\
+    \ to learn tips / expertise from each other. They can ask questions and others can reply to them.\
+    \ Admins and managers can “verify” some answers to make the response official. Essentially, Questions\
+    \ section acts as a forum where knowledge can be shared across the company.\n\n### Fields\n\n| Field\
+    \                | Type        | Required | Readonly   | OrderBy | Description               |\n|----------------------|:-----------:|:--------:|:----------:|:-------:|---------------------------|\n\
+    |`question_id`         |  string     |    x     |     x      |         | Unique id of the question\
+    \ |\n|`title`               |  string     |          |     x      |         | Title of the question\
+    \ |\n|`description`         |  string     |          |     x      |         | Description of the question\
+    \ |\n|`user_id`             |  string     |          |     x      |         | User id creating the\
+    \ question |\n|`is_wiki`             |  boolean    |          |     x      |         | Whether or\
+    \ not the question exists in the knowledge base | \n|`is_verified`         |  boolean    |       \
+    \   |     x      |         | Whether or not this is a verified question | \n|`likes`             \
+    \  |  number     |          |     x      |         | Likes count | \n|`answers`             |  number\
+    \     |          |     x      |         | Answers count | \n|`bookmarks`           |  number     |\
+    \          |     x      |         | Number of users who bookmarked the question | \n|`tags`      \
+    \          |  array      |          |     x      |         | List of tags        |\n|`image`     \
+    \          |  string     |          |     x      |         | The url to the image  |\n|`created_date`\
+    \        |  date       |          |     x      |         | Creation date             |\n|`updated_date`\
+    \        |  date       |          |     x      |    x    | Last update date          |"
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Questions
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-questions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-roles-api
+  name: Yoobic Roles API
+  description: >-
+    <a id="group-roles"></a>
+
+    Get the list of Roles available for the users in your organization. The roles are defined by a combination
+    of `client_role` and `client_role_extension`
+
+
+    The `client_role` refers to a YOOBIC specific role name between  ROLEFIELD, ROLEMANAGER, ROLEEDITOR,
+    ROLESTOREMANAGER, ROLESTORE, ROLEADMIN, and ROLEVIEWER and has an impact on some default features
+    of the platform. It also determines what license level the user is attached to.
+
+
+    The `client_role_extension` refers to a customer-specific designation of a user role, usually based
+    on the job or responsibility of the teams. It is used to differentiate users with the same license
+    level but access to different modules of the platform.
+
+
+    Each combination of client_role and `client_role_extension` is given a unique acl_role_id at creation
+
+
+    Roles are created during the implementation of the platform and cannot be changed by an administrator
+    either via the public API or from the admin interface.
+
+
+    ### Fields
+
+
+    | Field                  | Type           | Required | Readonly | OrderBy | Description               |
+
+    |------------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`acl_role_id`           |  string        |     x    |     x    |         | Unique id of the role
+    object  |
+
+    |`client_role`           |  string        |     x    |     x    |         | User roles: ROLEFIELD
+    | ROLEMANAGER | ROLEEDITOR | ROLESTOREMANAGER | ROLESTORE | ROLEADMIN | ROLEVIEWER   |
+
+    |`client_role_extension` |  string        |     x    |     x    |         | Additional role information   |
+
+    |`created_date`          |  date          |          |     x    |         | Creation date             |
+
+    |`updated_date`          |  date          |          |     x    |    x    | Last update date          |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-roles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-security-api
+  name: Yoobic Security API
+  description: >-
+    <a id="group-security"></a>
+
+    This endpoint exposes the login method in order to create a valid access token for subsequents call
+    to the API, as well as an endpoint for invalidating the current access token. The latter will have
+    the effect of requiring anyone currently using the existing token to login again in order to get the
+    new one.
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Security
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-security-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-shifts-api
+  name: Yoobic Shifts API
+  description: >-
+    <a id="group-shifts"></a>
+
+    A shift object represents a scheduled period of time in which a specific employee is expected to work
+    at a specific store. The object includes information about the start and end times of the shift, as
+    well as the store location and the ID of the employee who is scheduled to work during that time
+
+
+    ### Fields
+
+
+    | Field      | Type   | Required | Readonly | OrderBy | Description                                                            |
+
+    |------------|--------|:--------:|:--------:|:-------:|------------------------------------------------------------------------|
+
+    | username   | string |    x     |          |         | The unique username of the employee assigned
+    to the shift.             |
+
+    | user_id    | string |          |    x     |         | An external identifier for the employee                                |
+
+    | title      | string |    x     |          |         | The title of the shift. (visible in the calendar
+    of the user)         |
+
+    | store_id   | string |          |    x     |         | An external identifier for the employee                                |
+
+    | start_date | string |    x     |          |    x    | The start date and time of the shift.                                  |
+
+    | shift_id   | string |          |    x     |         | The unique identifier of the shift.                                   |
+
+    | end_date   | string |    x     |          |    x    | The end date and time of the shift.                                   |
+
+    | description| string |          |          |         | The description of the shift.                                         |
+
+    | client_id  | string |    x     |          |         | The unique client_id of the location where
+    the shift takes place.      |
+
+    | _lmt       | string |          |    x     |         | The last modified time of the shift.                                  |
+
+    | _ect       | string |          |    x     |         | The time when the shift was created.                                  |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Shifts
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-shifts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-store-types-api
+  name: Yoobic Store Types API
+  description: "<a id=\"group-store_types\"></a> \nStores always belong to specific Store Type.    \n\
+    Store Types determine which stores users can potentially see.     \nThey will be linked to one or\
+    \ several user groups.     \nStore types are used to have a better view of where the stores are (regions),\
+    \ or what type they belong to (business unit).     \nStores types are handy in the application when\
+    \ publishing campaigns to multiple stores.    \n<img src=\"https://user-images.githubusercontent.com/4806944/41536837-6372e65e-730f-11e8-9bba-78d46a39ca1c.png\"\
+    \ >\n\n### Fields\n\n| Field                       | Type     | Required | Readonly | OrderBy | Description\
+    \                 |\n|-----------------------------|:--------:|:--------:|:--------:|:-------:|-----------------------------|\n\
+    |`store_type_id`              |  string  |          |    x     |         | Unique id of the store\
+    \ type |\n|`name`                       |  string  |    x     |          |    x    | Name of the store\
+    \ type      |\n|`group_ids`                  |  array   |    x     |          |         | Group ids\
+    \ that can see this store type   |\n|`user_ids`                   |  array   |          |        \
+    \  |         | User ids that can see this store type |\n|`created_date`               |  date    |\
+    \          |    x     |         | Created Date|\n|`updated_date`               |  date    |      \
+    \    |    x     |    x    | Updated Date|\n\n### Tip\n\nTo summarize remember that stores always belong\
+    \ to specific store type.     \nFor example, all stores in the UK might belong to the type \"UK Stores\"\
+    .    \nStore Types must be created before importing or creating stores."
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Store Types
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-store-types-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-stores-api
+  name: Yoobic Stores API
+  description: "<a id=\"group-stores\"></a>\nStores are a very important part of the application. They\
+    \ represent physical locations of stores.\nThey are the entities which receive missions (not the users).\
+    \ The users associated to the stores will be able to see their missions and carry them out if they\
+    \ have the correct roles.\nBefore you can create or import stores, you need to have created the store\
+    \ types. If you don't know how to do that, please refer to the Store Types section which will provide\
+    \ you with a detailed explanation on how to create store types.\n\nIn the front end of the application\
+    \ we now call them sites, to use a wording that also applies to companies in different industries\
+    \ that do not have frontline locations called stores (but perhaps restaurants, pharmacies etc.). But\
+    \ in the context of the API, we still call these entities stores.\n\n<img src=\"https://user-images.githubusercontent.com/4806944/41537992-bb5dc5fc-7312-11e8-8059-311f076a30c7.png\"\
+    \ >\n\nWhen you use your GPS to get your position on your smartphone, how are you located?\nEvery\
+    \ point on the Earth's surface can be defined with a pair of coordinates: latitude and longitude.\n\
+    When you are creating new stores, geo location data is required (`latitude` and `longitude`). In these\
+    \ fields you have to enter the coordinates pair of the store you are trying to locate.\n\nIn the case\
+    \ you don't provide them, the coordinates will be infered automatically from the `address` but it\
+    \ may result in a less accurate location than the exact geolocation of the store.\n\n### Fields\n\n\
+    | Field                    | Type    | Required | Readonly | OrderBy | Description     |\n|--------------------------|:-------:|:--------:|:--------:|:-------:|-----------------|\n\
+    |`store_id`                |  string |          |     x    |         | Unique store id |\n|`title`\
+    \                   |  string |    x     |          |         | Name of the store|\n|`address`   \
+    \              |  string |    x     |          |         | The full address allows us to locate the\
+    \ store on the map. This is used to display the missions available near the user's position|\n|`tags`\
+    \                    |  array  |          |          |         | Tags allow to specify additional\
+    \ information about the store|\n|`latitude`                |  float  |    x     |          |     \
+    \    | Latitude of the store|\n|`longitude`               |  float  |    x     |          |      \
+    \   | Longitude of the store|\n|`client_id`               |  string |    x     |          |    x \
+    \   | The external unique id of the store as it may exists in your Information System|\n|`store_type_name`\
+    \         |  string |    x     |          |         | The name of the store type|\n|`store_type_id`\
+    \           |  string |    x     |          |         | The id of the store type|\n|`info`       \
+    \             |  string |          |          |         | Additional information regarding the store.\
+    \ Supports HTML layout |\n|`country`                 |  string |          |    x     |         | Country\
+    \ location of the store |\n|`notification_emails`     |  array  |          |          |         |\
+    \ List of email(s) that will be notified when a mission is finished and/or a request is created/finished\
+    \ |\n|`contact_email`           |  string |          |          |         | Contact's email of the\
+    \ store i.e. store manager's email |\n|`contact_phone`           |  string |          |          |\
+    \         | Contact's phone of the store i.e. store manager's phone |\n|`contact_name`           \
+    \ |  string |          |          |         | Contact's name of the store i.e. store manager's name\
+    \ |\n|`properties`              |  json   |          |          |         | Extra information that\
+    \ enables you to customize the display of the data shown on the Store Activity page. This can be split\
+    \ into 4 components: `columns`, `rows`, `grid`, `html` |\n|`photo`                   |  string | \
+    \         |          |         | A photo of the store                                            |\n\
+    |`vip`                     | boolean |          |          |         | Indicates if the store is a\
+    \ VIP store (a flagship store) |\n|`timezone`                | string  |          |    x     |   \
+    \      | The Time Zone allows to display the hourly sales data in the store insights in the local\
+    \ time of the store. |\n|`capacity`                | number  |          |          |         | Maximum\
+    \ number of customers which can be served at the same time |\n|`created_date`            |  date \
+    \  |          |    x     |         | Created Date|\n|`updated_date`            |  date   |       \
+    \   |    x     |    x    | Updated Date|\n|`custom_fields`           | object  |          |      \
+    \    |         | Dynamic properties (optional)|\n\nOne of either fields is required:\n\n- address\n\
+    \n- geoloc (latitude + longitude)\n\nIn case one of the fields' missing the other one will be inferred\
+    \ automatically by using Google Map API.    \nPlease note that the results may be incorrect and it's\
+    \ always recommended to supply both fields.    \n`country` field will be resolved using either the\
+    \ geoloc or address. Order of precedence is to resolve by the geoloc and if not present, by address.\n\
+    \nOne of either fields is required:\n\n- store_type_name\n\n- store_type_id\n\nThe `properties` field\
+    \ is a json array and can be used to display the following columns, rows, grid,  and html.\nIn its\
+    \ most generic format it looks like :\n\n```json\n\n[\n    {\n        \"title\": \"string\",\n   \
+    \     \"type\": \"string\",\n        \"headers\": [\n            \"string\"\n        ],\n        \"\
+    values\": [\n            \"object\"\n        ]\n    }\n]\n```\n\n#### columns\n\n```\n{\n    \"title\"\
+    \ : \"KPI S27\",\n    \"type\" : \"columns\",\n    \"values\" : [ \n        {\n            \"title\"\
+    \ : \"Revenues\",\n            \"value\" : \"1 456 $\",\n            \"isPercent\" : false,\n    \
+    \        \"colorHex\" : \"#00FF00\"\n        }, \n        {\n            \"title\" : \"Nb Hours\"\
+    ,\n            \"value\" : \"7/66\",\n            \"colorHex\" : \"#B404FF\"\n        }, \n      \
+    \  {\n            \"title\" : \"QP\",\n            \"value\" : 2.8,\n            \"isPercent\" : true,\n\
+    \            \"colorHex\" : \"#B40404\"\n        }\n    ]\n}\n```\n\n<img src=\"https://user-images.githubusercontent.com/4806944/67024261-c942a380-f10c-11e9-9a42-07c7415ea421.png\"\
+    \ >\n\n#### rows\n\n```\n{\n    \"title\" : \"S26 to S27\",\n    \"type\" : \"rows\",\n    \"values\"\
+    \ : [ \n        {\n            \"title\" : \"Revenues\",\n            \"value\" : \"14 647 $\",\n\
+    \            \"delta\" : \"+82.5 %\",\n            \"colorHex\" : \"#B40404\"\n        }, \n     \
+    \   {\n            \"title\" : \"Clients\",\n            \"value\" : \"1 753\",\n            \"delta\"\
+    \ : \"-10.3 %\",\n            \"colorHex\" : \"#B40404\"\n        }, \n        {\n            \"title\"\
+    \ : \"Basket\",\n            \"value\" : \"8.4 $\",\n            \"delta\" : \"+4.7 %\",\n       \
+    \     \"colorHex\" : \"#04B404\"\n        }\n    ]\n}\n```\n\n<img src=\"https://user-images.githubusercontent.com/4806944/67024307-dd86a080-f10c-11e9-82a4-e4e407282fdd.png\"\
+    \ >\n\n#### grid\n\n```\n{\n    \"title\" : \"Hours\",\n    \"type\" : \"grid\",\n    \"headers\"\
+    \ : [ \n        \"Day\", \n        \"Morning\", \n        \"Afternoon\", \n        \"Nb Hours\"\n\
+    \    ],\n    \"values\" : [ \n        {\n            \"values\" : [ \n                \"Monday\",\
+    \ \n                \"9:00\", \n                \"20:00\", \n                \"5/11\"\n          \
+    \  ],\n            \"colorHex\" : \"#000000\"\n        }, \n        {\n            \"values\" : [\
+    \ \n                \"Tuesday\", \n                \"9:00\", \n                \"20:00\", \n     \
+    \           \"2/11\"\n            ],\n            \"colorHex\" : \"#000000\"\n        }, \n      \
+    \  {\n            \"values\" : [ \n                \"Wednesday\", \n                \"9:00\", \n \
+    \               \"20:00\", \n                \"0/11\"\n            ],\n            \"colorHex\" :\
+    \ \"#000000\"\n        }, \n        {\n            \"values\" : [ \n                \"Thursday\",\
+    \ \n                \"9:00\", \n                \"20:00\", \n                \"0/11\"\n          \
+    \  ],\n            \"colorHex\" : \"#000000\"\n        }, \n        {\n            \"values\" : [\
+    \ \n                \"Friday\", \n                \"9:00\", \n                \"20:00\", \n      \
+    \          \"0/11\"\n            ],\n            \"colorHex\" : \"#000000\"\n        }, \n       \
+    \ {\n            \"values\" : [ \n                \"Saturday\", \n                \"9:00\", \n   \
+    \             \"20:00\", \n                \"0/11\"\n            ],\n            \"colorHex\" : \"\
+    #A0A0A0\"\n        }, \n        {\n            \"values\" : [ \n                \"Sunday\", \n   \
+    \             \" \", \n                \" \", \n                \"0/0\"\n            ],\n        \
+    \    \"colorHex\" : \"#A0A0A0\"\n        }\n    ]\n}\n```\n\n#### html\n\n```\n{\n    \"title\" :\
+    \ \"Reference docs\",\n    \"type\" : \"html\",\n    \"value\" : \"<center>Your engagement: <br><b>85%</b><br><br>Share\
+    \ of shelf :<br><img src=\\\"https://res.cloudinary.com/www-yoobic-com/image/upload/a_exif/w_50/v1516113345/upyw8n7f9fz3v6zhfq29.png\\\
+    \"><br><font color=#69D0C0><a href=\\\"mailto:support@yoobic.com?Subject=Reference\\\" target=\\\"\
+    _top \\\">Contact us</a></font></center>\"\n}\n```\n\n<img src=\"https://user-images.githubusercontent.com/31584145/50735233-373c6080-11b4-11e9-832d-ad0ecefb4447.png\"\
+    \ >\n\n**Important:**\n\n`custom_fields` contains new attributes that can be used to describe more\
+    \ precisely a store.    \nCustom fields provide a new way to customize your store data by allowing\
+    \ you to filter and select the relevant data in the application.    \nYou can create your own custom\
+    \ fields in the YOOBIC Web Application in order to enrich your store data.    \nFor the full list\
+    \ of supported field types see [campaigns](#group-campaigns-question-types)"
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Stores
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-stores-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-tenants-api
+  name: Yoobic Tenants API
+  description: >-
+    <a id="group-tenants"></a>
+
+    Exposes tenant level information.
+
+
+    ### Fields
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`tenant_id`           |  string        |    x     |    x     |         | Unique id of the tenant   |
+
+    |`name`                |  string        |          |    x     |         | The unique tenant name    |
+
+    |`title`               |  string        |          |    x     |         | The tenant title           |
+
+    |`icon`                |  string        |          |    x     |         | The icon of the company
+    |
+
+    |`sql_size`            |  number        |          |    x     |         | The company's estimated
+    size  |
+
+    |`has_terms_of_acceptance`|  boolean    |          |    x     |         | Does company have acceptance
+    terms |
+
+    |`terms_of_acceptance`    |  string     |          |    x     |         | Acceptance terms |
+
+    |`terms_of_acceptance_lmt`|  date       |          |    x     |         | Last date modified acceptance
+    terms |
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Tenants
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-tenants-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-translations-api
+  name: Yoobic Translations API
+  description: >-
+    <a id="group-translations"></a>
+
+    Contains translations of common keys used in the app to different languages.
+
+
+    ### Table Translations
+
+
+    | Field                | Type           | Required | Readonly | OrderBy | Description               |
+
+    |----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|
+
+    |`translation_id`      | string         |    x     |          |         | Unique id of the translations     |
+
+    |`language`            | string         |    x     |          |    x    | Default language chosen
+    for the key |
+
+    |`key`                 | string         |    x     |          |    x    | The key that references
+    this translation |
+
+    |`value`               | string         |    x     |          |         | Translated key by the default
+    language |
+
+    |`group_ids`           | array          |    x     |          |         | Group ids that can see these
+    translations  |
+
+    |`user_ids`            |  array         |          |          |         | User ids that can see these
+    translations |
+
+    |`us`                  | string         |          |          |         | English - United States           |
+
+    |`en`                  | string         |          |          |         | English                                  |
+
+    |`ca`                  | string         |          |          |         | English - Canada                         |
+
+    |`fr`                  | string         |          |          |         | French                                  |
+
+    |`de`                  | string         |          |          |         | German                                  |
+
+    |`es`                  | string         |          |          |         | Spanish                                  |
+
+    |`nl`                  | string         |          |          |         | Dutch                                  |
+
+    |`pl`                  | string         |          |          |         | Polish                                  |
+
+    |`it`                  | string         |          |          |         | Italian                                  |
+
+    |`ru`                  | string         |          |          |         | Russian                                  |
+
+    |`zhs`                 | string         |          |          |         | Simplified Chinese                                  |
+
+    |`zht`                 | string         |          |          |         | Traditional Chinese                                  |
+
+    |`pt`                  | string         |          |          |         | Portuguese                                  |
+
+    |`kr`                  | string         |          |          |         | Kanuri                                  |
+
+    |`ja`                  | string         |          |          |         | Japanese                                  |
+
+    |`ua`                  | string         |          |          |         | Ukrainian                                  |
+
+    |`he`                  | string         |          |          |         | Hebrew                                  |
+
+    |`ar`                  | string         |          |          |         | Arabic                                  |
+
+    |`cz`                  | string         |          |          |         | Czech                                  |
+
+    |`th`                  | string         |          |          |         | Thai                                  |
+
+    |`tr`                  | string         |          |          |         | Turkish                                  |
+
+    |`bg`                  | string         |          |          |         | Bulgarian                                  |
+
+    |`el`                  | string         |          |          |         | Greek                                  |
+
+    |`sl`                  | string         |          |          |         | Slovenian                                  |
+
+    |`sk`                  | string         |          |          |         | Slovak                                  |
+
+    |`ro`                  | string         |          |          |         | Romanian                                  |
+
+    |`hu`                  | string         |          |          |         | Hungarian                                  |
+
+    |`br`                  | string         |          |          |         | Brazilian Portuguese                                  |
+
+    |`et`                  | string         |          |          |         | Estonian                                  |
+
+    |`au`                  | string         |          |          |         | Australian                                  |
+
+    |`ido`                 | string         |          |          |         | Indonesian                                  |
+
+    |`vi`                  | string         |          |          |         | Vietnamese                                  |
+
+    |`da`                  | string         |          |          |         | Danish                                  |
+
+    |`fi`                  | string         |          |          |         | Finnish                                  |
+
+    |`nb`                  | string         |          |          |         | Norwegian                                  |
+
+    |`sv`                  | string         |          |          |         | Swedish                                  |
+
+    |`base_language`       |  string        |          |          |         | the base language code of
+    the plan |
+
+    |`created_date`        |  date          |          |          |         | translations item creation
+    date   |
+
+    |`updated_date`        |  date          |          |          |    x    | translations item last update
+    date|
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Translations
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-translations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-users-api
+  name: Yoobic Users API
+  description: "<a id=\"group-users\"></a>\nExpose users for your company.\n\nRemember:\n\n- Users are\
+    \ the people at your company with access to the YOOBIC mobile and/or web apps.\n\n- Users can be assigned\
+    \ to one or more groups after they are created\n\n- Users can have multiple tags\n\n### Fields\n\n\
+    | Field                    | Type    | Required | Readonly | OrderBy | Available for all users | Description\
+    \     |\n|--------------------------|:-------:|:--------:|:--------:|:-------:|:-----------------------:|-----------------|\n\
+    |`user_id`                 |  string |          |    x     |         |         x               | Unique\
+    \ user id |\n|`username`                |  string |    x     |          |    x    |         x    \
+    \           | Unique username |\n|`password`                |  string |    x     |          |    \
+    \     |         x               | Password, required on creation only |\n|`first_name`           \
+    \   |  string |    x     |          |         |         x               | First name|\n|`last_name`\
+    \               |  string |    x     |          |         |         x               | Last name|\n\
+    |`client_role`             |  string |    x     |          |         |         x               | User\
+    \ roles: ROLEFIELD \\| ROLEMANAGER \\| ROLEEDITOR \\| ROLESTOREMANAGER \\| ROLESTORE \\| ROLEADMIN\
+    \ \\| ROLEVIEWER|\n|`client_role_extension`   |  string |          |          |         |        \
+    \ x               | Indicates an extension of a user role. Has to match an existing role extension\
+    \ in the database |\n|`email`                   |  string |          |          |         |      \
+    \   x               | Email |\n|`address`                 |  string |          |          |      \
+    \   |         x               | User's work address |\n|`groups`                  |  array  |    x\
+    \     |          |         |         x               | The list of groups the user is in|\n|`language`\
+    \                |  string |          |          |         |         x               | Preferred language\
+    \ |\n|`phone`                   |  string |          |          |         |         x            \
+    \   | Phone number|\n|`photo`                   |  string |          |          |         |      \
+    \   x               | Url of the user's picture |\n|`store_id`                |  string |        \
+    \  |    x     |    x    |         x               | Primary Store. Setting up a store_id on a user\
+    \ will create a geofilter on this user |\n|`tags`                    |  array  |          |      \
+    \    |         |         x               | Tags allow to specify additional information about the\
+    \ user|\n|`sso`                     |  boolean|     x    |          |         |         x        \
+    \       | Flag if a user will login through a third party |\n|`allow_local_login`       |  boolean|\
+    \          |          |         |         x               | Flag if a user will login with password,\
+    \ even if set to third party in tenant (company) configuration |\n|`last_seen`               |  date\
+    \   |          |    x     |         |         x               | The date on which the user connected\
+    \ for the last time.  |\n|`terms_of_acceptance_date`|  date   |          |    x     |         |  \
+    \       x               | The date in which terms were last accepted |\n|`mobile_version`        \
+    \  |  string |          |    x     |         |         x               | Version of the App used on\
+    \ mobile by the user.  |\n|`desktop_version`         |  string |          |    x     |         | \
+    \        x               | Version of the App used on desktop by the user. |\n|`created_date`    \
+    \        |  date   |          |    x     |         |         x               | Created Date|\n|`updated_date`\
+    \            |  date   |          |    x     |    x    |         x               | Updated Date|\n\
+    |`custom_fields`           | object  |          |          |         |         x               | Dynamic\
+    \ properties (optional)|\n|`weekly_schedule`         | object  |          |          |         | \
+    \        x               | Contains data on an employee's working hours for each day of the week.|\n\
+    |`client_ids`              | array   |          |          |         |         x               | List\
+    \ of stores that the user can have access to, selected with their client_id. Creates or updates the\
+    \ corresponding user's geofilter if not empty\n|`store_type_names`        | array   |          | \
+    \         |         |         x               | List of stores' store_types that the user can have\
+    \ access to, selected with their store_type_name. Creates or updates the corresponding user's geofilter\
+    \ if not empty\n| `position`               | string  |          |          |         |           \
+    \              | Position                               |\n| `department`             | string  |\
+    \          |          |         |                         | Department                           \
+    \  |\n| `division`               | string  |          |          |         |                     \
+    \    | Division                               |\n| `company`                | string  |          |\
+    \          |         |                         | Company                                |\n| `hiring_date`\
+    \            | date    |          |          |         |                         | Date when the user\
+    \ joined the company  |\n| `skills`                 | array   |          |          |         |  \
+    \                       | Skills                                 |\n| `cover`                  | string\
+    \  |          |          |         |                         | Cover URL                         \
+    \         |\n| `description`            | string  |          |          |         |              \
+    \           | Description                            |\n\n**Important:**\n\n- One of either fields\
+    \ is required in case of user creation:\n    - password\n    - sso\n\n- `allow_local_login` is required\
+    \ only if in tenant (company) configuration it is specified to allow login using a third party, but\
+    \ would like to enable specific user a login with a password instead.\n\n- Combination of `client_role`\
+    \ and `client_role_extension` defines the user's permission. A wrong combination of these two will\
+    \ cause a validation error, specifying an invalid permission. If `client_role_extension` is not passed\
+    \ (optional), `client_role` will refer to the corresponding base permission.\n\n- `custom_fields`\
+    \ contains new attributes that can be used to describe more precisely a user.    \nCustom fields provide\
+    \ a new way to customize your user data by allowing you to filter and select the relevant data in\
+    \ the application.    \nYou can create your own custom fields in the YOOBIC Web Application in order\
+    \ to enrich your user data.    \nFor the full list of supported field types see [campaigns](#group-campaigns-question-types)\n\
+    \n- The `username` of a user has to be unique across live and archived users and is used to log in\
+    \ to the platform.\n\n- If a user already has a `store_id` in their profile, the corresponding store’s\
+    \ `client_id` will be exported in the next export. It can be used instead of the `store_id`\n\n- It\
+    \ is possible to add several `client_ids` and/or `store_type_names` for a single user. When updating\
+    \ a user, the list of `client_ids` and `store_type_names` will replace the previous one in the user's\
+    \ geofilter.\n\n- It is not possible to filter users on the `client_ids` or `store_type_names` attributes.\
+    \ Please use the geofilter collection to find if a geofilter exist for a user on a specific store\
+    \ or store_type\n\nDescription of the `weekly_schedule` object:\n\n- This object contains data on\
+    \ an employee's working hours for each day of the week.\n\n- Each day of the week is represented by\
+    \ a key (e.g. `mon`, `tue`, etc.) and has a corresponding value that contains information about the\
+    \ working periods for that day.\n\n### Fields\n\n| Field   | Type    | Required | Readonly | OrderBy\
+    \ | Description     |\n|---------|:-------:|:--------:|:--------:|:-------:|-----------------|\n|\
+    \ mon     | JSON    | no       | no       | no      | Contains data on the working hours for Monday\
+    \ |\n| tue     | JSON    | no       | no       | no      | Contains data on the working hours for\
+    \ Tuesday |\n| wed     | JSON    | no       | no       | no      | Contains data on the working hours\
+    \ for Wednesday |\n| thu     | JSON    | no       | no       | no      | Contains data on the working\
+    \ hours for Thursday |\n| fri     | JSON    | no       | no       | no      | Contains data on the\
+    \ working hours for Friday |\n| sat     | JSON    | no       | no       | no      | Contains data\
+    \ on the working hours for Saturday |\n| sun     | JSON    | no       | no       | no      | Contains\
+    \ data on the working hours for Sunday |\n\nFor each day of the week, the corresponding value is an\
+    \ object with the following fields:\n\n| Field   | Type   | Required | Readonly | OrderBy | Description\
+    \                                                            |\n|---------|--------|----------|----------|---------|------------------------------------------------------------------------|\n\
+    | periods | array  | no       | no       | no      | Contains an array of objects, each of which represents\
+    \ a working period for the day. |\n\nEach object in the `periods` array has the following fields:\n\
+    \n| Field | Type   | Required | Readonly | OrderBy | Description                                 \
+    \                           |\n|-------|--------|----------|----------|---------|------------------------------------------------------------------------|\n\
+    | from  | string | no       | no       | no      | The start time of the working period. Format is\
+    \ `hh:mm` in UTC.      |\n| to    | string | no       | no       | no      | The end time of the working\
+    \ period. Format is `hh:mm` in UTC.        |\n\nIf a day doesn’t have data in the `weekly_schedule`\
+    \ object, it is considered that the user is not scheduled to work on that day."
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-visits-api
+  name: Yoobic Visits API
+  description: "<a id=\"group-visits\"></a>\nThrough this endpoint the details and/or the approval of\
+    \ the visit could be set.    \nBy default, the visits will be shown as pending until they are approved\
+    \ (`compliant`).    \nBelow is an example of a typical way of scheduling a visit:\n\n<img src=\"https://res.cloudinary.com/www-yoobic-com/image/upload/v1568034036/ympswsz9y1j0ziaddexu.png\"\
+    \ >\n\n### Fields\n\n<a id=\"group-visits-fields\"></a>\n| Field                          | Type \
+    \        | Required | Readonly | OrderBy | Description     |\n|--------------------------------|--------------|:--------:|:--------:|:-------:|-----------------|\n\
+    |`visit_id`                      |  string      |          |     x    |         | Unique id of the\
+    \ visit  |\n|`user_id`                       |  string      |     x    |          |    x    | Unique\
+    \ id of the user who will visit the store  |\n|`store_id`                      |  string      |  \
+    \   x    |          |    x    | Unique id of the associated store  |\n|`group_ids`               \
+    \      |  timestamp   |     x    |          |         | Group ids that can see this visit  |\n|`user_ids`\
+    \                      |  array       |          |          |         | User ids that can see this\
+    \ visit|\n|`start_time`                    |  string      |          |          |         | The scheduled\
+    \ time of the visit. Format is HH:mm |\n|`end_time`                      |  string      |        \
+    \  |          |         | The end time of the visit. Format is HH:mm |\n|`visit_date`            \
+    \        |  date        |     x    |          |         | The scheduled date of the visit. Format\
+    \ is YYYY-MM-DD |\n|`compliant`                     |  boolean     |          |          |       \
+    \  | The compliance of the visit as marked by an area manager: `true` if marked compliant, `false`\
+    \ if marked noncompliant |\n|`type`                          |  string      |          |         \
+    \ |         | Type of the visit chosen among a predefined list             |\n|`description`     \
+    \              |  string      |          |          |         | Description of the visit  |\n|`creator_id`\
+    \                    |  string      |          |     x    |    x    | Unique id of the visit creator\
+    \  |\n|`custom_fields`                 |  object      |          |          |         | Dynamic properties\
+    \ (optional)|\n|`updated_date`                  |  timestamp   |          |     x    |    x    | Visit's\
+    \ last update date  |\n|`created_date`                  |  timestamp   |          |     x    |   \
+    \      | Visit's creation date     |\n\n**Important:**\n\n`custom_fields` contains new attributes\
+    \ that can be used to describe more precisely a user.    \nCustom fields provide a new way to customize\
+    \ your user data by allowing you to filter and select the relevant data in the application.    \n\
+    You can create your own custom fields in the YOOBIC Web Application in order to enrich your user data.\
+    \    \nFor the full list of supported field types see [campaigns](#group-campaigns-question-types)"
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Visits
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-visits-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
+- aid: yoobic:yoobic-webhooks-api
+  name: Yoobic Webhooks API
+  description: "<a id=\"group-webhooks\"></a>\nYou can create webhooks with HTTP targets to build integrations\
+    \ with the services or with your back-end system. Examples:\n\n- Alert your team in Slack when a mission\
+    \ is created\n\n- Pass mission to your docs team in Asana after a mission is completed\n\n- Update\
+    \ Salesforce when a new store is created\n\nAn HTTP target lets you pass information to third-party\
+    \ services and REST APIs that accept JSON in HTTP requests.\n\nThe list of topics supporting webhooks\
+    \ are:\n\n- campaigns\n\n- courses\n\n- events\n\n- files\n\n- lessons\n\n- mission-workflows\n\n\
+    - missions\n\n- mission-comments\n\n- mission-services\n\n- store-types\n\n- stores\n\n- users\n\n\
+    - visits\n\n- webhooks\n\n- For visits, the `delete` action is not supported. To receive deleted visit\
+    \ objects you need to subscribe to the `missions` topic. The deleted visits are sent as their corresponding\
+    \ `mission` object as a visit is a sub-type of missions.\n\n- For mission-comments, only `create`\
+    \ and `update` actions are supported.    \nSee example use case [here](https://yoobic.zendesk.com/hc/en-gb/articles/14909941328274-Ticketing-System-Integration-Setup-Guide-Synchronise-Requests-and-Comments-With-External-Tickets#h_01HEJEZ7VEZSGHBCZH7C569T8A).\n\
+    \n- For mission-services, only `create` and `update` actions are supported.    \nSee example use case\
+    \ [here](https://yoobic.zendesk.com/hc/en-gb/articles/14909941328274-Ticketing-System-Integration-Setup-Guide-Synchronise-Requests-and-Comments-With-External-Tickets#h_01HEJCJBH9B9G62R79FBGKA29N).\n\
+    \n- If the webhook has a filter, the webhook will fire only once per object when it matches the filter\
+    \ the first time. For example, if the webhook is on topic `missions` , operations `update` and the\
+    \ filter is `{\"status\": \"finished\"}`, then each mission will trigger a new message only when it\
+    \ is `finished`. If another update happens later, to validate the mission for example, it will not\
+    \ fire a new message.\n\n- To send multiple messages for the same object and operation, set `trigger_on_every_match`\
+    \ to true. For example if you want to track every update for `mission-workflows` for every step of\
+    \ the workflow.\n\n- On mission-workflows, possible to filter on `step_title` and `state`. Both can\
+    \ be used together to **only** fire the webhook when a step is reached. Otherwise, having only a filter\
+    \ on `step_title` results in the webhook firing twice when the step is reached due to the mission\
+    \ being updated when it is assigned to a user.\n\n- The object output of mission-workflows contains\
+    \ the same fields as for a regular mission, with an addition of `workflow_step_title`, `workflow_step_id`\
+    \ and `workflow_state`.\n\n#### Errors\n\nIf a webhook fails it becomes inactive. In addition a failure\
+    \ object with the http status and reason are set on the webhook's object.\n\n```\n  {\n      \"is_active\"\
+    : false\",\n      \"error\": {\n        \"status\": 404,\n        \"message\": \"Not Found.\"\n  \
+    \    }\n  }\n  ```\n\nOnce the webhook becomes active again, the error object will be cleared.   \
+    \ \ni.e. a PATCH request to fix the broken webhook:\n\n```\n  {\n    \"is_active\": true,\n    \"\
+    url\": \"<new working callback url>\"\n  } \n  ```\n\n#### Callback response body\n\nThe callback\
+    \ url will have the following fields -\n\n- action: create/update/delete\n\n- topic: one of the supported\
+    \ topics i.e. store-types\n\n- data: the actual entity\n\n- updatedFields: list of fields that were\
+    \ updated \n  ```\n  {\n      \"action\": \"update\",\n      \"topic\": \"store-types\",\n      \"\
+    data\": {\n          \"store_type_id\": \"56b0c262e9a22a4e5f02be7d\",\n          \"name\": \"ice-cream\"\
+    ,\n          \"group_ids\": [\"managers\"],\n          \"created_date\": \"2016-02-02T14:51:14.644Z\"\
+    ,\n          \"updated_date\": \"2020-07-15T14:18:41.750Z\"\n      },\n      \"updatedFields\": [\n\
+    \        \"group_ids\"\n      ]\n  }\n  ```\n\n#### Security\n\nWebhooks provide an additional security\
+    \ measure to verify that the webhook is genuine and has come from YOOBIC. \n  This can be useful if\
+    \ you're looking to ensure only YOOBIC webhooks are being made to your endpoint and ensure the information\
+    \ is genuine and as the system expects. These signatures will also help prevent against replay attacks.\
+    \ Verifying the signing secret is optional.\n  When registering a webhook you can set an additional\
+    \ `secret` field in the payload.\n  Webhook requests will contain two headers which can be used to\
+    \ verify the request's authenticity:\n\n- `x-yoobic-webhook-signature` - the main signature\n\n- `x-yoobic-webhook-signature-timestamp`\
+    \ - the timestamp used to verify the signature\n  This is used in conjunction with the payload of\
+    \ the request (if there is one).\n\n  Verifying the signature    \n  Sign the body and signature timestamp\
+    \ with the webhook secret key using SHA256, then base64 encoding the resulting digest.\n\n  Represented\
+    \ simply: base64(HMACSHA256(TIMESTAMP + BODY))\n\n  To verify the signature, create the same SHA256\
+    \ HMAC signature and then compare it to the webhook payload to ensure that they match. If they match,\
+    \ then you can be sure that the webhook came from YOOBIC. If they don't, it may be a request from\
+    \ another source.\n\n\n  Here is an example of a verification signature function in nodejs\n\n\n \
+    \ ```js\n  const crypto = require('crypto');\n  const SIGNING_SECRET = <the secret you used when registering\
+    \ the webhook>\n  function isValidSignature(signature, body, timestamp) {\n    let hmac = crypto.createHmac('sha256',\
+    \ SIGNING_SECRET);\n    let sig = hmac.update(timestamp + body).digest(\"base64\");\n\n    return\
+    \ (\n      Buffer.compare(\n        Buffer.from(signature),\n        Buffer.from(sig.toString(\"base64\"\
+    ))\n      ) === 0\n    );\n  }\n\n  // assuming you have access to the HTTP request (req) object your\
+    \ webhook endpoint has been called with\n  const signature = req.headers[\"x-yoobic-webhook-signature\"\
+    ];\n  const timestamp = req.headers[\"x-yoobic-webhook-signature-timestamp\"];\n  const raw_body =\
+    \ JSON.stringify(req.body);\n\n  const isValid = isValidSignature(signature, raw_body, timestamp)\n\
+    \  if (isValid) {\n    console.log(\"HMAC signature is valid\");\n  } else {\n    console.log(\"HMAC\
+    \ signature is invalid\");\n  }\n  ```\n\n#### Webhooks and sandbox\n\nYou can create webhooks in\
+    \ the sandbox environment but they are automatically removed every week when the sandbox environment\
+    \ is refreshed.\n  Active webhooks in production are not copied to the sandbox environment during\
+    \ the weekly sandbox refresh.\n\n### Fields\n\n| Field                | Type           | Required\
+    \ | Readonly | OrderBy | Description               |\n|----------------------|:--------------:|:--------:|:--------:|:-------:|---------------------------|\n\
+    |`webhook_id`          |  string        |          |     x    |         | Unique webhook id      \
+    \   |\n|`url`                 |  string        |     x    |          |         | Unique http target\
+    \ url    |\n|`topics`              |  array         |          |          |         | A list of entities\
+    \ to listen for (default: all)|\n|`operations`          |  array         |          |          | \
+    \        | A list of operations to listen for [\"create\", \"update\", \"delete\"] (default: all)|\n\
+    |`is_active`           |  boolean       |          |          |         | enable or disable this webhook\
+    \ (default: true)         |\n|`trigger_on_every_match`|  boolean     |          |          |     \
+    \    | Specifies if an object should trigger the webhook on every match or only once |\n|`has_secret`\
+    \          |  boolean       |          |    x     |         | True if secret has been provided   \
+    \      |\n|`error`               |  object        |          |    x     |         | A description\
+    \ object (http status, message) to the reason this webhook is inactive         |\n|`secret`      \
+    \        |  string        |          |          |         | Encryption key         |\n|`created_date`\
+    \        |  date          |          |     x    |         | Creation date             |\n|`updated_date`\
+    \        |  date          |          |     x    |    x    | Last update date          |"
+  humanURL: https://docs.yoobic.com/api.html
+  baseURL: https://api.yoobic.com/public/api
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/yoobic-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.yoobic.com/api.html
+  - type: APIReference
+    url: https://docs.yoobic.com/api.html
+  - type: Postman
+    url: >-
+      https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip
+  - type: ErrorCatalog
+    url: errors/yoobic-problem-types.yml
+  - type: Conventions
+    url: conventions/yoobic-conventions.yml
+  - type: ChangeLog
+    url: changelog/yoobic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/yoobic-lifecycle.yml
+  - type: Conformance
+    url: conformance/yoobic-conformance.yml
+  - type: Sandbox
+    url: sandbox/yoobic-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/yoobic-webhooks.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,3 +3304,38 @@ maintainers:
 common:
 - type: Website
   url: https://www.yoobic.com/
+- type: DeveloperPortal
+  url: https://docs.yoobic.com/
+- type: Documentation
+  url: https://docs.yoobic.com/api.html
+- type: Blog
+  url: https://yoobic.com/blog/
+- type: GitHubOrganization
+  url: https://github.com/yoobic
+- type: Pricing
+  url: https://www.yoobic.com/pricing
+- type: SignUp
+  url: https://yoobic.com/book-a-demo/
+- type: PrivacyPolicy
+  url: https://info.yoobic.com/privacy-policy
+- type: Support
+  url: mailto:support@yoobic.com
+- type: StatusPage
+  url: https://status.yoobic.com/
+- type: LLMsTxt
+  url: llms/yoobic-llms.txt
+- type: WellKnown
+  url: well-known/yoobic-well-known.yml
+- type: Authentication
+  url: authentication/yoobic-authentication.yml
+- type: DomainSecurity
+  url: security/yoobic-domain-security.yml
+- type: TrustCenter
+  url: security/yoobic-trust-center.yml
+- type: Compliance
+  url: security/yoobic-trust-center.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 20
+  pass: local-v1

@@ -1,0 +1,48 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enrichment overlay for the YOOBIC Public API
+  version: 1.0.0
+x-provenance:
+  generated: '2026-07-21'
+  method: generated
+  source: openapi/yoobic-openapi.json + https://docs.yoobic.com/api.html
+  notes: >-
+    Non-destructive enhancements over the published YOOBIC OpenAPI. Corrects the
+    placeholder server URL to the real production/sandbox hosts and documents the
+    operative JWT-bearer auth mechanism that the spec obscures behind a
+    placeholder oauth2 scheme. Does not mutate the original spec.
+actions:
+- target: $.servers
+  description: Replace the placeholder server with real production and sandbox hosts.
+  update:
+  - url: https://api.yoobic.com/public/api
+    description: Production
+  - url: https://api-sandbox.yoobic.com/public/api
+    description: Sandbox
+- target: $.components.securitySchemes
+  description: Document the real JWT bearer scheme alongside the placeholder oauth2 scheme.
+  update:
+    bearerJwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        JWT obtained from POST /auth/login and sent as Authorization: Bearer <jwt>.
+        This is the operative mechanism; the spec's oauth2 scheme is a placeholder.
+- target: $.info
+  description: Annotate rate limits and error envelope observed in the documentation.
+  update:
+    x-rate-limits:
+      overall: 10/s
+      delete: 120/min
+      users_write: 180/min
+      daily: 100000
+      headers:
+      - ratelimit-limit
+      - ratelimit-remaining
+      - ratelimit-reset
+    x-error-envelope:
+      fields:
+      - data
+      - error
+      rfc9457: false
