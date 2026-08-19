@@ -1,0 +1,299 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YOOBIC Public Answers Events API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/events/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "61b9b435c8f864003a552378",
+                "type": "path",
+                "description": "The id of the event"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a event for the given id."
+        },
+        {
+          "info": {
+            "name": "Partial Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://<base_url>/public/api/events/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "61b9b435c8f864003a552378",
+                "type": "path",
+                "description": "The id of the event"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update a subset of properties of an event"
+        },
+        {
+          "info": {
+            "name": "Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://<base_url>/public/api/events/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "61b9b435c8f864003a552378",
+                "type": "path",
+                "description": "The id of the event"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete an event by id."
+        },
+        {
+          "info": {
+            "name": "Invitees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/events/:id/invitees",
+            "params": [
+              {
+                "name": "id",
+                "value": "62876c7ad1d606003e43d8bc",
+                "type": "path",
+                "description": "The id of the event"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Export list of invitees of an event.\n\n| Field       | Format | Description                               |\n|-------------|--------|-------------------------------------------|\n| user_id     | string | id of the user                            |\n| username    | string | username of the user                      |\n| email       | string | email of the user                         |\n| first_name  | string | first name of the user                    |\n| last_name   | string | last name of the user  "
+        },
+        {
+          "info": {
+            "name": "Get All",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/events?filter=:filter",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "filter",
+                "value": "{}",
+                "type": "query",
+                "description": "A valid JSON filter object"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get all the events."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/events",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "You may create a new single or multiple events using this action.\nWhen creating a single event object the body contains a json object, when creating multiple events objects the body contains an array of objects.    \n**Warning: a maximum of 1000 items can be sent in a single request.**"
+        },
+        {
+          "info": {
+            "name": "Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/events/count?where=:where",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "where",
+                "value": "{ \"property\": \"value\" }",
+                "type": "query",
+                "description": "A valid JSON [Where filter](#section-api-requests-filter-where)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Count all the existing entities based on the where filter"
+        },
+        {
+          "info": {
+            "name": "Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/events/export?type=:type&filter=:filter",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "csv",
+                "type": "path",
+                "description": "The type of file, either `csv` (default value) or `excel`"
+              },
+              {
+                "name": "filter",
+                "value": "{}",
+                "type": "query",
+                "description": "A valid JSON filter object (does not accept a `fields` filter)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export all results as a file.    \nThis action is asynchronous and returns the id of a job. See [`jobs`](#group-jobs) endpoint to query the status of the job. The file will contain the results with all of the fields specified on the resource."
+        },
+        {
+          "info": {
+            "name": "Import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/events/import?type=:type",
+            "headers": [
+              {
+                "name": "Content-Disposition",
+                "value": "form-data; name=\"file\"; filename=\"file.csv\""
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "csv",
+                "type": "path",
+                "description": "The type of file, either `csv` (default value) or `excel`"
+              }
+            ]
+          },
+          "docs": "### Fields\n\n| Field                | Format         | Required | Description               |\n|----------------------|:--------------:|:--------:|:--------------------------|\n|`event_id`            |  string        |          | Unique id of the event    |\n|`title`               |  string        |    x     | The title of the event    |\n|`description`         |  string        |    x     | The description of the event. HTML can be used for formatting|\n|`start_date`          |  date          |    x  "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

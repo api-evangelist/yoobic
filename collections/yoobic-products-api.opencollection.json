@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YOOBIC Public Answers Products API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/products/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "54ab03c6546847ee0d30081d",
+                "type": "path",
+                "description": "The id of the product"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a product for the given id."
+        },
+        {
+          "info": {
+            "name": "Get All",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/products?filter=:filter",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "filter",
+                "value": "{}",
+                "type": "query",
+                "description": "A valid JSON filter object"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get all the products."
+        },
+        {
+          "info": {
+            "name": "Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/products/count?where=:where",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "where",
+                "value": "{ \"property\": \"value\" }",
+                "type": "query",
+                "description": "A valid JSON [Where filter](#section-api-requests-filter-where)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Count all the existing entities based on the where filter"
+        },
+        {
+          "info": {
+            "name": "Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/products/export?type=:type&filter=:filter",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "csv",
+                "type": "path",
+                "description": "The type of file, either `csv` (default value) or `excel`"
+              },
+              {
+                "name": "filter",
+                "value": "{}",
+                "type": "query",
+                "description": "A valid JSON filter object (does not accept a `fields` filter)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export all results as a file.    \nThis action is asynchronous and returns the id of a job. See [`jobs`](#group-jobs) endpoint to query the status of the job. The file will contain the results with all of the fields specified on the resource."
+        },
+        {
+          "info": {
+            "name": "Import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/products/import?type=:type",
+            "headers": [
+              {
+                "name": "Content-Disposition",
+                "value": "form-data; name=\"file\"; filename=\"file.csv\""
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "csv",
+                "type": "path",
+                "description": "The type of file, either `csv` (default value) or `excel`"
+              }
+            ]
+          },
+          "docs": "See the [Import file section](#section-import-jobs) for more information.\n\n### Fields\n\n| Field                | Type           | Required | Description               |\n|----------------------|:--------------:|:--------:|---------------------------|\n|`product_id`          |  string        |          | Unique id of the product  |\n|`title`               |  string        |    x     | The product title         |\n|`price`               |  number        |          | The product price         |\n|`refere"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

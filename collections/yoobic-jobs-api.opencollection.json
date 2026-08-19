@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YOOBIC Public Answers Jobs API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "View Status of a Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "53fzs3c6546847ee0d33386a",
+                "type": "path",
+                "description": "The id of the job"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "View Status of a Job"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

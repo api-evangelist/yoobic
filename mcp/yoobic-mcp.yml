@@ -2,11 +2,9 @@ generated: '2026-07-21'
 method: derived
 source: openapi/yoobic-openapi.json
 status: candidate
-notes: >-
-  No official YOOBIC-hosted or remote MCP server was found. This is a CANDIDATE
-  tool surface derived from the Public API OpenAPI (265 operations across 41
-  resource groups) to illustrate what an MCP server over the YOOBIC API could
-  expose. Not an endorsement of a live server.
+notes: No official YOOBIC-hosted or remote MCP server was found. This is a CANDIDATE tool surface derived
+  from the Public API OpenAPI (265 operations across 41 resource groups) to illustrate what an MCP server
+  over the YOOBIC API could expose. Not an endorsement of a live server.
 server:
   name: yoobic-public-api
   transport: none-published
@@ -43,3 +41,8 @@ candidate_tools:
 - name: create_webhook
   op: POST /public/api/webhooks
   description: Register a webhook subscription.
+deployment:
+  mode: none
+  verified: derived
+  checked: '2026-08-12'
+  source: catalog MCP census

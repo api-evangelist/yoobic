@@ -1,0 +1,354 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YOOBIC Public Answers Groups API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/groups/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a group for the given id."
+        },
+        {
+          "info": {
+            "name": "Partial Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://<base_url>/public/api/groups/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update a subset of properties of a group.\n\n**Important:**\nIt is not possible to update `group_ids` or `user_ids` through this endpoint. To update these properties, please read the endpoints above."
+        },
+        {
+          "info": {
+            "name": "Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://<base_url>/public/api/groups/:id",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete a group by id."
+        },
+        {
+          "info": {
+            "name": "Add Groups to Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/groups/:id/groups",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Add groups to a group"
+        },
+        {
+          "info": {
+            "name": "Remove Groups from Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://<base_url>/public/api/groups/:id/groups",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Remove groups from a group"
+        },
+        {
+          "info": {
+            "name": "Add Users to Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/groups/:id/users",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Add users to a group"
+        },
+        {
+          "info": {
+            "name": "Remove Users from Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://<base_url>/public/api/groups/:id/users",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Remove users from a group"
+        },
+        {
+          "info": {
+            "name": "Get All",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/groups?filter=:filter",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "filter",
+                "value": "{}",
+                "type": "query",
+                "description": "A valid JSON filter object"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get all the groups."
+        },
+        {
+          "info": {
+            "name": "Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/group/count?where=:where",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "where",
+                "value": "{ \"property\": \"value\" }",
+                "type": "query",
+                "description": "A valid JSON [Where filter](#section-api-requests-filter-where)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Count all the existing entities based on the where filter"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/groups",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "You may create a new single group or multiple groups using this action.\nWhen creating a single group the body contains a json object, when creating multiple groups the body contains an array of objects.    \n**Warning: a maximum of 1000 items can be sent in a single request.**\n\n**Important:**\nThe `group_id` is generated automatically when a new group is created. The `group_id` corresponds to the group's title in lowercase letters, with `_` instead of spaces, and without special caracters"
+        },
+        {
+          "info": {
+            "name": "Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/groups/export?type=:type&filter=:filter",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "csv",
+                "type": "path",
+                "description": "The type of file, either `csv` (default value) or `excel`"
+              },
+              {
+                "name": "filter",
+                "value": "{}",
+                "type": "query",
+                "description": "A valid JSON filter object (does not accept a `fields` filter)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export all results as a file.    \nThis action is asynchronous and returns the id of a job. See [`jobs`](#group-jobs) endpoint to query the status of the job. The file will contain the results with all of the fields specified on the resource."
+        },
+        {
+          "info": {
+            "name": "Import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/groups/import?type=:type",
+            "headers": [
+              {
+                "name": "Content-Disposition",
+                "value": "form-data; name=\"file\"; filename=\"file.csv\""
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "csv",
+                "type": "path",
+                "description": "The type of file, either `csv` (default value) or `excel`"
+              }
+            ]
+          },
+          "docs": "See the [Import file section](#section-import-jobs) for more information.\n\n**Important:**\nThe `group_id` is generated automatically when a new group is created. The `group_id` corresponds to the Group title in lowercase letters, with `_` instead of spaces, and without special caracters\n\n### Fields\n\n| Field                    | Format  | Required  | Description     |\n|--------------------------|---------|:---------:|-----------------|\n|`group_id`                |  string |           | Unique grou"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

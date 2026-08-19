@@ -1,0 +1,497 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YOOBIC Public Answers Campaigns API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Campaigns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/campaigns/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "54ab03c6546847ee0d30086a",
+                "type": "path",
+                "description": "The id of the campaign"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a campaign for the given id."
+        },
+        {
+          "info": {
+            "name": "Partial Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://<base_url>/public/api/campaigns/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "54ab03c6546847ee0d30086a",
+                "type": "path",
+                "description": "The id of the campaign"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update a subset of properties of a campaign.    \nIf `questions` are passed, they will *replace* the existing."
+        },
+        {
+          "info": {
+            "name": "Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://<base_url>/public/api/campaigns/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "54ab03c6546847ee0d30086a",
+                "type": "path",
+                "description": "The id of the campaign"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete a campaign by id."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/campaigns",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a campaign.\n\n`icon_url` and `background_url` can be a file's `_downloadURL` or a created photo's `url`. Both have to begin with https://."
+        },
+        {
+          "info": {
+            "name": "Publish",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/campaigns/:id/publish",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Publish missions of a campaign to automatically create one mission per targeted site or per targeted user.\nThe result is the number of newly created missions and the mission ids.\n\n**Important**\nThe mission must be assigned before booking: error message: \"Mission must have an assigned user before it can be booked. Please call the assign endpoint prior to booking the mission.\"\n\n- Only campaigns of type memo, form and workflow are supported (quick tasks not supported)\n\n- Memos cannot be personalise"
+        },
+        {
+          "info": {
+            "name": "Export data for a Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/campaigns/:id/export?type=:type&filter=:filter",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "csv",
+                "type": "path",
+                "description": "The type of file, either `csv` (default value) or `excel`"
+              },
+              {
+                "name": "filter",
+                "value": "{}",
+                "type": "query",
+                "description": "A valid JSON filter object"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Exports the data from the missions that have been published for this campaign.\n\n#### Exported Fields\n\nThe result file contains generic [`mission fields`](#group-missions-fields) as well as specific columns for each of the questions defined on the campaign. The name of the field for each question is the `question_id`.    \nClick <a href=\"https://res.cloudinary.com/www-yoobic-com/raw/upload/v1558500360/campaign_data_5ce4d1a5c5d27100499b2395_m5wjty.xlsx\">here</a> to download an excel file example.  "
+        },
+        {
+          "info": {
+            "name": "Import (update) data for a Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/campaigns/:id/import?type=:type",
+            "headers": [
+              {
+                "name": "Content-Disposition",
+                "value": "form-data; name=\"file\"; filename=\"file.csv\""
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "csv",
+                "type": "path",
+                "description": "The type of file, either `csv` (default value) or `excel`"
+              }
+            ]
+          },
+          "docs": "Imports the data to update missions that have been published for this campaign.\n\nSee the [Import file section](#section-import-jobs) for more information.\n\nThe headers and fields imported are the same as those of the campaign data export files. A typical scenario would be to start exporting data for a specific mission, alter the result file, and then import it back.\n\n**Important:**\n\n-   The second header row with the question alignment data must be present, but is not read. All mission fields (e"
+        },
+        {
+          "info": {
+            "name": "Create Question",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/campaigns/:id/questions",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a single question.\n\n* Restricted to campaigns of type `mission`.\n\n* If there's a conflict in the `question_number` the request takes priority. If you add a question in position 1 in page 1 and there is already a question 1 in the page 1, the new question will be placed in position 1 and the one that already existed is moved to position 2 in page 1.\n\n* The `page_number` and `question_number` are adjusted to the current state. If i.e. the `page_number` does not exist, a new subsequent numbe"
+        },
+        {
+          "info": {
+            "name": "Update Question",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://<base_url>/public/api/campaigns/:id/questions/:question_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "question_id",
+                "value": "e8345f6d-108d-445f-b90b-123ce6876bc9",
+                "type": "path",
+                "description": "The id of the question"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Replace a single question.\n\n* Restricted to campaigns of type `mission`.\n\n* If there's a conflict in the `question_number` the request takes priority. If you add a question in position 1 in page 1 and there is already a question 1 in the page 1, the new question will be placed in position 1 and the one that already existed is moved to position 2 in page 1\n\n* The `page_number` and `question_number` are adjusted to the current state. If i.e. the `page_number` does not exist, a new subsequent numbe"
+        },
+        {
+          "info": {
+            "name": "Delete Question",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://<base_url>/public/api/campaigns/:id/questions/:question_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "question_id",
+                "value": "e8345f6d-108d-445f-b90b-123ce6876bc9",
+                "type": "path",
+                "description": "The id of the question"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete a single question.\n\n* Restricted to campaigns of type `mission`.\n\n* If a single question is removed from a page, that page would be removed as well (unless its the only page of the campaign)."
+        },
+        {
+          "info": {
+            "name": "Import audience",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://<base_url>/public/api/campaigns/:id/stores",
+            "headers": [
+              {
+                "name": "Content-Disposition",
+                "value": "form-data; name=\"file\"; filename=\"file.csv\""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "61c1af9dc9ee430037e6b622",
+                "type": "path",
+                "description": "The id of the campaign"
+              }
+            ]
+          },
+          "docs": "Import a simple list of `client_ids` or `titles` of your sites to use it as the audience of an existing campaign.\n\n### Fields\n\n| Field      | Format  | Required | Description     |\n|------------|---------|:--------:|-----------------|\n|`client_id` |  string |    x     | client_id of the store to be added to the audience  |\n|`title`     |  string |    x     | title of the store to be added to the audience  |\n\n**Important:**    \nEither `client_id` or `title` is required. We recommend to import cli"
+        },
+        {
+          "info": {
+            "name": "Import new campaigns from template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/campaign-templates/import?type=:type",
+            "headers": [
+              {
+                "name": "Content-Disposition",
+                "value": "form-data; name=\"file\"; filename=\"file.csv\""
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "csv",
+                "type": "path",
+                "description": "The type of file, either `csv` (default value) or `excel`"
+              }
+            ]
+          },
+          "docs": "Generate multiple campaigns from an excel file containing the list of new campaigns you wish to create and the campaign template used as source for each.\n\n#### Fields\n\n| Field                 | Format  | Required | Description     |\n|-----------------------|---------|:--------:|-----------------|\n|`template_title`       |  string |    x     | The title of the source template you want to use for the new campaign  |\n|`campaign_title`       |  string |    x     | The title of the new campaign you a"
+        },
+        {
+          "info": {
+            "name": "Get All",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/campaigns?filter=:filter",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "filter",
+                "value": "{}",
+                "type": "query",
+                "description": "A valid JSON filter object"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get all the campaigns."
+        },
+        {
+          "info": {
+            "name": "Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/campaigns/count?where=:where",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "where",
+                "value": "{ \"property\": \"value\" }",
+                "type": "query",
+                "description": "A valid JSON [Where filter](#section-api-requests-filter-where)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Count all the existing entities based on the where filter"
+        },
+        {
+          "info": {
+            "name": "Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/campaigns/export?type=:type&filter=:filter",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "csv",
+                "type": "path",
+                "description": "The type of file, either `csv` (default value) or `excel`"
+              },
+              {
+                "name": "filter",
+                "value": "{}",
+                "type": "query",
+                "description": "A valid JSON filter object (does not accept a `fields` filter)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export all results as a file.    \nThis action is asynchronous and returns the id of a job. See [`jobs`](#group-jobs) endpoint to query the status of the job. The file will contain the results with all of the fields specified on the resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

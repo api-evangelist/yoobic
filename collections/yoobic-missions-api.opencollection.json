@@ -1,0 +1,509 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YOOBIC Public Answers Missions API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Missions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/missions/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "54ab03c6546847ee0d30084a",
+                "type": "path",
+                "description": "The id of the mission"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a mission for the given id."
+        },
+        {
+          "info": {
+            "name": "Partial Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://<base_url>/public/api/missions/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "54ab03c6546847ee0d30084a",
+                "type": "path",
+                "description": "The id of the mission"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update a subset of properties of a mission"
+        },
+        {
+          "info": {
+            "name": "Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://<base_url>/public/api/missions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "54ab03c6546847ee0d30084a",
+                "type": "path",
+                "description": "The id of the mission"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete a mission by id."
+        },
+        {
+          "info": {
+            "name": "Find mission's tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/missions/:id/tasks",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Find the tasks for missions of type `todo`"
+        },
+        {
+          "info": {
+            "name": "Replace mission's tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://<base_url>/public/api/missions/:id/tasks",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update the tasks on a mission of type `todo`.    \nThe `todo` object must contain *all* the tasks defined with the new values.    \nOnce updated the status of the mission is set to `finished`."
+        },
+        {
+          "info": {
+            "name": "Book",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/missions/:id/book",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Book an available mission.\n\n**Important**\nThe mission must be assigned before booking: error message: \"Mission must have an assigned user before it can be booked. Please call the assign endpoint prior to booking the mission.\"\n\nIf the mission was republished with answers during the validation of a non-compliant mission, the booked mission will contain:\n\n* `original_mission_id`\n\n* `original_reason_noncompliant`\n\n* `original_mission_answers`\n\nThe `original_mission_answers` can be used as a starting"
+        },
+        {
+          "info": {
+            "name": "Unbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/missions/:id/unbook",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Unbook a mission.\n\nMake available a mission that was previously booked."
+        },
+        {
+          "info": {
+            "name": "Assign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/missions/:id/assign",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Assign an available mission to a user whose `user_id` is provided."
+        },
+        {
+          "info": {
+            "name": "Unassign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/missions/:id/unassign",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Unassign a mission.\n\nMake available a mission that was previously assigned. \n**Important:**\nOnly the user that previously assigned the mission can unassign it."
+        },
+        {
+          "info": {
+            "name": "Finish",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/missions/:id/finish",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Finish a mission.\n\nThe body should only contain an `answers` field as an array."
+        },
+        {
+          "info": {
+            "name": "Validate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/missions/:id/validate",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Validate a mission.\n\n#### Fields\n\n| Field                          | Format       | Required | Description     |\n|--------------------------------|--------------|:--------:|-----------------|\n|`compliant`                     |  boolean     |     x    | Validated if true, rejected otherwise. |\n|`rating`                        |  number      |          | Rating of the mission.                |\n|`republish`                     |  boolean     |          | If true, republish this mission.            "
+        },
+        {
+          "info": {
+            "name": "Archive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/missions/:id/archive",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Archive a mission.\n\nThe status of the mission will be set to `archived`."
+        },
+        {
+          "info": {
+            "name": "Find mission's workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/missions/:id/workflow",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get information about the workflow of a mission.\n\nThe `workflow_history` field is defined as an array of:\n\n| Field                | Type           | Description               |\n|----------------------|----------------|---------------------------|\n|`state`               |  string        | State of the step |\n|`step_id`             |  string        | Unique id of the step |\n|`step_title`          |  string        | The title of the step |\n|`user_id`             |  string        | Id of the user th"
+        },
+        {
+          "info": {
+            "name": "Get All",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/missions?filter=:filter",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "filter",
+                "value": "{ include: [\"answers\"] }",
+                "type": "query",
+                "description": "A valid JSON filter object.\nOptionally add the answers to the result if exist.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get all the missions."
+        },
+        {
+          "info": {
+            "name": "Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/missions/count?where=:where",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "where",
+                "value": "{ \"property\": \"value\" }",
+                "type": "query",
+                "description": "A valid JSON [Where filter](#section-api-requests-filter-where)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Count all the existing entities based on the where filter"
+        },
+        {
+          "info": {
+            "name": "Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://<base_url>/public/api/missions/export?type=:type&filter=:filter",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "csv",
+                "type": "path",
+                "description": "The type of file, either `csv` (default value) or `excel`"
+              },
+              {
+                "name": "filter",
+                "value": "{}",
+                "type": "query",
+                "description": "A valid JSON filter object (does not accept a `fields` filter)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export all results as a file.    \nThis action is asynchronous and returns the id of a job. See [`jobs`](#group-jobs) endpoint to query the status of the job. The file will contain the results with all of the fields specified on the resource."
+        },
+        {
+          "info": {
+            "name": "Import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/missions/import?type=:type",
+            "headers": [
+              {
+                "name": "Content-Disposition",
+                "value": "form-data; name=\"file\"; filename=\"file.csv\""
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "csv",
+                "type": "path",
+                "description": "The type of file, either `csv` (default value) or `excel`"
+              }
+            ]
+          },
+          "docs": "See the [Import file section](#section-import-jobs) for more information.\n\n**Important:**\n\n- Rows without an existing `mission_id` field will **not** be processed. Only existing missions may be updated by this import endpoint.\n\n- Only the following fields can be modified via a mission import:     \n    - title    \n    - score (the numeric score value, e.g. `10` — the score column holds the value, not the `{title, value}` object)    \n    - group_ids    \n    - user_ids\n\n    `extra_scores` is export"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2554 @@
+{
+  "item": [
+    {
+      "id": "8e4274b0-2f4d-42fe-bee7-c4e50a3fff3a",
+      "name": "Users",
+      "description": {
+        "content": "<a id=\"group-users\"></a>\nExpose users for your company.\n\nRemember:\n\n- Users are the people at your company with access to the YOOBIC mobile and/or web apps.\n\n- Users can be assigned to one or more groups after they are created\n\n- Users can have multiple tags\n\n### Fields\n\n| Field                    | Type    | Required | Readonly | OrderBy | Available for all users | Description     |\n|--------------------------|:-------:|:--------:|:--------:|:-------:|:-----------------------:|-----------------|\n|`user_id`                 |  string |          |    x     |         |         x               | Unique user id |\n|`username`                |  string |    x     |          |    x    |         x               | Unique username |\n|`password`                |  string |    x     |          |         |         x               | Password, required on creation only |\n|`first_name`              |  string |    x     |          |         |         x               | First name|\n|`last_name`               |  string |    x     |          |         |         x               | Last name|\n|`client_role`             |  string |    x     |          |         |         x               | User roles: ROLEFIELD \\| ROLEMANAGER \\| ROLEEDITOR \\| ROLESTOREMANAGER \\| ROLESTORE \\| ROLEADMIN \\| ROLEVIEWER|\n|`client_role_extension`   |  string |          |          |         |         x               | Indicates an extension of a user role. Has to match an existing role extension in the database |\n|`email`                   |  string |          |          |         |         x               | Email |\n|`address`                 |  string |          |          |         |         x               | User's work address |\n|`groups`                  |  array  |    x     |          |         |         x               | The list of groups the user is in|\n|`language`                |  string |          |          |         |         x               | Preferred language |\n|`phone`                   |  string |          |          |         |         x               | Phone number|\n|`photo`                   |  string |          |          |         |         x               | Url of the user's picture |\n|`store_id`                |  string |          |    x     |    x    |         x               | Primary Store. Setting up a store_id on a user will create a geofilter on this user |\n|`tags`                    |  array  |          |          |         |         x               | Tags allow to specify additional information about the user|\n|`sso`                     |  boolean|     x    |          |         |         x               | Flag if a user will login through a third party |\n|`allow_local_login`       |  boolean|          |          |         |         x               | Flag if a user will login with password, even if set to third party in tenant (company) configuration |\n|`last_seen`               |  date   |          |    x     |         |         x               | The date on which the user connected for the last time.  |\n|`terms_of_acceptance_date`|  date   |          |    x     |         |         x               | The date in which terms were last accepted |\n|`mobile_version`          |  string |          |    x     |         |         x               | Version of the App used on mobile by the user.  |\n|`desktop_version`         |  string |          |    x     |         |         x               | Version of the App used on desktop by the user. |\n|`created_date`            |  date   |          |    x     |         |         x               | Created Date|\n|`updated_date`            |  date   |          |    x     |    x    |         x               | Updated Date|\n|`custom_fields`           | object  |          |          |         |         x               | Dynamic properties (optional)|\n|`weekly_schedule`         | object  |          |          |         |         x               | Contains data on an employee's working hours for each day of the week.|\n|`client_ids`              | array   |          |          |         |         x               | List of stores that the user can have access to, selected with their client_id. Creates or updates the corresponding user's geofilter if not empty\n|`store_type_names`        | array   |          |          |         |         x               | List of stores' store_types that the user can have access to, selected with their store_type_name. Creates or updates the corresponding user's geofilter if not empty\n| `position`               | string  |          |          |         |                         | Position                               |\n| `department`             | string  |          |          |         |                         | Department                             |\n| `division`               | string  |          |          |         |                         | Division                               |\n| `company`                | string  |          |          |         |                         | Company                                |\n| `hiring_date`            | date    |          |          |         |                         | Date when the user joined the company  |\n| `skills`                 | array   |          |          |         |                         | Skills                                 |\n| `cover`                  | string  |          |          |         |                         | Cover URL                                  |\n| `description`            | string  |          |          |         |                         | Description                            |\n\n**Important:**\n\n- One of either fields is required in case of user creation:\n    - password\n    - sso\n\n- `allow_local_login` is required only if in tenant (company) configuration it is specified to allow login using a third party, but would like to enable specific user a login with a password instead.\n\n- Combination of `client_role` and `client_role_extension` defines the user's permission. A wrong combination of these two will cause a validation error, specifying an invalid permission. If `client_role_extension` is not passed (optional), `client_role` will refer to the corresponding base permission.\n\n- `custom_fields` contains new attributes that can be used to describe more precisely a user.    \nCustom fields provide a new way to customize your user data by allowing you to filter and select the relevant data in the application.    \nYou can create your own custom fields in the YOOBIC Web Application in order to enrich your user data.    \nFor the full list of supported field types see [campaigns](#group-campaigns-question-types)\n\n- The `username` of a user has to be unique across live and archived users and is used to log in to the platform.\n\n- If a user already has a `store_id` in their profile, the corresponding store’s `client_id` will be exported in the next export. It can be used instead of the `store_id`\n\n- It is possible to add several `client_ids` and/or `store_type_names` for a single user. When updating a user, the list of `client_ids` and `store_type_names` will replace the previous one in the user's geofilter.\n\n- It is not possible to filter users on the `client_ids` or `store_type_names` attributes. Please use the geofilter collection to find if a geofilter exist for a user on a specific store or store_type\n\nDescription of the `weekly_schedule` object:\n\n- This object contains data on an employee's working hours for each day of the week.\n\n- Each day of the week is represented by a key (e.g. `mon`, `tue`, etc.) and has a corresponding value that contains information about the working periods for that day.\n\n### Fields\n\n| Field   | Type    | Required | Readonly | OrderBy | Description     |\n|---------|:-------:|:--------:|:--------:|:-------:|-----------------|\n| mon     | JSON    | no       | no       | no      | Contains data on the working hours for Monday |\n| tue     | JSON    | no       | no       | no      | Contains data on the working hours for Tuesday |\n| wed     | JSON    | no       | no       | no      | Contains data on the working hours for Wednesday |\n| thu     | JSON    | no       | no       | no      | Contains data on the working hours for Thursday |\n| fri     | JSON    | no       | no       | no      | Contains data on the working hours for Friday |\n| sat     | JSON    | no       | no       | no      | Contains data on the working hours for Saturday |\n| sun     | JSON    | no       | no       | no      | Contains data on the working hours for Sunday |\n\nFor each day of the week, the corresponding value is an object with the following fields:\n\n| Field   | Type   | Required | Readonly | OrderBy | Description                                                            |\n|---------|--------|----------|----------|---------|------------------------------------------------------------------------|\n| periods | array  | no       | no       | no      | Contains an array of objects, each of which represents a working period for the day. |\n\nEach object in the `periods` array has the following fields:\n\n| Field | Type   | Required | Readonly | OrderBy | Description                                                            |\n|-------|--------|----------|----------|---------|------------------------------------------------------------------------|\n| from  | string | no       | no       | no      | The start time of the working period. Format is `hh:mm` in UTC.      |\n| to    | string | no       | no       | no      | The end time of the working period. Format is `hh:mm` in UTC.        |\n\nIf a day doesn’t have data in the `weekly_schedule` object, it is considered that the user is not scheduled to work on that day.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f0aa14ac-c31d-4072-9abf-5ab58f59faad",
+          "name": "Get",
+          "request": {
+            "name": "Get",
+            "description": {
+              "content": "Get the serivce account user for the current token.\n\n**Important:**\nThe `tenant` property returned by this endpoint contains the string value of the company name that should be used as the prefix for new [Groups](#reference/groups/multiple-groups-api/create).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                "me"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d6414995-6604-406d-982c-7aba4bb79135",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user_id\": \"53fb03c6546847fe0d30186b\",\n  \"username\": \"mycompany+yoobicserviceaccount@mycompany.com\",\n  \"email\": \"support+mycompany+yoobicserviceaccount@yoobic.com\",\n  \"groups\": [\n    \"mycompany_group\"\n  ],\n  \"created_date\": \"2019-02-10T17:20:11.531Z\",\n  \"updated_date\": \"2020-11-10T12:11:15.439Z\",\n  \"tenant\": \"mycompany\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "39237a6e-91db-4aa8-8e59-5ec1e35882a9",
+          "name": "Get",
+          "request": {
+            "name": "Get",
+            "description": {
+              "content": "Get a user for the given id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the User"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fa82317f-48b3-4770-957f-52443be9aa34",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the User"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user_id\": \"53fb03c6546847ee0d30086a\",\n  \"username\": \"johndoe9@houston.com\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"client_role\": \"ROLEVIEWER\",\n  \"email\": \"johndoe9@houston.com\",\n  \"groups\": [\n    \"test\"\n  ],\n  \"language\": \"en\",\n  \"photo\": \"https://www.w3schools.com/w3images/avatar2.png\",\n  \"store_id\": \"5739b18c6b8e2ac941fbee86\",\n  \"tags\": [\n    \"regional\"\n  ],\n  \"allow_local_login\": true,\n  \"mobile_version\": \"6.5.16\",\n  \"desktop_version\": \"7.0.16-9\",\n  \"last_seen\": \"2020-11-19T14:21:44.625Z\",\n  \"client_id\": [\n    \"SITE_1\"\n  ],\n  \"created_date\": \"2019-02-10T17:20:11.531Z\",\n  \"updated_date\": \"2020-11-10T12:11:15.439Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82a2cf47-0c7b-4a30-b419-73f046ede748",
+          "name": "Delete",
+          "request": {
+            "name": "Delete",
+            "description": {
+              "content": "Delete an user by id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the User"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "950f6394-46b7-489f-8a59-7eee6fa883db",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the User"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40a7e294-3d14-47b9-8c0d-2b23405faea5",
+          "name": "Partial Update",
+          "request": {
+            "name": "Partial Update",
+            "description": {
+              "content": "Update a subset of properties of an user.    \n**Important** - `password` cannot be updated (will be ignored) via this endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the User"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"client_role_extension\": \"<string>\",\n  \"store_type_names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"weekly_schedule\": {\n    \"fri\": {\n      \"periods\": [\n        {\n          \"from\": \"<string>\",\n          \"to\": \"<string>\"\n        },\n        {\n          \"from\": \"<string>\",\n          \"to\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "14ef35c4-bf1f-440d-85af-46b7da052df9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the User"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"client_role_extension\": \"<string>\",\n  \"store_type_names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"weekly_schedule\": {\n    \"fri\": {\n      \"periods\": [\n        {\n          \"from\": \"<string>\",\n          \"to\": \"<string>\"\n        },\n        {\n          \"from\": \"<string>\",\n          \"to\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user_id\": \"53fb03c6546847ee0d30086a\",\n  \"username\": \"johndoe9@houston.com\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"client_role\": \"ROLEMANAGER\",\n  \"client_role_extension\": \"Super\",\n  \"email\": \"johndoe9@houston.com\",\n  \"groups\": [\n    \"test\"\n  ],\n  \"language\": \"en\",\n  \"photo\": \"https://www.w3schools.com/w3images/avatar2.png\",\n  \"store_id\": \"5739b18c6b8e2ac941fbee86\",\n  \"tags\": [\n    \"The Dream\",\n    \"Hakeem the Dream Olajuwon\",\n    \"The Dream Shake\"\n  ],\n  \"mobile_version\": \"6.5.16\",\n  \"desktop_version\": \"7.0.16-9\",\n  \"store_type_names\": [\n    \"ST1\",\n    \"ST2\"\n  ],\n  \"last_seen\": \"2020-11-19T14:21:44.625Z\",\n  \"created_date\": \"2019-02-10T17:20:11.531Z\",\n  \"updated_date\": \"2020-11-10T12:11:15.439Z\",\n  \"weekly_schedule\": {\n    \"mon_hours\": {\n      \"periods\": [\n        {\n          \"from\": \"08:00\",\n          \"to\": \"20:00\"\n        }\n      ]\n    },\n    \"tue_hours\": {\n      \"periods\": [\n        {\n          \"from\": \"08:00\",\n          \"to\": \"17:00\"\n        }\n      ]\n    },\n    \"wed_hours\": {\n      \"periods\": [\n        {\n          \"from\": \"08:20\",\n          \"to\": \"10:00\"\n        },\n        {\n          \"from\": \"11:00\",\n          \"to\": \"16:20\"\n        }\n      ]\n    },\n    \"thu_hours\": {\n      \"periods\": [\n        {\n          \"from\": \"08:00\",\n          \"to\": \"20:10\"\n        }\n      ]\n    },\n    \"fri\": {\n      \"periods\": [\n        {\n          \"from\": \"09:00\",\n          \"to\": \"13:00\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d48321c6-1f3e-4275-a3c6-be4ff7a39ce7",
+          "name": "Change Password",
+          "request": {
+            "name": "Change Password",
+            "description": {
+              "content": "Update user's `password`.    \nNote - `dontSendMail` / boolean / not required / if `true` no email is sent to the user. If `false` or not specified, an email is sent to the user to inform them about the change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                ":id",
+                "password-change"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"<string>\",\n  \"dontSendMail\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ba42ec8-34b2-4c26-b026-407a62d9a675",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    ":id",
+                    "password-change"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<the-new-password>\",\n  \"dontSendMail\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7ef12a6-cd52-4100-b59d-91886e344af1",
+          "name": "Password History",
+          "request": {
+            "name": "Password History",
+            "description": {
+              "content": "Get the dates on which a user changed his password.    \nNote - currently only the `date` field exists, thus filtering is done solely on it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                ":id",
+                "password-change"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "filter",
+                  "value": "{{filter}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "A valid JSON filter object"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the user"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "12e9fdfc-3aa7-4f95-b72d-0f67d42b2375",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    ":id",
+                    "password-change"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "{}"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f86d30b5-3ca7-4f98-9533-9e51475ed98b",
+          "name": "Archive",
+          "request": {
+            "name": "Archive",
+            "description": {
+              "content": "Archive a user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                ":id",
+                "archive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "73055950-b412-44f1-b560-d1e89788b172",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    ":id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06a4be8f-93ec-415e-9ecb-8fbefa86d63c",
+          "name": "Unarchive",
+          "request": {
+            "name": "Unarchive",
+            "description": {
+              "content": "Restore an archived user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                ":id",
+                "unarchive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "013a00c8-e7b1-4e66-ae46-e0c460985f3e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    ":id",
+                    "unarchive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5946c8f-1502-4202-990b-44fcd54c23ef",
+          "name": "Get All",
+          "request": {
+            "name": "Get All",
+            "description": {
+              "content": "Get all the users.    \n**Important:**    \nCombination of `client_role` and `client_role_extension` defines the user's permission. A wrong combination of these two will cause a validation error, specifying an invalid permission. If `client_role_extension` is not passed (optional), `client_role` will refer to the corresponding base permission.\nTo filter on user roles, always pass both the `client_role` and `client_role_extension`. Example:\n\n```json\nfilter={\"where\": { \"client_role\": \"ROLEVIEWER\",\"client_role_extension\": \"roleTitle\"}}\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "filter",
+                  "value": "{{filter}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "A valid JSON filter object"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5cab30a3-ea38-415b-9550-dc9fbc8a8eb9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "{}"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paging\": {\n    \"total\": 2,\n    \"skip\": 0,\n    \"limit\": 1000\n  },\n  \"data\": [\n    {\n      \"user_id\": \"53fb03c6546847ee0d30086a\",\n      \"username\": \"johndoe9@houston.com\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"client_role\": \"ROLEMANAGER\",\n      \"client_role_extension\": \"Super\",\n      \"email\": \"johndoe9@houston.com\",\n      \"groups\": [\n        \"test\"\n      ],\n      \"language\": \"en\",\n      \"photo\": \"https://www.w3schools.com/w3images/avatar2.png\",\n      \"store_id\": \"5739b18c6b8e2ac941fbee86\",\n      \"tags\": [\n        \"The Dream\"\n      ],\n      \"allow_local_login\": true,\n      \"mobile_version\": \"6.5.16\",\n      \"desktop_version\": \"7.0.16-9\",\n      \"last_seen\": \"2020-11-19T14:21:44.625Z\",\n      \"client_ids\": [\n        \"CL1\",\n        \"CL2\"\n      ],\n      \"created_date\": \"2019-02-10T17:20:11.531Z\",\n      \"updated_date\": \"2020-11-10T12:11:15.439Z\"\n    },\n    {\n      \"user_id\": \"53fb03c6546847ee0d33386b\",\n      \"username\": \"dianedoe9@houston.com\",\n      \"first_name\": \"Diane\",\n      \"last_name\": \"Doe\",\n      \"client_role\": \"ROLEMANAGER\",\n      \"email\": \"dianedoe9@houston.com\",\n      \"groups\": [\n        \"test\"\n      ],\n      \"language\": \"en\",\n      \"photo\": \"https://www.w3schools.com/w3images/avatar2.png\",\n      \"store_id\": \"5739b18c6b8e2ac941fbee87\",\n      \"tags\": [\n        \"The Dream\"\n      ],\n      \"allow_local_login\": true,\n      \"terms_of_acceptance_date\": \"2019-01-23T10:18:32.977Z\",\n      \"weekly_schedule\": {\n        \"mon_hours\": {\n          \"periods\": [\n            {\n              \"from\": \"08:00\",\n              \"to\": \"20:00\"\n            }\n          ]\n        },\n        \"tue_hours\": {\n          \"periods\": [\n            {\n              \"from\": \"08:00\",\n              \"to\": \"17:00\"\n            }\n          ]\n        },\n        \"wed_hours\": {\n          \"periods\": [\n            {\n              \"from\": \"08:20\",\n              \"to\": \"10:00\"\n            },\n            {\n              \"from\": \"11:00\",\n              \"to\": \"16:20\"\n            }\n          ]\n        },\n        \"thu_hours\": {\n          \"periods\": [\n            {\n              \"from\": \"08:00\",\n              \"to\": \"20:10\"\n            }\n          ]\n        },\n        \"fri_hours\": {\n          \"periods\": [\n            {\n              \"from\": \"08:00\",\n              \"to\": \"20:05\"\n            }\n          ]\n        }\n      },\n      \"created_date\": \"2018-05-23T04:55:50.862Z\",\n      \"updated_date\": \"2018-05-23T04:55:50.862Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0787c56-4994-49f1-932f-b7a8d06a7cc5",
+          "name": "Get all archives",
+          "request": {
+            "name": "Get all archives",
+            "description": {
+              "content": "Get all archived users. You can use the same filters as for the regular “Get all users” method",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                "archives"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "filter",
+                  "value": "{{filter}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "A valid JSON filter object"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "84fb9aeb-7fbc-4f8b-b124-cb2276886ecc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    "archives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "{}"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paging\": {\n    \"total\": 2,\n    \"skip\": 0,\n    \"limit\": 1000\n  },\n  \"data\": [\n    {\n      \"user_id\": \"53fb03c6546847ee0d30093f\",\n      \"username\": \"johndoe9@houston.com\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"client_role\": \"ROLEMANAGER\",\n      \"client_role_extension\": \"Super\",\n      \"email\": \"johndoe9@houston.com\",\n      \"groups\": [\n        \"test\"\n      ],\n      \"language\": \"en\",\n      \"photo\": \"https://www.w3schools.com/w3images/avatar2.png\",\n      \"store_id\": \"5739b18c6b8e2ac941fbee86\",\n      \"tags\": [\n        \"The Dream\"\n      ],\n      \"allow_local_login\": true,\n      \"mobile_version\": \"6.5.16\",\n      \"desktop_version\": \"7.0.16-9\",\n      \"last_seen\": \"2020-11-19T14:21:44.625Z\",\n      \"created_date\": \"2019-02-10T17:20:11.531Z\",\n      \"updated_date\": \"2020-11-10T12:11:15.439Z\"\n    },\n    {\n      \"user_id\": \"53fb03c6546847ee0d33394c\",\n      \"username\": \"dianedoe9@houston.com\",\n      \"first_name\": \"Diane\",\n      \"last_name\": \"Doe\",\n      \"client_role\": \"ROLEMANAGER\",\n      \"email\": \"dianedoe9@houston.com\",\n      \"groups\": [\n        \"test\"\n      ],\n      \"language\": \"en\",\n      \"photo\": \"https://www.w3schools.com/w3images/avatar2.png\",\n      \"store_id\": \"5739b18c6b8e2ac941fbee87\",\n      \"tags\": [\n        \"The Dream\"\n      ],\n      \"allow_local_login\": true,\n      \"terms_of_acceptance_date\": \"2019-01-23T10:18:32.977Z\",\n      \"created_date\": \"2018-05-23T04:55:50.862Z\",\n      \"updated_date\": \"2018-05-23T04:55:50.862Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56d03ab9-6b23-47bf-977c-835f677effe7",
+          "name": "Count",
+          "request": {
+            "name": "Count",
+            "description": {
+              "content": "Count all the existing entities based on the where filter",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "where",
+                  "value": "{{where}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "where",
+                  "value": "<string>",
+                  "description": "A valid JSON [Where filter](#section-api-requests-filter-where)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "abf50e7c-6180-4084-b2d1-6e67a1866df5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "where",
+                      "value": "{ \"property\": \"value\" }"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f620fb37-b622-4466-9448-5d4e7453e7f7",
+          "name": "Create",
+          "request": {
+            "name": "Create",
+            "description": {
+              "content": "You may create a new single user or multiple users using this action.    \nWhen creating a single user the body contains a json object, when creating multiple users the body contains an array of objects.    \n**Warning: a maximum of 1000 items can be sent in a single request.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"language\": \"<string>\",\n  \"store_id\": \"<string>\",\n  \"photo\": \"<string>\",\n  \"client_role\": \"<string>\",\n  \"client_role_extension\": \"<string>\",\n  \"client_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "34e6819a-8c95-4271-a514-4d2d98cc9eed",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"language\": \"<string>\",\n  \"store_id\": \"<string>\",\n  \"photo\": \"<string>\",\n  \"client_role\": \"<string>\",\n  \"client_role_extension\": \"<string>\",\n  \"client_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"user_id\": \"53fb03c6546847ee0d30086a\",\n    \"username\": \"johndoe9@houston.com\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"client_role\": \"ROLEVIEWER\",\n    \"email\": \"johndoe9@houston.com\",\n    \"groups\": [\n      \"test\"\n    ],\n    \"language\": \"en\",\n    \"photo\": \"https://www.w3schools.com/w3images/avatar2.png\",\n    \"store_id\": \"5739b18c6b8e2ac941fbee86\",\n    \"tags\": [\n      \"The Dream\"\n    ],\n    \"client_ids\": [\n      \"CL1\",\n      \"CL2\",\n      \"CL3\"\n    ],\n    \"created_date\": \"2018-05-23T04:51:40.862Z\",\n    \"updated_date\": \"2018-05-23T04:51:40.862Z\"\n  },\n  {\n    \"user_id\": \"53fb03c6546847fe0d30186b\",\n    \"username\": \"janedoe9@houston.com\",\n    \"first_name\": \"Jane\",\n    \"last_name\": \"Doe\",\n    \"client_role\": \"ROLEMANAGER\",\n    \"email\": \"janedoe9@houston.com\",\n    \"language\": \"en\",\n    \"groups\": [\n      \"test\"\n    ],\n    \"photo\": \"https://www.w3schools.com/w3images/avatar4.png\",\n    \"store_id\": \"5739b18c6b8e2ac941fbee86\",\n    \"tags\": [\n      \"The Dream\"\n    ],\n    \"created_date\": \"2018-05-23T04:51:40.862Z\",\n    \"updated_date\": \"2018-05-23T04:51:40.862Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50acfff2-34f8-496f-a746-8826e5f855a7",
+          "name": "Invite users",
+          "request": {
+            "name": "Invite users",
+            "description": {
+              "content": "Send account activation reminder\n\nSends a reminder email to users. Only users who have not already logged in the application and have a work email \n(`user.email`) will be notified. This email contains information for the user to log in the application with their account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                "reminders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8b412065-ed3c-4fad-9e02-ce36f5e59fae",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    "reminders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userIds\": [\n    \"53fb03c6546847ee0d30086a\",\n    \"53fb03c6546847ee0d30086b\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44c54495-b717-47d2-b51d-a6dbd350d306",
+          "name": "Export Weekly Schedule",
+          "request": {
+            "name": "Export Weekly Schedule",
+            "description": {
+              "content": "Export all results as a file.    \nThis action is asynchronous and returns the id of a job. See [`jobs`](#group-jobs) endpoint to query the status of the job. The file will contain the results with all of the fields specified on the resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                "weekly-schedule",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "{{type}}"
+                },
+                {
+                  "key": "filter",
+                  "value": "{{filter}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "A valid JSON filter object (does not accept a `fields` filter)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e239b5af-7aa7-4d37-86f4-80b40ae52071",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    "weekly-schedule",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "{}"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Export file\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:56:05.387Z\",\n  \"_id\": \"5b97e5954b99568b4b9101af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09458e1c-bd64-43f1-ae5b-931e9cda94c4",
+          "name": "Import Weekly Schedule",
+          "request": {
+            "name": "Import Weekly Schedule",
+            "description": {
+              "content": "See the [Import file section](#section-import-jobs) for more information.\n\n### Fields\n\n| Field                    | Format  | Required  | Description     |\n|--------------------------|---------|:---------:|-----------------|\n|`user_id`                 |  string |           | Unique user id |\n|`username`                |  string |     x     | Username |\n|`mon_hours`               |  string |           | Contains data on the working hours for Monday i.e. 06:00-12:00,15:00-17:00|\n|`tue_hours`               |  string |           | Contains data on the working hours for Tuesday i.e. 09:00-17:00|\n|`wed_hours`               |  string |           | Contains data on the working hours for Wednesday i.e. 09:00-17:00|\n|`thu_hours`               |  string |           | Contains data on the working hours for Thursday i.e. 09:00-17:00|\n|`fri_hours`               |  string |           | Contains data on the working hours for Friday i.e. 09:00-16:00|\n|`sat_hours`               |  string |           | Contains data on the working hours for Saturday |\n|`sun_hours`               |  string |           | Contains data on the working hours for Sunday |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                "weekly-schedule",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "{{type}}"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                "key": "Content-Disposition",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data, boundary=AaB03x"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "2751e82b-73f7-4196-be4a-f87fd95493c2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    "weekly-schedule",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                    "key": "Content-Disposition",
+                    "value": "form-data; name=\"file\"; filename=\"file.csv\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Import file\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:56:05.387Z\",\n  \"_id\": \"5b97e5954b99568b4b9101af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7521aba7-8b30-48bb-a395-c4b6a86445f9",
+          "name": "Import Users To Archive",
+          "request": {
+            "name": "Import Users To Archive",
+            "description": {
+              "content": "This method will archive all users found from the imported file.\n\n### Fields\n\n| Field                    | Format  | Required  | Description     |\n|--------------------------|---------|:---------:|-----------------|\n|`user_id`                 |  string |     x     | Unique user id |\n|`username`                |  string |     x     | Username |\n\nOnly one of user_id or username is required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                "archive",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "{{type}}"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                "key": "Content-Disposition",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data, boundary=AaB03x"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "b0a6297c-cd8a-4a89-b1b8-41077c018b8c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    "archive",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                    "key": "Content-Disposition",
+                    "value": "form-data; name=\"file\"; filename=\"file.csv\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Import file\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:56:05.387Z\",\n  \"_id\": \"5b97e5954b99568b4b9101af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "571a001f-5220-4564-bbf0-5cf626a6c8d7",
+          "name": "Export archived users",
+          "request": {
+            "name": "Export archived users",
+            "description": {
+              "content": "Export all results as a file.    \nThis action is asynchronous and returns the id of a job. See [`jobs`](#group-jobs) endpoint to query the status of the job. The file will contain the results with all of the fields specified on the resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users_archived",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "{{type}}"
+                },
+                {
+                  "key": "filter",
+                  "value": "{{filter}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "A valid JSON filter object (does not accept a `fields` filter)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1485f571-f0f3-4e96-96c5-e6ebce11c00f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users_archived",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "{}"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Export file\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:56:05.387Z\",\n  \"_id\": \"5b97e5954b99568b4b9101af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1d92961-9a97-4719-821a-d120f9db47ca",
+          "name": "Import Users To Un Archive",
+          "request": {
+            "name": "Import Users To Un Archive",
+            "description": {
+              "content": "This method will unarchive all users found from the imported file.\n\n### Fields\n\n| Field                    | Format  | Required  | Description     |\n|--------------------------|---------|:---------:|-----------------|\n|`user_id`                 |  string |     x     | Unique user id |\n|`username`                |  string |     x     | Username |\n\nOnly one of user_id or username is required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                "unarchive",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "{{type}}"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                "key": "Content-Disposition",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data, boundary=AaB03x"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "260ef170-7dbb-41bd-9c31-3ce160dd7bd8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    "unarchive",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                    "key": "Content-Disposition",
+                    "value": "form-data; name=\"file\"; filename=\"file.csv\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Import file\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:56:05.387Z\",\n  \"_id\": \"5b97e5954b99568b4b9101af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85fabc19-85ea-445a-88b5-50637647449d",
+          "name": "Export",
+          "request": {
+            "name": "Export",
+            "description": {
+              "content": "Export all results as a file.    \nThis action is asynchronous and returns the id of a job. See [`jobs`](#group-jobs) endpoint to query the status of the job. The file will contain the results with all of the fields specified on the resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "{{type}}"
+                },
+                {
+                  "key": "filter",
+                  "value": "{{filter}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "A valid JSON filter object (does not accept a `fields` filter)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "55fdbca9-c0a8-4a31-b501-d786f08e276b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "{}"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Export file\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:56:05.387Z\",\n  \"_id\": \"5b97e5954b99568b4b9101af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1d6eed5-3bde-4709-b325-9a9c8db6d32e",
+          "name": "Import",
+          "request": {
+            "name": "Import",
+            "description": {
+              "content": "See the [Import file section](#section-import-jobs) for more information.\n\n### Fields\n\n| Field                    | Format  | Required  | Description     |\n|--------------------------|---------|:---------:|-----------------|\n|`user_id`                 |  string |           | Unique user id |\n|`username`                |  string |     x     | Username |\n|`password`                |  string |     x     | Password, required on creation only.|\n|`first_name`              |  string |     x     | First name|\n|`last_name`               |  string |     x     | Last name|\n|`client_role`             |  string |     x     | User roles: ROLEFIELD \\| ROLEMANAGER \\| ROLEEDITOR \\| ROLESTOREMANAGER \\| ROLESTORE \\| ROLEADMIN \\| ROLEVIEWER|\n|`client_role_extension`   |  string |           | Indicates an extension of a user role. Has to match an existing role extension in the database |\n|`email`                   |  string |           | Email |\n|`address`                 |  string |           | Address|\n|`groups`                  |  array  |     x     | The list of groups the user is in|\n|`language`                |  string |           | Preferred language |\n|`phone`                   |  string |           | Phone number|\n|`photo`                   |  string |           | Url of the user's picture |\n|`store_id`                |  string |           | Primary Store. Setting up a store_id on a user will create a geofilter on this user. |\n|`tags`                    |  string |           | Tags allow to specify additional information about the store in the form \"AAA,BBB\" - multiple tags are comma separated, and we only use capital letter by convention|\n|`last_seen`               |  date   |           | The date on which the user connected for the last time.  |\n|`terms_of_acceptance_date`|  date   |           | The date in which terms were last accepted.  |\n|`mobile_version`          |  string |           | Version of the App used on mobile by the user.  |\n|`desktop_version`         |  string |           | Version of the App used on desktop by the user. |    \n|`client_ids`             |  array  |           | List of stores that the user can have access to, selected with their client_id. Creates or updates the corresponding user's geofilter if not empty\n|`store_type_names`        |  array  |           | List of stores' store_types that the user can have access to, selected with their store_type_name. Creates or updates the corresponding user's geofilter if not empty\n\n**Important** -\n\n- Combination of `client_role` and `client_role_extension` defines the user's permission. A wrong combination of these two will cause a validation error, specifying an invalid permission. If `client_role_extension` is not passed (optional), `client_role` will refer to the corresponding base permission.\n\n- `password` cannot be updated (will be ignored) in case the row exists.\n\n- If you are using custom_fields, you can also add columns corresponding to the name of each of your custom_fields in your import file\n\n- The `username` is used as primary key when importing a user file. This means you don’t need to store the YOOBIC `user_id` in your systems. For each row in the import file, the import process will check if a user exists in the database with the same `username`:\n\n    * If the `username` is found and the user is not archived, then the user is updated\n    * If the `username` is not found, a new user is created\n    * If the `username` is found and the user is archived, an error is returned to indicate this user is archived\n\n- If the import type is `json`, the body should consist of an array of user objects for creation or update.    \ne.g. here is a valid JSON body for the import action:\n```json\n[\n    {\n        \"username\": \"user1\",\n        \"password\": \"password\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"client_role\": \"ROLEFIELD\",\n        \"email\": \"john@company.com\"\n    },\n    {\n        \"user_id\": \"5b97e5954b99568b4b9101af\",\n        \"first_name\": \"Jane\"\n    },\n    {\n        \"username\": \"user2\",\n        \"email\": \"new_mail@company.com\"\n    }\n]\n```\nPlease note that there is no strict limit on the number of items that can be imported in a single request when using this action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "{{type}}"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                "key": "Content-Disposition",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data, boundary=AaB03x"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "e92e22d9-f83a-472f-8abd-469ab8d75a48",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                    "key": "Content-Disposition",
+                    "value": "form-data; name=\"file\"; filename=\"file.csv\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Import file\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:56:05.387Z\",\n  \"_id\": \"5b97e5954b99568b4b9101af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a48f9e5a-7ce9-4566-a145-cf431050a76b",
+          "name": "Export manager users",
+          "request": {
+            "name": "Export manager users",
+            "description": {
+              "content": "User managers are used to replicate real-life hierarchy within the YOOBIC app. This enables the use of the Org Chart tab, which provides users with search and visualisation tools to find relationships between managers and their direct reports.\n\nExport all results as a file.    \nThis action is asynchronous and returns the id of a job. See [`jobs`](#group-jobs) endpoint to query the status of the job. The file will contain the results with all of the fields specified on the resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                "managers",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "{{type}}"
+                },
+                {
+                  "key": "filter",
+                  "value": "{{filter}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "A valid JSON filter object (does not accept a `fields` filter)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7af171f0-cacf-4a6f-9a21-ef8a9e886edb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    "managers",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "{}"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Export file\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:56:05.387Z\",\n  \"_id\": \"5b97e5954b99568b4b9101af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e135d2f-a0e3-4852-abeb-62ba867daf1d",
+          "name": "Import manager users",
+          "request": {
+            "name": "Import manager users",
+            "description": {
+              "content": "### Fields\n\n| Field                    | Type    | Required  | Description     |\n|--------------------------|---------|:---------:|-----------------|\n|`manager_username`        |  string |     x     | Manager |\n|`direct_report_username`  |  string |     x     | Direct report of the manager |\n\n**Important:**\n\n- Each correspondance between a user and his manager should be entered as a single row in the import file\n\n- Each user can only have one manager\n\n- A user cannot be managed by another user who reports directly or indirectly to them",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "users",
+                "managers",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "{{type}}"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                "key": "Content-Disposition",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data, boundary=AaB03x"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "9b8cbb70-e149-445b-a159-9902cf5b08fc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "users",
+                    "managers",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                    "key": "Content-Disposition",
+                    "value": "form-data; name=\"file\"; filename=\"file.csv\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Import file\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:56:05.387Z\",\n  \"_id\": \"5b97e5954b99568b4b9101af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://<base_url>/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The type of file, either `csv` (default value) or `excel`",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "type"
+    }
+  ],
+  "info": {
+    "_postman_id": "0c777df8-e42f-46f0-ae09-5c6d409aa037",
+    "name": "YOOBIC Public Answers Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the **YOOBIC Public API** documentation.\n\nThe **YOOBIC Public API** is designed for developers and engineers who are interested in building custom applications or integrating with other systems or APIs.\nThe API allows you to manage resources in a simple, programmatic way using conventional HTTPS requests.\n\nThe endpoints are intuitive and powerful, allowing you to easily make calls to retrieve information or to execute actions.\n\nThe API documentation will start with a general overview about the design and technology that has been implemented, followed by reference information about specific endpoints.\n\n# Postman Collection\n\nA complete **YOOBIC Postman Collection** is available for download, containing all API endpoints organized by resource groups with pre-configured environments.\n\n**Download:** [YOOBIC Postman Collection](https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip)\n\nThis collection includes:\n\n- All API endpoints organized by resource groups\n\n- Pre-configured environments (sandbox, prod)\n\n- Automatic authentication handling\n\n- Example requests and responses\n\n- Ready-to-use test scripts\n\nImport the collection into Postman to quickly start testing the YOOBIC API endpoints.\n\n# What's new\n\nBelow is a list of recent enhancements/changes to the YOOBIC Public API.\n\n### July 21st, 2026\n\n* New [rate limit](#section-api-tech-requirements) for `DELETE` requests (120 per minute) across all endpoints, per client organization. See [Rate Limits](#section-api-tech-requirements).\n\n### June 3rd, 2026\n\n* Clarify `score` and `extra_scores` semantics in [missions](#group-missions) CSV import/export: the `score` column holds the numeric value only; `extra_scores` is export-only with one (translated) column per sub-score.\n\n### March 19th, 2026\n\n* Expand publish documentation on [campaigns](#group-campaigns): per-site/per-user mission creation, `user_ids` parameter, and request/response examples.\n\n* Document that a mission must be assigned before it can be booked on [missions](#group-missions).\n\n### March 4th, 2026\n\n* Document escaping of special characters in CSV import files using double quotes (see [Asynchronous Jobs](#section-async-jobs)).\n\n### January 25th, 2026\n\n* Clarify that `group_ids` on [files](#group-files) accepts an array of group ids, with an updated example.\n\n### December 29th, 2025\n\n* New automatic public api collections\n\n* Add [Bot Messages](#group-bot_messages) endpoint.\n\n* Add [Chats](#group-chats) endpoint.\n\n* Add [Upload file](#reference/files/single-file-api/create) on files.\n\n### April 10th, 2025\n\n* Add `folder_id` field on [`files`](#group-files).\n\n* Add `folder_name` field on [`files`](#group-files).\n\n### February 16th, 2025\n\n* Error messages now partially obscure usernames when relevant.\n\n### January 16th, 2025\n\n* Added support for [SCIM](#group-scim).\n\n### January 15th, 2025\n\n* Add [Communities](#group-communities) endpoint.\n\n* Add [Community Posts](#group-community-posts) endpoint.\n\n### January 1st, 2025\n\n* Add `address` field on [`events`](#group-events).\n\n* Add `virtual_event_link` field on [`events`](#group-events).\n\n* Add `total_users` field on [`events`](#group-events).\n\n### November 10th, 2024\n\n* Add `expires_in` field on [`login`](#reference/auth/group-security/Authentication) [auth](#group-security).\n\n### October 30th, 2024\n\n* Add [Export manager users](#reference/users/multiple-users-api/export-manager-users) endpoint.\n\n* Add [Import manager users](#reference/users/multiple-users-api/import-manager-users) endpoint.\n\n* Add `position` field on [users](#group-users).\n\n* Add `department` field on [users](#group-users).\n\n* Add `division` field on [users](#group-users).\n\n* Add `company` field on [users](#group-users).\n\n* Add `hiring_date` field on [users](#group-users).\n\n* Add `skills` field on [users](#group-users).\n\n* Add `cover` field on [users](#group-users).\n\n* Add `description` field on [users](#group-users).\n\n### August 1st, 2024\n\n* Add `trigger_on_every_match` field on [webhooks](#group-webhooks).\n\n### July 15, 2024\n\n* Add new type for import users `json` on [`import`](#reference/users/multiple-users-api/import) endpoint.\n\n### June 27, 2024\n\n* Add [Bots](#group-bots) endpoint.\n\n* Add `earned_points` field on [courses](#group-courses).\n\n* Add `duration` field on [courses](#group-courses).\n\n* Add `start_date` field on [courses](#group-courses).\n\n* Add `due_date` field on [courses](#group-courses).\n\n* Add `finished_date` field on [courses](#group-courses).\n\n### April 30, 2024\n\n* Add `notify` field on campaign [Publish](#reference/campaigns/single-campaign-api/publish).\n\n### April 17, 2024\n\n* New [rate limit](#section-api-tech-requirements) for `users` endpoint for POST, PATCH and DELETE requests\n\n### January 31, 2024\n\n* Add [Invite users](#reference/users/multiple-users-api/invite-users) endpoint.\n\n* Add [Export archived users](#reference/users/multiple-users-api/export-archived-users) endpoint. The exported file now includes custom fields.\n\n* Add [Export archived stores](#reference/stores/multiple-stores-api/export-archived-stores) endpoint. The exported file now includes custom fields.\n\n### November 3, 2023\n\n* Add [Mission-Comments](#group-mission_comments) endpoint.\n\n### October 23, 2023\n\n* Add `da`, `fi`, `nb` and `sv` fields on [translations](#group-translations).\n\n### August 15, 2023\n\n* Add [Import Users To Archive](#reference/users/multiple-users-api/import-users-to-archive) on users.\n\n* Add [Import Users To Un Archive](#reference/users/multiple-users-api/import-users-to-un-archive) on users.\n\n* Add [Import Stores To Archive](#reference/stores/multiple-stores-api/import-stores-to-archive) on stores.\n\n* Add [Import Stores To Un Archive](#reference/stores/multiple-stores-api/import-stores-to-un-archive) on stores.\n\n### July 26, 2023\n\n* Add extra security asymetric encryption for logins.\n\n### June 20, 2023\n\n* [webhooks](#group-webhooks) change in behavior on sandbox environment.\n\n### April 23, 2023\n\n* Add new supported topics to [webhooks](#group-webhooks).\n\n### April 18, 2023\n\n* Add [Invitees](#reference/events/single-events-api/invitees) endpoint on events.\n\n### March 2, 2023\n\n* Update `group_id` field on [groups](#group-groups).\n\n### February 7, 2023\n\n* Add `weekly_schedule` fields on [users](#group-users).\n\n* Add [Shifts](#group-shifts) endpoint.\n\n### December 20, 2022\n\n* Add `au`, `ido` and `vi` fields on [translations](#group-translations).\n\n### November 23, 2022\n\n* Add `images` field on [news](#group-news).\n\n* Removed `image` field on [news](#group-news) (deprecated).\n\n### October 31, 2022\n\n* Add [Roles](#group-roles) endpoint.\n\n### October 20, 2022\n\n* Add [Questions](#group-questions) endpoint.\n\n### October 13, 2022\n\n* Add [Answers](#group-answers) endpoint.\n\n### September 1, 2022\n\n* Add `client_ids` field on [users](#group-users).\n\n* Add `store_type_names` field on [users](#group-users).\n\n### June 26, 2022\n\n* [`Publish`](#reference/campaigns/single-campaign-api/publish) a campaign based on its current configured audience.\n\n### June 22, 2022\n\n* Add security for [webhooks](#group-webhooks).\n\n* Updated limit to the number of [`notifications`](#group-notifications) that can be sent at once to 50k.\n\n### June 14, 2022\n\n* Add [Events](#group-events) endpoint.\n\n### February 20, 2022\n\n* Add `custom_fields` field on [visits](#group-visits).\n\n### December 21, 2021\n\n* Add [Import audience](#reference/campaigns/single-campaign-api/import-audience) on campaigns.\n\n* Add [Import new campaigns from template](#reference/campaigns/single-campaign-api/import-new-campaigns-from-template) on campaigns.\n\n* Add [Get all archives](#reference/users/multiple-users-api/get-all-archives) on users.\n\n* Add [Get all archives](#reference/stores/multiple-stores-api/get-all-archives) on stores.\n\n### October 27, 2021\n\n* Add `active` field on [campaigns](#group-campaigns).\n\n* Add `archived` field on [campaigns](#group-campaigns).\n\n### September 9, 2021\n\n* Add [jobs](#group-jobs) fields' detail.\n\n* Updated the location of the file containing the errors to be under `error`.\n\n### August 15, 2021\n\n* Errors during an import job are now described in a file and returned as a `download_url` under `errors` in the job response.\n\n### May 12, 2021\n\n* Add [create question](#reference/campaigns/single-campaign-api/create-question) on campaigns.\n\n* Add [update question](#reference/campaigns/single-campaign-api/update-question) on campaigns.\n\n* Add [delete question](#reference/campaigns/single-campaign-api/delete-question) on campaigns.\n\n* Add [partial u pdate](#reference/campaigns/single-campaign-api/partial-update) on campaigns.\n\n### May 10, 2021\n\n* Add get and update a [missions](#reference/missions/single-mission-api/find-mission's-tasks) tasks.\n\n### April 7, 2021\n\n* Add ability to get the missions' answers [missions](#reference/missions/multiple-missions-api/get-all).\n\n### March 16, 2021\n\n* Add `out_of_stock` field on [products](#group-products).\n\n### March 1, 2021\n\n* Add [`Password History`](#reference/users/single-user-api/password-history) method for [users](#group-users)\n\n### January 17, 2021\n\n* Add `terms_of_acceptance_date` field on [users](#group-users).\n\n* Add [tenants](#group-tenants)\n\n### January 13, 2021\n\n* Add `vq_fields` object in [stores](#group-stores) description and endpoints to support virtual queuing\n\n### January 12, 2021\n\n* Add [webhooks](#group-webhooks) endpoint.\n\n### December 28, 2020\n\n* Add [custom-model-instances](#group-custom_model_instances)\n\n### December 7, 2020\n\n* Add `task_number` field on [missions](#group-missions) endpoint.\n\n### November 19, 2020\n\n* Add `capacity` field on [stores](#group-stores) endpoint.\n\n* Add `last_seen` field on [users](#group-users).\n\n* Add `mobile_version` field on [users](#group-users).\n\n* Add `desktop_version` field on [users](#group-users).\n\n### November 10, 2020\n\n* Add `group_ids` field on [inventory](#group-inventory).\n\n### October 26, 2020\n\n* Add [`unarchive`](#reference/stores/single-store-api/unarchive) method for [stores](#group-stores)\n\n* Add [`unarchive`](#reference/users/single-user-api/unarchive) method for [users](#group-users)\n\n### October 22, 2020\n\n* Add [`archive`](#reference/stores/single-store-api/archive) method for [stores](#group-stores)\n\n* Add [`archive`](#reference/users/single-user-api/archive) method for [users](#group-users)\n\n### October 14, 2020\n\n* Add `allow_local_login` field on [users](#group-news).\n\n### September 14, 2020\n\n* Add `tags` field on [news](#group-news).\n\n* Add POST, DELETE and PATCH endpoints for [news](#group-news).\n\n### September 10, 2020\n\n* Add `client_role_extension` field on [users](#group-users).\n\n### August 19, 2020\n\n* Add `action_plan_progress` field on [missions](#group-missions) table.\n\n### July 23, 2020\n\n* Add `available-slots` method on [waitlist-yoobic-visits](#group-waitlist-yoobic-visits) endpoint.\n\n* Update `waitlist-yoobic-visits` response to return store `client_id` and store `title` on [waitlist-yoobic-visits](#group-waitlist-yoobic-visits) endpoints.\n\n### July 05, 2020\n\n* Add [waitlist-yoobic-visits](#group-waitlist-yoobic-visits)\n\n### June 28, 2020\n\n* Add [waitlist-customers](#group-waitlist-customers)\n\n### May 18, 2020\n\n* Add BOOST endpoint ([incentives-kpi](#group-incentives-kpi))\n\n### May 11, 2020\n\n* Add `timezone` field on [stores](#group-stores) endpoint.\n\n### May 5, 2020\n\n* Add `page_titles` field on [campaigns](#group-campaigns) endpoint.\n\n### April 16, 2020\n\n* Add [`delete`](#reference/campaigns/single-campaign-api/delete) method for [campaigns](#group-campaigns)\n\n### February 19, 2020\n\n* Add to [campaigns](#group-campaigns) [`publish`](#reference/campaigns/single-campaign-api/publish) the ability to provide default answers.\n\n### February 13, 2020\n\n* Add [`assign`](#reference/plans/single-plan-api/assign) method for [plans](#group-plans)\n\n### February 5, 2020\n\n* Add `timezone` field on [stores](#group-stores) endpoint.\n\n### February 4, 2020\n\n* Add [`create`](#reference/visits/multiple-visits-api/create) method for [visits](#group-visits)\n\n* Add [`import`](#reference/visits/multiple-visits-api/import) method for [visits](#group-visits)\n\n### January 28, 2020\n\n* Add properties on [campaigns](#group-campaigns) [`publish`](#reference/campaigns/single-campaign-api/publish)\n\n### November 5, 2019\n\n* Add `create` method for [campaigns](#group-campaigns) endpoint.\n\n* Add `create` method for [photos](#group-photos) endpoint.\n\n### October 2, 2019\n\n* Add `store_id` field on [visit](#group-visits).\n\n* Add `user_id` field on [visit](#group-visits).\n\n* Add `creator_id` field on [visit](#group-visits).\n\n### September 5, 2019\n\n* Add [visit](#group-visits) endpoint.\n\n### September 3, 2019\n\n* Add `group_ids` field on [notifications](#group-notifications).\n\n### August 8, 2019\n\n* Add [inventory](#group-inventory) endpoint.\n\n### August 5, 2019\n\n* Add `scoring` field on [campaigns](#group-campaigns).\n\n* Add `recurring` field on [campaigns](#group-campaigns).\n\n* Add `body` field on [notifications](#group-notifications).\n\n* Add `user_ids` field on [notifications](#group-notifications).\n\n* Add `badge_type` field on [notifications](#group-notifications).\n\n* Add `manufacturer` field on [products](#group-products).\n\n* Add `brand` field on [products](#group-products).\n\n* Add `category` field on [products](#group-products).\n\n* Add `images` field on [products](#group-products).\n\n### July 9, 2019\n\n* Add `authorised_viewers` field on [news](#group-news).\n\n* Add `description` field on [news](#group-news).\n\n* Add `group_ids` field on [news](#group-news).\n\n### June 13, 2019\n\n* Add `available_on_book` field on [missions](#group-missions).\n\n* Add `available_on_finished` field on [missions](#group-missions).\n\n### June 3, 2019\n\n* Add `average_completed_lesson` field on [plans](#group-plans).\n\n* Add `photo` field on [stores](#group-stores).\n\n* Add `address` field on [users](#group-users).\n\n### May 16, 2019\n\n* Add `duration` field on [missions](#group-missions).\n\n* Add `duration` field on [lessons](#group-lessons).\n\n### May 8, 2019\n\n* Add `markup_url` field on [photos](#group-photos).\n\n### April 30, 2019\n\n* Add `catalog_title` field on [products](#group-products).\n\n### Mar 24, 2019\n\n* Add `vip` field on [stores](#group-stores).\n\n### Mar 11, 2019\n\n* Remove support for the replace (PUT) resource, in favor of partial update (PATCH).\n\n### Mar 6, 2019\n\n* Document [Current User API](#reference/users/current-user-api/get)\n\n* Document company name restriction on  `Groups` [`create`](#reference/groups/multiple-groups-api/create) and [`import`](#reference/groups/multiple-groups-api/import)\n\n### Feb 25, 2019\n\n* Add endpoint to get a store's [`Health Score`](#reference/stores/single-store-api/health-score-of-a-store-api)\n\n* Add BOOST endpoints ([plans](#group-plans), [courses](#group-courses), [lessons](#group-lessons))\n\n### API Resources Overview\n\n| Resource                                 | GET | POST | PATCH  | DELETE | IMPORT | EXPORT | COUNT |\n|------------------------------------------|:---:|:----:|:------:|:------:|:------:|:------:|:-----:|\n|[`auth`](#group-security)                 |     |  x   |        |        |        |        |       |\n|[`answers`](#group-answers)               |  x  |      |        |        |        |    x   |   x   |\n|[`badges`](#group-badges)                 |  x  |      |        |        |        |    x   |   x   |\n|[`bots`](#group-bots)                     |  x  |      |        |        |        |    x   |   x   |\n|[`bot-messages`](#group-bot_messages)     |     |      |        |        |        |    x   |       |\n|[`campaigns`](#group-campaigns)           |  x  |  x   |   x    |   x    |        |    x   |   x   |\n|[`catalogs`](#group-catalogs)             |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`chats`](#group-chats)                   |     |  x   |        |        |        |        |       |\n|[`comments`](#group-comments)             |  x  |      |        |        |        |    x   |   x   |\n|[`communities`](#group-communities)       |  x  |  x   |   x    |        |        |    x   |   x   |\n|[`community-posts`](#group-community-posts) |  x  |  x   |        |        |    x   |    x   |   x   |\n|[`competencies`](#group-competencies)     |  x  |      |        |        |        |    x   |   x   |\n|[`course-categories`](#group-course-categories)     |  x  |      |        |        |        |    x   |   x   |\n|[`courses`](#group-courses)               |  x  |      |        |        |        |    x   |   x   |\n|[`custom-model-instances`](#group-custom_model_instances)|  |   |    |   |   x    |    x   |       |\n|[`events`](#group-events)                 |  x  |  x   |   x    |   x    |   x    |    x   |   x   |\n|[`files`](#group-files)                   |  x  |  x   |        |        |        |    x   |   x   |\n|[`geofilters`](#group-geofilters)         |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`groups`](#group-groups)                 |  x  |  x   |        |   x    |   x    |    x   |   x   |\n|[`incentives-kpi`](#group-incentives-kpi) |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`inventory`](#group-inventory)           |  x  |      |        |        |        |    x   |   x   |\n|[`lessons`](#group-lessons)               |  x  |      |        |        |        |    x   |   x   |\n|[`missions`](#group-missions)             |  x  |      |    x   |   x    |   x    |    x   |   x   |\n|[`mission_comments`](#group-mission_comments)   |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`news`](#group-news)                     |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`notifications`](#group-notifications)   |  x  |  x   |        |        |        |    x   |   x   |\n|[`photos`](#group-photos)                 |  x  |  x   |        |        |        |    x   |   x   |\n|[`plans`](#group-plans)                   |  x  |      |        |        |        |    x   |   x   |\n|[`products`](#group-products)             |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`questions`](#group-questions)           |  x  |      |        |        |        |    x   |   x   |\n|[`roles`](#group-roles)                   |  x  |      |        |        |        |    x   |   x   |\n|[`salesdata`](#group-salesdata)           |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`shifts`](#group-shifts)                 |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`store-types`](#group-store_types)       |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`stores`](#group-stores)                 |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`tenants`](#group-tenants)               |  x  |      |        |        |        |        |       |\n|[`translations`](#group-translations)     |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`users`](#group-users)                   |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`visits`](#group-visits)                 |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`webhooks`](#group-webhooks)             |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`jobs`](#group-jobs)                     |  x  |      |        |        |        |        |       |\n\n# Table of Contents\n\n- [API Help](#section-api-help) - We're here to help!\n\n- [API Access](#section-api-access) - API access authentication\n\n- [API Technical Requirements](#section-api-tech-requirements) - Technical requirements for communicating with the API - security protocols and rate limits\n\n- [API Requests](#section-api-requests) - Formatting of requests sent to the **RESTful** YOOBIC API\n    - [Filter](#section-api-requests-filter) - Filter the results using different criteria\n        - [Order](#section-api-requests-filter-order) - Ordering the results\n        - [Paging](#section-api-requests-filter-paging) - Paging through your results\n        - [Where](#section-api-requests-filter-where) - Matching your results\n        - [Fields](#section-api-requests-filter-fields) - including specific fields to your results\n    - [CRUD Requests](#section-api-requests-crud-requests) - Creating/updating/deleting resources\n\n- [API Responses](#section-api-responses) - The common response format of each request\n\n- [Asynchronous Jobs](#section-async-jobs) - How data is requested asynchronously for endpoints\n  - [Export file section](#section-export-jobs)\n  - [Import file section](#section-import-jobs)\n\n- [Endpoint Documentation](#section-endpoint-documentation) - Documentation specific for each endpoint. You may also use the links on the table on the sidebar to navigate to any endpoint.\n    - [Security](#group-security)\n    - [Answers](#group-answers)\n    - [Badges](#group-badges)\n    - [Bots](#group-bots)\n    - [Bot Messages](#group-bot_messages)\n    - [Campaigns](#group-campaigns)\n    - [Catalogs](#group-catalogs)\n    - [Chats](#group-chats)\n    - [Comments](#group-comments)\n    - [Communities](#group-communities)\n    - [Comments](#group-community-posts)\n    - [Competencies](#group-competencies)\n    - [Course-categories](#group-course-categories)\n    - [Courses](#group-courses)\n    - [Custom-model-instances](#group-custom_model_instances)\n    - [Events](#group-events)\n    - [Files](#group-files)\n    - [Geofilters](#group-geofilters)\n    - [Groups](#group-groups)\n    - [Incentives Kpi](#group-incentives-kpi)\n    - [Inventory](#group-inventory)\n    - [Lessons](#group-lessons)\n    - [Missions](#group-missions)\n    - [Missions](#group-mission_comments)\n    - [News](#group-news)\n    - [Notifications](#group-notifications)\n    - [Photos](#group-photos)\n    - [Plans](#group-plans)\n    - [Products](#group-products)\n    - [Questions](#group-questions)\n    - [Roles](#group-roles)\n    - [Salesdata](#group-salesdata)\n    - [SCIM](#group-scim)\n    - [Shifts](#group-shifts)\n    - [Store Types](#group-store_types)\n    - [Stores](#group-stores)\n    - [Tenants](#group-tenants)\n    - [Translations](#group-translations)\n    - [Users](#group-users)\n    - [Visits](#group-visits)\n    - [Webhooks](#group-webhooks)\n    - [Jobs](#group-async-jobs)\n\n<a id=\"section-api-help\"></a>\n\n## API Help\n\nHave questions or need support?\nEmail your YOOBIC Customer Success Manager or [support@yoobic.com](mailto:support@yoobic.com).\n\n<a id=\"section-api-access\"></a>\n\n## API Access\n\nAuthentication to the YOOBIC API uses JWT tokens. They are required for accessing API.    \nJWT tokens are set in the `Authorization` header for your requests as follows:\n\n```\nAuthorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\n```\n\nTo obtain a valid token you can either:\n\n- Use the [`auth/login`](#group-security) endpoint\n\n- Contact your YOOBIC Customer Success Manager or [support@yoobic.com](mailto:support@yoobic.com) to obtain credentials to use in the /auth/login endpoint.\n\n- Please note that in the case you are using a reverse proxy you must set the parameter `proxy_ssl_server_name` to on to successfully connect to the prod environment.\n\n<a id=\"section-api-tech-requirements\"></a>\n\n## API Technical Requirements\n\n### Protocol and Communication\n\n- The api is only accessible via HTTPS, using TLS 1.2 or better. We forward secrecy and AES-GCM, and prohibit insecure connections using SSL 3.0 or RC4.\n\n- Environments    \n      We provide both a Sandbox and a Production environment. Every Friday at 21:55 UTC, Sandbox is refreshed by taking a snapshot of the Production environment. Since this refresh process takes several hours, please avoid using Sandbox during that time. It is available for testing purposes outside of the refresh period.\n\n- Template structure of a request:   \n    - Base url Production: **https://api.yoobic.com/public/api**\n    - Base url Sandbox: **https://api-sandbox.yoobic.com/public/api**\n    - The `<base_url>` variable in the example requests is either `api.yoobic.com` or `api-sandbox.yoobic.com`.\n    - Get all (GET): `/{endpoint}?filter={ \"where\": { \"property\": \"value\" }, \"skip\": 0, \"limit\": 100, \"order\": \"updated_date DESC\", \"fields\": [\"property\"] }`\n    - Count (GET):  `/{endpoint}?where={ \"property\": \"value\" }`\n    - Create (POST): `/{endpoint}` should include a valid JSON object as the body.\n    - Update (PATCH): `/{endpoint}/:id` should include a valid JSON object as the body.\n    - Delete (DELETE): `/{endpoint}/:id`\n\n### Rate Limits\n\nAll limits are applied per client organization. Exceeding a limit returns HTTP error `429 Too Many Requests (Rate Limit Exceeded)`; wait for the current one-minute window to pass and retry.\n\n- **Interval Limit**: 10 requests per second overall. Send requests serially (one at a time); bursts of concurrent requests may be rejected.\n\n- **Delete Limit**: 120 `DELETE` requests per minute across all endpoints.\n\n- **Users Write Limit**: 180 requests per minute (3 per second) for `POST`, `PATCH` and `DELETE` on the `/users` endpoint. These requests also count toward the limits above.\n\n- **Daily Limit**: 100,000 requests per day.\nIf you need higher limits to support your specific use case, please contact your YOOBIC Customer Success Manager or [support@yoobic.com](mailto:support@yoobic.com) — limits can be adjusted per organization.\n\n<a id=\"section-api-requests\"></a>\n\n## API Requests\n\nRequests for the YOOBIC API are all RESTful, with parameters following the endpoint path or in request body.\nEach request in the documentation is displayed with the appropriate HTTP method and sample parameters.\nData may be sent in as parameters or in the request body as JSON.\nThe requests on the YOOBIC API allow for ordering, paging and filtering on a per entity basis.\n\n<a id=\"section-api-requests-filter\"></a>\n\n### Filter\n\nA where filter specifies criteria for returning data.\nWe supports the following kind of filters:\n\n- [Order filter](#section-api-requests-filter-order)\n\n- [Paging filter](#section-api-requests-filter-paging)\n\n- [Where filter](#section-api-requests-filter-where)\n\n- [Fields filter](#section-api-requests-filter-fields)\n\nA filter must be a JSON encoded string (`{\"something\":\"value\"}`).    \nTo do this, simply use the following syntax:\n\n```\n?filter={ Stringified-JSON }\n```\n\nIn the JSON all text keys/strings must be enclosed in quotes (\").\n\n**Important**:     \nWhen using stringified JSON, you must use an equal sign after ?filter in the query string.    \nFor example:\n\n```\nGET /entity?filter={\"where\": { \"entity_id\": 1234 }, \"order\": \"updated_date DESC\", \"limit\": 100, \"fields\": [\"property\", \"property\"] }\n```\n\n<a id=\"section-api-requests-filter-order\"></a>\n\n#### Order Filter\n\nAn *order* filter specifies how to sort the results: ascending (ASC) or descending (DESC) based on the specified property.   \nOrder by one property:\n\n```json\n{ \"order\": \"property <ASC|DESC>\" }\n```\n\nOrder by two or more properties:\n\n```json\n{ \"order\": [\"property <ASC|DESC>\", \"property <ASC|DESC>\",...] }\n```\n\nWhere:\n\n- *property* is the name of the property (field) to sort by.\n\n- *<ASC|DESC>* signifies either ASC for ascending order or DESC for descending order.\n\n**Important**:     \nBy default ordering will be performed according to the *updated_date* property.    \nEach endpoint's table, contains information, to the properties ordering could be performed on.\n\n<a id=\"section-api-requests-filter-paging\"></a>\n\n#### Paging Filter\n\nPaging can be achieved by a combination of *limit* and *skip* parameters.\n\n* *limit* filter limits the number of records returned to the specified number (or less).    \n    The maximum number of records that could be fetched is `1000`.    \n    For anything above that, you might want to consider using the [export](#section-async-jobs) endpoint.    \n    ```json\n        { \"limit\": 5 }\n    ```\n\n* *skip* filter omits the specified number of returned records.\n    ```json\n        { \"skip\": 5 } \n    ```\n\n* If `paging.total > paging.limit` in the response of a request:\n\n    It is possible to use the *skip* filter. Here is an example on how to use it with the users endpoint:    \n    `https://api-sandbox.yoobic.com/public/api/users?filter={\"skip\": 1000}`    \n    The recommended solution is to add a condition to the API script to loop requests if there are too many elements until all of them are returned.    \n    The condition would monitor that `paging.total - paging.limit <= paging.skip` in the response of each request, and if not send another request with `newSkip = Skip + 1000` after receiving the last one.    \n    The other way to manage large requests is to use asynchronous requests. For example with Users, it is possible to export a CSV file of all or some users. See the [export](#section-async-jobs) section for this.\n\n<a id=\"section-api-requests-filter-where\"></a>\n\n#### Where Filter\n\nA *where* filter specifies a set of logical conditions to match, similar to a WHERE clause in a SQL query.\n\nUse the first form below to test equivalence, that is, whether property equals value. Use the second form below for all other conditions.\n\n```json\n{ \"where\": { \"property\": value } }\n```\n\n```json\n{ \"where\": { \"property\": { \"op\" : value } } }\n```\n\n```json\n{ \"where\": { \"and|or\": [{ \"property\": { \"op\" : value } }, { \"property\": { \"op\" : value } }] } }\n```\n\nWhere:\n\n- *property* is the name of a property (field) in the model being queried.\n\n- *value* is a literal value.\n\n- *op* is one of the operators listed below.\n\n| Operator      | Description                                                                                                |\n|---------------|------------------------------------------------------------------------------------------------------------|\n|gt, gte        | Numerical greater than (>); greater than or equal (>=). Valid only for numerical and date values.| \n|lt, lte        | Numerical less than (<); less than or equal (<=). Valid only for numerical and date values. |\n|between        | True if the value is between the two specified values: greater than or equal to first value and less than or equal to second value.| \n|inq, nin       | In / not in an array of values.|\n|neq            | Not equal (!=) |\n\n<a id=\"section-api-requests-filter-fields\"></a>\n\n#### Fields Filter\n\nA *fields* filter specifies properties (fields) to include from the results.\n\n```json\n{ \"fields\": [\"property\", \"property\", ...] }\n```\n\nWhere:\n\n- *property* is the name of the proeprty (field) to include.\n\nBy default, queries return all properties in results. However, if you specify at least one fields filter, then by default the query will include only those you specifically include with filters.\n\n**Important**:     \nThe *export* resource for all endpoints does not allow the *fields* filter.\n\n<a id=\"section-api-requests-crud-requests\"></a>\n\n## CRUD Requests\n\nCreate, update and delete requests follow standard RESTful practices. While some fields\nare available on a resource, you may not be able to set values for *readonly* fields such as `created_date` during\na CREATE, UPDATE or DELETE action (it would just be ignored). The allowed parameters are listed at the beginning of each CRUD section for a particular resource.\n\n<a id=\"section-api-responses\"></a>\n\n## API Responses\n\nThe Response format varies depending on the type of request:\n\n- Single API requests - simple hash, whether it be an error or not.\n\n- Multiple API requests - a hash containing two lists \n  - `data` for successfull requests.\n  - `error` for failed requests.\n\nThe two correspond to the order in the request.\n\n```json\n{\n     \"data\": [],\n     \"error\": []\n}\n```\n\nFor find requests an `error` **or** `data` with an additional `paging` hash -\n\n```json\n{\n    \"data\": [],\n    \"error\": [],\n    \"paging\": {\n          \"skip\": 0,\n          \"limit\": 1000,\n          \"total\": 10000,\n    }\n}\n\n```\n\n- `skip` - The currently requested page. Defaults to `0` if no page is given in the request.\n\n- `limit` - The maximum amount of records that may be returned in this response. If not given in the filter parameter, defaults to `1000`.\n\n- `total` - The total records that match this request, regardless of current paging results.\n\n### Response Headers\n\n- content-type: application/json; charset=utf-8\n\n- status: 200 OK\n\n- ratelimit-limit: 1200\n\n- ratelimit-remaining: 1137\n\n- ratelimit-reset: 1415984218\n\n### Multiple Response Body\n\n#### Description Of Usual Server Responses:\n\n- 200 `OK` - the request was successful (some API calls may return 201 instead).\n\n- 201 `Created` - the request was successful and a resource was created.\n\n- 204 `No Content` - the request was successful but there is no representation to return (i.e. the response is empty).\n\n- 400 `Bad Request` - the request could not be understood or was missing required parameters.\n\n- 401 `Unauthorized` - authentication failed or user doesn't have permissions for requested operation.\n\n- 403 `Forbidden` - access denied.\n\n- 404 `Not Found` - resource was not found.\n\n- 405 `Method Not Allowed` - requested method is not supported for resource.\n\n- 429 `Too Many Requests` - rate limit exceeded.\n\n- 501 `Not Implemented` - the server lacks the ability to fulfill the request. Usually this implies future availability.\n\n<a id=\"section-async-jobs\"></a>\n\n## Asynchronous Jobs\n\nThere are 2 endpoints for async jobs\n\n- `/import`: Import a csv/excel file\n\n- `/export`: Export data as a csv/excel file\n\nBy default, all requests to the External API are synchronous and all data requested are returned within the same request/response cycle.\nOne limitation of this approach is that all responses are limited to a maximum number of records as defined in the [Paging section](#section-api-requests-filter-paging).\nTo enable returning an unlimited number of records, you are able to create a job to be executed asynchronously to return all records that match your current query.\n\n#### Async Jobs\n\n- `GET entity/export`\n\n- `POST entity/import`\n\nGiven the following request to get the stores:\n\n`https://api.yoobic.com/public/api/stores`\n\nIt can be converted into an asynchronous job:\n\n`https://api.yoobic.com/public/api/stores/export?type=csv`\n\n#### Response Structure and Return Codes\n\nWhen an asynchronous job is successfully created, a code of `200` will be returned. Any errors will result in a return code of `400` and error messages will be returned in the standard format.\n\nThe response structure of a requested asynchronous job includes a `job_id` that you use on the [Jobs endpoint](#group-jobs)\nto query for the current status of the endpoint. This structure is almost identical to what is returned from the [Jobs endpoint](#group-jobs).\nPlease refer to that endpoint for more details about obtaining the status of your job.\n\n```json\n{\n  \"name\": \"Export csv\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:37:23.088Z\",\n  \"_id\": \"5b97e133952d1c8776c9e723\"\n}\n```\n\n#### Export File Format\n\n<a id=\"section-export-jobs\"></a>\n\nThe file formats supported for exporting all records via an asynchronous job are CSV or Excel (xlsx). Once a job is completed, the response\nbody of the [Jobs endpoint](#group-jobs) request will return the `download_url` key that is the URL of the CSV or Excel.\nFor example, the above request will result in a file containing example data delimited by the default delimiter, with headers as follows:\n\n```json\n{\n  \"job_id\": \"5b97e133952d1c8776c9e723\",\n  \"name\": \"Export file\",\n  \"data\": {\n    \"authorization\": \"\",\n    \"input\": {\n      \"filter\": null,\n      \"type\": \"csv\",\n      \"modelName\": \"stores\"\n    },\n    \"output\": {\n      \"errors\": [],\n      \"data\": {\n          \"download_url\": \"https://s3.eu-west-1.amazonaws.com/yoobic.transient-file-storage/stores_6b97e133952d1c8776c9e723.csv\"\n        }\n    },\n    \"stats\": {\n      \"execution_time_milliseconds\": 556.81776,\n      \"execution_time\": \"556.81776 ms\",\n      \"errors\": 0,\n      \"success\": 1\n    }\n  },\n  \"progress\": 1,\n  \"lastFinishedAt\": \"2018-09-11T15:37:28.496Z\"\n}\n```\n\n- Response \"data.input\" object\nThe input parameters when creating the job.\n\n- Response \"data.output.data\" object.    \nThe `data` object in the results hash may be either a hash or an array, depending on the endpoint action.\n\n- Response \"data.output.errors\" hash.    \nThe `errors` array only appears in results to inform the client of errors such as incorrect field formats, model validation errors or server errors.\n\n- Response \"data.stats\" hash.    \nThe `stats` object informs about the total execution time and number of errors and/or successes.\n\n##### Resulting CSV example:\n\n```\n    id; title; address; latitude; longitude; client_id; store_type_id; store_type_name; created_date; updated_date\n    5b97e017952d1c8776c9e71e; Home; Statue of Liberty, New York, USA; 40.6895453; -74.0449292; 001; 5b97e00411ec54f2e3a0936e; TEST; 2018-09-11T15:32:39.607Z; 2018-09-11T15:32:39.607Z\n```\n\n#### Resulting Excel example:\n\nIn case of a request to export an excel file `https://api.yoobic.com/public/api/stores/export?type=excel` it would result in:    \n<img src=\"https://res.cloudinary.com/www-yoobic-com/image/upload/v1554025223/export_excel_example.png\" >\n\n##### Export File Expiration\n\nCurrently all exports are set to expire **one day** after they are created at which point they will be inaccessible.\n\n#### Import File\n\n<a id=\"section-import-jobs\"></a>\n\n<a id=\"section-asynchronous-jobs-import\"></a>\nImport a CSV/Excel file.    \nThis action is asynchronous and returns the id of a job. See [`jobs`](#group-jobs) endpoint to query the status of the job.\nMake sure that you make a multipart/form-data query, passing the CSV/Excel file as named parameter `file`.\nWhen you create a CSV/Excel file to import, you'll probably generate this list from some other information management system or database. Most of these systems have some facility for creating a CSV/Excel export file. If you need to create the list from scratch you can use a program like Microsoft Excel or OpenOffice.org Calc.\n\n**Important**:\n\n- To ensure correct handling of special characters, you must generate the CSV/Excel file using the UTF-8 character encoding.\n\n- The first row of the file is the header row, and you must include it in the file.\n\n- The header row must contain any required fields in the table below, plus any other fields listed in the table below that you want to include.\n\n- Empty columns of data in the file will overwrite any existing data for that entity (empty column is treated as a *null* value).\n\n- For Excel files, array type fields (i.e.: `tags` for users or stores, `client_ids` for users…) must be comma separated string i.e.: Tag1,Tag2,Tag3 or Tag1, Tag2, Tag3\n\n- For CSV files, array type fields can be either comma separated strings (i.e.: Tag1,Tag2,Tag3 or Tag1, Tag2, Tag3) or JSON array with quotes (i.e.: `\"[\"Tag1\",\"Tag2\",\"Tag3\"]\"`)- In Addition for CSV the field separator is `;` and line separator is `line-break`.\n\n- Make sure there are no duplicates by the defined primary keys as there is no guarantee on the order in which the import iterates over the rows.\n\n- Date values should comply with the ISO format, i.e. 2019-12-31 or 2019-12-31T23:59:59:999.\n\n- Escape special characters in CSV files with double quotes, for example: `\"<a href=\"\"https://example.com\"\">Link</a>\"`.",
+      "type": "text/plain"
+    }
+  }
+}

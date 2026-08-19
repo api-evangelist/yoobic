@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YOOBIC Public Answers Security API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Security",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/auth/login"
+          },
+          "docs": "Generates a JSON Web Token (JWT) for the API provided a valid username and password.\n\n**important**\n\n- The `expires_in` parameter is used during the login process to specify the duration for which the token will remain valid. The acceptable range for this value is a minimum of 1200 seconds (20 minutes) and a maximum of 157680000 seconds (5 years). If a value below the minimum is provided, it will automatically be set to 1200 seconds (20 minutes). Conversely, if a value exceeds the maximum, it wi"
+        },
+        {
+          "info": {
+            "name": "Invalidate Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://<base_url>/public/api/auth/invalidate_token",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/",
+              "accessTokenUrl": "/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Invalidates the existing JSON Web Token (JWT) for the API provided in the Authorization header."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

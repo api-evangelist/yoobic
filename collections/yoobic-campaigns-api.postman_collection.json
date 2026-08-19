@@ -1,0 +1,1826 @@
+{
+  "item": [
+    {
+      "id": "263e664b-c8a6-464a-b21c-192c1356bbaf",
+      "name": "Campaigns",
+      "description": {
+        "content": "<a id=\"group-campaigns\"></a>\nA campaign is the main structure used to send tasks to frontline teams and collect data about how they execute them. It is essentially a configurable form with instructions and fields (checklists, buttons, photos, open text, etc.) that users fill in from the field. They are used for many operational needs like audits, promotions, checklists, surveys, health and safety monitoring, and other day-to-day activities.\n\nThere are 4 different types of campaigns available in YOOBIC:\n\n- Quick task\n\n- Memo\n\n- Form\n\n- Workflow\n\nArchived campaigns are visible in the [campaigns_archive](#group-campaigns_archive) table.\n\n### Fields\n\n| Field                | Type        | Required | Readonly   | OrderBy | Description               |\n|----------------------|:-----------:|:--------:|:----------:|:-------:|---------------------------|\n|`campaign_id`         |  string     |    x     |     x      |         | Unique id of the campaign |\n|`title`               |  string     |    x     |            |         | The campaign title        |\n|`description`         |  string     |          |            |         | The campaign description  |\n|`type`                |  string     |    x     |            |         | The campaign type  (mission, service, todo, poll, lesson, visit)     |\n|`group_ids`           |  array      |    x     |            |         | Group ids that can see this campaign |\n|`user_ids`            |  array      |          |            |         | User ids that can see this campaign |\n|`tags`                |  array      |          |            |         | The list of tags          |\n|`scoring`             |  boolean    |          |            |         | true if scoring is enabled for missions from this campaign, false otherwise | \n|`recurring`           |  boolean    |          |            |         | true if this campaign is recurring, false if it is a one-off campaign | \n|`active`              |  boolean    |          |    x       |         | true if campaign is neither paused nor archived | \n|`archived`            |  boolean    |          |    x       |         | true if campaign is paused | \n|`icon_url`            |  string     |          |            |         | `_downloadURL` of a File or a `url` of a Photo. Icon size recommendation is 100px X 100px. |\n|`background_url`      |  string     |          |            |         | `_downloadURL` of a File or a `url` of a Photo. |\n|`page_titles`         |  array      |          |            |         | An ordered list of page titles i.e. first title is the first page title etc. |\n|`questions`           |  array      |          |            |         | The campaign's questions  |\n|`created_date`        |  date       |          |     x      |         | Creation date             |\n|`updated_date`        |  date       |          |     x      |    x    | Last update date          |\n\nThe `questions` field is defined as an array of:\n| Field                | Type           | Description               |\n|----------------------|----------------|---------------------------|\n|`question_id`         |  string        | Unique id of the question |\n|`question_type`       |  string        | The type of the question. Supported types: `text`, `textarea`, `toggle`, `checkbox`, `information`, `todo`, `photo`, `multiphotos`, `selectbuttons`, `select`, `selectmulti`, `address`, `date`, `number`, `starrating`, `image`. |\n|`question`            |  string        | The title of the question |\n|`question_description`|  string        | The description of the question |\n|`mandatory`           |  boolean       | If `true`, the question has to be answered. Defaults to `false` |\n|`page_number`         |  number        | The number of the page the question appears in |\n|`question_number`     |  number        | The number of the question |\n|`hide_mobile`         |  boolean       | Hide the question on mobile devices. Defaults to `false`. |\n|`question_attributes` |  object        | Question attributes for specific question types.|\n\nThe `question_attributes` field is defined as an object with the following fields:\n| Field                | Type           | Description               |\n|----------------------|----------------|---------------------------|\n|`max_photos`          |  number        | Maximum of allowed photos to upload. Applies only to questions of type `multiphotos`.         |\n|`values`              |  array         | Values to be displayed as options to choose from in the question. Applies only to questions of type `selectbuttons`, `select`, `selectmulti`.           |\n|`min`                 |  number        | If present, value must be above or including it. Applies only to questions of type `number`. |\n|`max`                 |  number        | If present, value must be below or including it. Applies only to questions of type `number`, `starrating`. |\n\n#### Question Types\n\n<a id=\"group-campaigns-question-types\"></a>\n**Important**    \nBelow is a list of the supported types and their value types:\n\n| question_type | Type           | Description |\n|---------------|:--------------:|-------------|\n| address       |  string        |             |\n| date          |  string        |             |\n| information   |  string        |             |\n| select        |  string        | Single value chosen from the `values` defined in `question_attributes` |\n| textarea      |  string        |             |\n| text          |  string        |             |\n| photo         |  URL           | A valid image URL      |\n| multiphotos   |  array of URLs | Valid image URLs and up to `max_photos` defined in `question_attributes`     |\n| selectbuttons |  array         | Multiple values chosen from the `values` defined in `question_attributes`      |\n| selectmulti   |  array         | Multiple values chosen from the `values` defined in `question_attributes`      |\n| number        |  number        | Might have min, max borders as defined in `question_attributes`      |\n| starrating    |  number        | Might have max border as defined in `question_attributes`. No negatives allowed.      |\n| checkbox      |  boolean       |             |\n| toggle        |  boolean       |             |\n| image         |                | This is a readonly property (informative) which does not have a value. |\n\n**Important**\n\n- If `page_titles` does not have a title for a given page then a default will be given -    \nSo i.e. if the values are -    \n```json\n[ \"first chapter\", \"second chapter\" ]\n``` \nand there are three pages in total, then the title for the third page will be `Page 3`.\n\n- To filter on `live` campaigns only you should filter accordingly: \n```json\n{ \"active\": true,  \"archived\": { \"neq\": true } }\n```",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b8bab03f-efa8-4341-9b02-1f7421c0fd02",
+          "name": "Get",
+          "request": {
+            "name": "Get",
+            "description": {
+              "content": "Get a campaign for the given id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaigns",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the campaign"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e8fcd30b-2b50-4ab3-b857-e18f9b4dca5f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaigns",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the campaign"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"campaign_id\": \"54ab03c6546847ee0d30086a\",\n  \"created_date\": \"2018-05-23T04:51:40.862Z\",\n  \"updated_date\": \"2018-05-23T04:51:40.862Z\",\n  \"title\": \"Rockets campaign 1\",\n  \"description\": \"campaign description here\",\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"type\": \"mission\",\n  \"page_titles\": [\n    \"Page 1\"\n  ],\n  \"active\": true,\n  \"questions\": [\n    {\n      \"question_id\": \"e8335f8d-109d-475f-b10b-113ce6876dc7\",\n      \"question_type\": \"number\",\n      \"question\": \"number of ice-cream flavors\",\n      \"page_number\": 1,\n      \"question_number\": 1\n    },\n    {\n      \"question_id\": \"e8335f8d-109d-475f-b10b-113ce6876dc8\",\n      \"question_type\": \"text\",\n      \"question\": \"ice-cream flavors\",\n      \"page_number\": 1,\n      \"question_number\": 2\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01b97f1f-c63b-438f-9cfb-988323122d94",
+          "name": "Partial Update",
+          "request": {
+            "name": "Partial Update",
+            "description": {
+              "content": "Update a subset of properties of a campaign.    \nIf `questions` are passed, they will *replace* the existing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaigns",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the campaign"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"questions\": [\n    {\n      \"question_type\": \"<string>\",\n      \"question\": \"<string>\",\n      \"page_number\": \"<number>\",\n      \"question_number\": \"<number>\",\n      \"question_attributes\": {\n        \"allow_library\": \"<boolean>\",\n        \"hide_mobile\": \"<boolean>\",\n        \"mandatory\": \"<boolean>\"\n      }\n    },\n    {\n      \"question_type\": \"<string>\",\n      \"question\": \"<string>\",\n      \"page_number\": \"<number>\",\n      \"question_number\": \"<number>\",\n      \"question_attributes\": {\n        \"allow_library\": \"<boolean>\",\n        \"hide_mobile\": \"<boolean>\",\n        \"mandatory\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b69ed32a-9f88-4b63-aa21-59d3b250f12f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaigns",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the campaign"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"questions\": [\n    {\n      \"question_type\": \"<string>\",\n      \"question\": \"<string>\",\n      \"page_number\": \"<number>\",\n      \"question_number\": \"<number>\",\n      \"question_attributes\": {\n        \"allow_library\": \"<boolean>\",\n        \"hide_mobile\": \"<boolean>\",\n        \"mandatory\": \"<boolean>\"\n      }\n    },\n    {\n      \"question_type\": \"<string>\",\n      \"question\": \"<string>\",\n      \"page_number\": \"<number>\",\n      \"question_number\": \"<number>\",\n      \"question_attributes\": {\n        \"allow_library\": \"<boolean>\",\n        \"hide_mobile\": \"<boolean>\",\n        \"mandatory\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0af0f993-c4e4-426b-93f4-8c3b367013d2",
+          "name": "Delete",
+          "request": {
+            "name": "Delete",
+            "description": {
+              "content": "Delete a campaign by id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaigns",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the campaign"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1644665f-4a7e-44e0-af3b-1c255290407e",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaigns",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the campaign"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1dd7cf88-f6be-451e-a57c-6bced759f5b8",
+          "name": "Create",
+          "request": {
+            "name": "Create",
+            "description": {
+              "content": "Create a campaign.\n\n`icon_url` and `background_url` can be a file's `_downloadURL` or a created photo's `url`. Both have to begin with https://.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaigns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\",\n  \"group_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"icon_url\": \"<string>\",\n  \"background_url\": \"<string>\",\n  \"page_titles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"questions\": [\n    {\n      \"question_type\": \"<string>\",\n      \"question\": \"<string>\",\n      \"question_description\": \"<string>\",\n      \"page_number\": \"<number>\",\n      \"question_number\": \"<number>\"\n    },\n    {\n      \"question_type\": \"<string>\",\n      \"question\": \"<string>\",\n      \"question_description\": \"<string>\",\n      \"page_number\": \"<number>\",\n      \"question_number\": \"<number>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aace1f41-c9da-4b52-a85e-8312cd8583e0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\",\n  \"group_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"icon_url\": \"<string>\",\n  \"background_url\": \"<string>\",\n  \"page_titles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"questions\": [\n    {\n      \"question_type\": \"<string>\",\n      \"question\": \"<string>\",\n      \"question_description\": \"<string>\",\n      \"page_number\": \"<number>\",\n      \"question_number\": \"<number>\"\n    },\n    {\n      \"question_type\": \"<string>\",\n      \"question\": \"<string>\",\n      \"question_description\": \"<string>\",\n      \"page_number\": \"<number>\",\n      \"question_number\": \"<number>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"campaign_id\": \"5dc18578883086880887175e\",\n  \"title\": \"<p>campaign title here</p>\",\n  \"description\": \"campaign description here\",\n  \"type\": \"mission\",\n  \"group_ids\": [\n    \"staff\"\n  ],\n  \"page_titles\": [\n    \"My first page title\"\n  ],\n  \"icon_url\": \"https://res.cloudinary.com/www-yoobic-com/image/upload/a_exif/v1569401814/ji2yhtw926naemtsj6xr.png\",\n  \"background_url\": \"https://res.cloudinary.com/www-yoobic-com/image/upload/a_exif/v1569401827/seuuqjbry1e4uusi0nta.png\",\n  \"questions\": [\n    {\n      \"question_id\": \"32e1e38c-961a-421f-8cb7-ee1eafefbace\",\n      \"question_type\": \"text\",\n      \"question\": \"Dow do the shelves look today?\",\n      \"question_description\": \"<p>Tell us what you see from left to right.</p>\",\n      \"page_number\": 1,\n      \"question_number\": 1,\n      \"mandatory\": false\n    }\n  ],\n  \"created_date\": \"2019-11-05T14:21:44.361Z\",\n  \"updated_date\": \"2019-11-05T14:21:44.361Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53d895c3-54f4-4696-a7a0-2f02ed3af074",
+          "name": "Publish",
+          "request": {
+            "name": "Publish",
+            "description": {
+              "content": "Publish missions of a campaign to automatically create one mission per targeted site or per targeted user.\nThe result is the number of newly created missions and the mission ids.\n\n**Important**\nThe mission must be assigned before booking: error message: \"Mission must have an assigned user before it can be booked. Please call the assign endpoint prior to booking the mission.\"\n\n- Only campaigns of type memo, form and workflow are supported (quick tasks not supported)\n\n- Memos cannot be personalised by site (the message is sent as configured in the YOOBIC app)\n\n- If campaign audience is set by site: not possible to specify user_ids for publication\n\n- If campaign audience is set by user: not possible to specify store_ids for publication\n\n- If store_ids specified: missions published to all sites specified OR that match the campaign audience (store_ids that do not match the campaign audience criteria are added)\n\n- If user_ids specified: missions published to all users specified AND that match the campaign audience (user_ids that do not match the campaign audience criteria are ignored)\n\n- If no store_ids specified: missions published to all sites in the audience of the campaign (if the audience is not null)\n\n- If no user_ids specified: missions published to all users in the audience of the campaign (if the audience is not null)\n\n**Example:**\n\nFor a form campaign by site with an audience of 5 sites:\n\n- if no `store_ids`, `store_client_ids`, `store_type_ids` is specified in the request:\n\nRequest - Body:\n\n```\n{}\n```\n\nResponse - Body:\n\n```\n{\n  \"count\": 5,\n  \"mission_ids\": [\n    \"5bf166a4e44684a31c7a5f86\",\n    \"5bf166a4e44684a31c7a5f87\",\n    \"5bf166a4e44684a31c7a5f88\",\n    \"5bf166a4e44684a31c7a5f89\",\n    \"5bf166a4e44684a31c7a5f8a\"\n  ]\n}\n```\n\n- if `store_ids` is specified in the request:\n\nRequest - Body:\n\n```\n{\n  \"store_ids\": [\n    \"674843fbf7b5a0004845026b\"\n  ]\n}\n```\n\nResponse - Body:\n\n```\n{\n  \"count\": 1,\n  \"mission_ids\": [\n    \"5bf166a4e44684a31c7a5f8c\"\n  ]\n}\n```\n\n### Fields\n\n| Field                | Format   | Required | Description     |\n|----------------------|----------|:--------:|-----------------|\n|`store_ids`           |  array   |          | Unique store ids|\n|`store_client_ids`    |  array   |          | External unique ids of the stores as it may exists in your Information System|\n|`store_type_ids`      |  array   |          | The ids of the store types|\n|`user_ids`            |  array   |          | Unique user ids |\n|`skip_when_available` |  boolean |          | Skip publishing for a store if there is already an unbooked mission of the same campaign on that store |\n|`skip_when_exists`    |  boolean |          | Skip publishing for a store if there is already a mission of the same campaign on that store (regardless of status) |\n|`valid_from`          |  date    |          | Make a mission visible from the specified date |\n|`valid_until`         |  date    |          | Archive an available or ongoing mission after the specified date & time. (Script is run every hour) |\n|`due_date`            |  date    |          | Due date in UTC |\n|`mission_title`       |  string  |          | If exists, it replaces the default campaign title. See below for further details |\n|`answers`             |  array   |          | Default values for the published missions |\n|`notify`              |  boolean |          | if true will send a notification at publication. More information on who receives the notification in [this](https://yoobic.zendesk.com/hc/en-gb/articles/360015946360-Create-Publish-a-Campaign-Form-Missions-Polls-Requests#01G4Z8A3N45FRJB45DD5B2ZJN0) article. If false or not specified, no notification is sent. |\n\n`mission_title` has two placeholders you can add:\n\n+ `{campaign_title}` if supplied, will be replaced with the original campaign title.\n\n+ `{date_now}` if supplied, today's date will be added to the mission title.\n\nSo i.e. a mission_title could look like -    \n``` \"{CAMPAIGN_TITLE} - {DATE_NOW_TEMPLATE} - URGENT\" ``` => ``` \"HQ Store Visit - 01/03/2020 - URGENT\" ```.\n\nThe `answers` field is defined as an array of:\n| Field                | Format   | Required | Description               |\n|----------------------|----------|:--------:|---------------------------|\n|`question_id`         |  string  |    x     | Unique id of the question |\n|`question_type`       |  string  |          | The type of the question  |\n|`question`            |  string  |    x     | The title of the question |\n|`page_number`         |  number  |    x     | The number of the page the question appears in |\n|`answer`              |  any     |          | The value of the answer |\n\nOne of either options is required for the each answer object:\n\n+ question_id\n\n+ question, page_number\n\nThere are two ways to publish a campaign of type `mission`:\n\n- If you have a specific store or list of stores to target, you can specify in the body of the request one of the following:\n\n  + store_ids\n\n  + store_client_ids\n\n  + store_type_ids\n\n- If you have already configured the campaign’s audience in the Campaign’s menu from the user interface, it is possible to publish the campaign on all the stores of the audience, only the stores where a mission from this campaign is not available (`skip_when_available: true`), or only the stores where no mission from this campaign exisits (`skip_when_exists: true`).\n\n**Important**    \nIt is required to have either:\n\n+ At least one active filter with the \"Select all\" function activated to publish on the selection.\n\n+ At least one store manually selected.\n\nIf nothing is selected in the Campaign’s configuration (filters or manual selection) and no stores were specified in the request’s body, then an error will be returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaigns",
+                ":id",
+                "publish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"store_client_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"answers\": [\n    {\n      \"question_type\": \"<string>\",\n      \"question\": \"<string>\",\n      \"page_number\": \"<number>\",\n      \"answer\": [],\n      \"question_id\": \"<string>\"\n    },\n    {\n      \"question_type\": \"<string>\",\n      \"question\": \"<string>\",\n      \"page_number\": \"<number>\",\n      \"answer\": [],\n      \"question_id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7c7b6950-cef3-4701-90e0-052f76067c55",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaigns",
+                    ":id",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"store_client_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"answers\": [\n    {\n      \"question_type\": \"<string>\",\n      \"question\": \"<string>\",\n      \"page_number\": \"<number>\",\n      \"answer\": [],\n      \"question_id\": \"<string>\"\n    },\n    {\n      \"question_type\": \"<string>\",\n      \"question\": \"<string>\",\n      \"page_number\": \"<number>\",\n      \"answer\": [],\n      \"question_id\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 6,\n  \"mission_ids\": [\n    \"5bf166a4e44684a31c7a5f86\",\n    \"5bf166a4e44684a31c7a5f87\",\n    \"5bf166a4e44684a31c7a5f88\",\n    \"5bf166a4e44684a31c7a5f89\",\n    \"5bf166a4e44684a31c7a5f8a\",\n    \"5bf166a4e44684a31c7a5f8b\",\n    \"5bf166a4e44684a31c7a5f8c\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "799d6ed7-d9d2-4af9-89f9-c8e8eaf75e33",
+          "name": "Export data for a Campaign",
+          "request": {
+            "name": "Export data for a Campaign",
+            "description": {
+              "content": "Exports the data from the missions that have been published for this campaign.\n\n#### Exported Fields\n\nThe result file contains generic [`mission fields`](#group-missions-fields) as well as specific columns for each of the questions defined on the campaign. The name of the field for each question is the `question_id`.    \nClick <a href=\"https://res.cloudinary.com/www-yoobic-com/raw/upload/v1558500360/campaign_data_5ce4d1a5c5d27100499b2395_m5wjty.xlsx\">here</a> to download an excel file example.    \n**Important:**\nThe result file contains 2 header rows. The second header row contains additional data from the corresponding question with the format `<question>|<page_number>|<question_number>`. All other fields in this extra header row are blank. Because of the extra header row, files exported by this endpoint contain data starting on the third line rather than the second.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaigns",
+                ":id",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "{{type}}"
+                },
+                {
+                  "key": "filter",
+                  "value": "{{filter}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "A valid JSON filter object"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b3c54816-d917-42ff-9873-c71d2826b541",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaigns",
+                    ":id",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "{}"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Export file\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:56:05.387Z\",\n  \"_id\": \"5b97e5954b99568b4b9101af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31697136-6623-44ab-ae68-b4ea1758e020",
+          "name": "Import (update) data for a Campaign",
+          "request": {
+            "name": "Import (update) data for a Campaign",
+            "description": {
+              "content": "Imports the data to update missions that have been published for this campaign.\n\nSee the [Import file section](#section-import-jobs) for more information.\n\nThe headers and fields imported are the same as those of the campaign data export files. A typical scenario would be to start exporting data for a specific mission, alter the result file, and then import it back.\n\n**Important:**\n\n-   The second header row with the question alignment data must be present, but is not read. All mission fields (except readonly ones, for more details see [missions](#group-missions)) can be modified via the campaign data import.\n\n-   Rows without an existing `mission_id` field will **not** be processed. Only existing missions may be updated by this import endpoint.\n\n-   Fields which contain an object as value cannot be updated. This includes fields with type: catalog, user, store, table\n\n### Fields\n\n| Field                          | Format       | Required | Readonly | Description     |\n|--------------------------------|--------------|:--------:|:--------:|-----------------|\n|`mission_id`                    |  string      |     x    |    x     | Unique id of the mission  |\n|`title`                         |  string      |          |          | The title of the mission  |\n|`type`                          |  string      |          |    x     | Mission type             |\n|`campaign_id`                   |  string      |          |    x     | Unique id of the mission's parent campaign |\n|`user_id`                       |  string      |          |    x     | Unique id of the user who performs the mission   |\n|`creator_id`                    |  string      |          |    x     | Unique id of the mission creator  |\n|`store_id`                      |  string      |          |    x     | Unique id of associated store  |\n|`status`                        |  string      |          |    x     | Current status of the mission if set: `\"scheduled\"`, `\"booked\"`, `\"finished\"`, `\"archived\"`  |\n|`valid_from`                    |  timestamp   |          |    x     | Mission available from   |\n|`republish_count`               |  number      |          |    x     | The number of times the mission was republished  |\n|`booked_date`                   |  timestamp   |          |    x     | The date on which the mission was booked to a user  |\n|`due_date`                      |  timestamp   |          |    x     | The date by which the mission must be completed |\n|`finished_date`                 |  timestamp   |          |    x     | The date on which the mission was finished  |\n|`score`                         |  number      |          |          | The mission's main score as its numeric value (e.g. `10`). In file exports/imports this column holds the score value only; the full `{\"title\", \"value\"}` object is used in the JSON API representation. |\n|`extra_scores`                  |  number      |          |    x     | Export only. Each sub-score is written to its own column, named after the (translated) sub-score title and holding that sub-score's numeric value. It cannot be set via import. |\n|`compliant`                     |  boolean     |          |    x     | The compliance of the mission as marked by an area manager: `true` if marked compliant, `false` if marked noncompliant. If nothing is specified and if the mission is finished, `status` will be \"to validate\" |\n|`compliant_by_default`          |  boolean     |          |    x     | If `true` the mission is automatically marked compliant on finish |\n|`validated_date`                |  timestamp   |          |    x     | The date on which the mission was validated  |\n|`reason_noncompliant`           |  string      |          |    x     | The reason provided by the area manager to explain why the mission was marked noncompliant |\n|`republished_with_answers`      |  boolean     |          |    x     | Has the mission been repulished with the previous answers after being marked noncompliant |\n|`original_mission_id`           |  string      |          |    x     | If present, the `mission_id` of the mission that this mission was republished from |\n|`original_reason_noncompliant`  |  string      |          |    x     | The `reason_noncompliant` from the original mission that was republished. |\n|`action_plan_progress`          |  number      |          |    x     | Completion rate of an action plan.      |\n|`task_number`                   |  number      |          |    x     | Auto generated when a new mission is created. The value is unique within a campaign.      |\n|`created_date`                  |  timestamp   |          |    x     | Mission's creation date     |\n|`updated_date`                  |  timestamp   |          |    x     | Mission's last update date  |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaigns",
+                ":id",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "{{type}}"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                "key": "Content-Disposition",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data, boundary=AaB03x"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "79f1dd0a-1207-4dff-93f8-f5286e11b7db",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaigns",
+                    ":id",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                    "key": "Content-Disposition",
+                    "value": "form-data; name=\"file\"; filename=\"file.csv\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Import file\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:56:05.387Z\",\n  \"_id\": \"5b97e5954b99568b4b9101af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d6f691e-ee71-44bb-a46c-edbf0b48bfbb",
+          "name": "Create Question",
+          "request": {
+            "name": "Create Question",
+            "description": {
+              "content": "Create a single question.\n\n* Restricted to campaigns of type `mission`.\n\n* If there's a conflict in the `question_number` the request takes priority. If you add a question in position 1 in page 1 and there is already a question 1 in the page 1, the new question will be placed in position 1 and the one that already existed is moved to position 2 in page 1.\n\n* The `page_number` and `question_number` are adjusted to the current state. If i.e. the `page_number` does not exist, a new subsequent number will be given regardless of the input.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaigns",
+                ":id",
+                "questions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"<string>\",\n  \"question_type\": \"<string>\",\n  \"page_number\": \"<number>\",\n  \"question_number\": \"<number>\",\n  \"question_attributes\": {\n    \"allow_library\": \"<boolean>\",\n    \"hide_mobile\": \"<boolean>\",\n    \"mandatory\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0a864209-8cf0-4f7c-90b1-5412d99a362c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaigns",
+                    ":id",
+                    "questions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"question\": \"Photo 2\",\n  \"question_type\": \"photo\",\n  \"page_number\": 200,\n  \"question_number\": 12,\n  \"question_attributes\": {\n    \"allow_library\": true,\n    \"hide_mobile\": false,\n    \"mandatory\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8186f0e0-2c58-4462-b4d0-ed456d7ae3b2",
+          "name": "Update Question",
+          "request": {
+            "name": "Update Question",
+            "description": {
+              "content": "Replace a single question.\n\n* Restricted to campaigns of type `mission`.\n\n* If there's a conflict in the `question_number` the request takes priority. If you add a question in position 1 in page 1 and there is already a question 1 in the page 1, the new question will be placed in position 1 and the one that already existed is moved to position 2 in page 1\n\n* The `page_number` and `question_number` are adjusted to the current state. If i.e. the `page_number` does not exist, a new subsequent number will be given regardless of the input.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaigns",
+                ":id",
+                "questions",
+                ":question_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "question_id",
+                  "description": "(Required) The id of the question"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"<string>\",\n  \"question_type\": \"<string>\",\n  \"page_number\": \"<number>\",\n  \"question_number\": \"<number>\",\n  \"question_attributes\": {\n    \"allow_library\": \"<boolean>\",\n    \"hide_mobile\": \"<boolean>\",\n    \"mandatory\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4b44b792-7c28-4785-851c-6c6086d29fe5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaigns",
+                    ":id",
+                    "questions",
+                    ":question_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "question_id",
+                      "description": "(Required) The id of the question"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"question\": \"Photo 2\",\n  \"question_type\": \"photo\",\n  \"page_number\": 1,\n  \"question_number\": 2,\n  \"question_attributes\": {\n    \"allow_library\": true,\n    \"hide_mobile\": false,\n    \"mandatory\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c4fc34a-0f52-4b3a-b219-765d1a7357e4",
+          "name": "Delete Question",
+          "request": {
+            "name": "Delete Question",
+            "description": {
+              "content": "Delete a single question.\n\n* Restricted to campaigns of type `mission`.\n\n* If a single question is removed from a page, that page would be removed as well (unless its the only page of the campaign).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaigns",
+                ":id",
+                "questions",
+                ":question_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "question_id",
+                  "description": "(Required) The id of the question"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ef85aff9-5c94-4db9-956e-69e5f6a4c39f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaigns",
+                    ":id",
+                    "questions",
+                    ":question_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "question_id",
+                      "description": "(Required) The id of the question"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"campaign_id\": \"54ab03c6546847ee0d30086a\",\n  \"created_date\": \"2021-05-23T04:45:02.020Z\",\n  \"updated_date\": \"2021-05-23T04:51:40.862Z\",\n  \"title\": \"Rockets campaign 1\",\n  \"description\": \"campaign description here\",\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"type\": \"mission\",\n  \"page_titles\": [\n    \"Page 1\"\n  ],\n  \"icon_url\": \"https://res.cloudinary.com/www-yoobic-com/image/upload/a_exif/v1569401814/ji2yhtw926naemtsj6xr.png\",\n  \"background_url\": \"https://res.cloudinary.com/www-yoobic-com/image/upload/a_exif/v1569401827/seuuqjbry1e4uusi0nta.png\",\n  \"questions\": [\n    {\n      \"question_id\": \"e8335f8d-109d-475f-b10b-113ce6876dc7\",\n      \"question_type\": \"number\",\n      \"question\": \"number of ice-cream flavors\",\n      \"page_number\": 1,\n      \"question_number\": 1\n    },\n    {\n      \"question_id\": \"e8335f8d-109d-475f-b10b-113ce6876dc8\",\n      \"question_type\": \"text\",\n      \"question\": \"ice-cream flavors\",\n      \"page_number\": 1,\n      \"question_number\": 2\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05746c66-504a-4e07-8adb-b395f0b83b59",
+          "name": "Import audience",
+          "request": {
+            "name": "Import audience",
+            "description": {
+              "content": "Import a simple list of `client_ids` or `titles` of your sites to use it as the audience of an existing campaign.\n\n### Fields\n\n| Field      | Format  | Required | Description     |\n|------------|---------|:--------:|-----------------|\n|`client_id` |  string |    x     | client_id of the store to be added to the audience  |\n|`title`     |  string |    x     | title of the store to be added to the audience  |\n\n**Important:**    \nEither `client_id` or `title` is required. We recommend to import client_ids as they are unique.\nIf multiple stores have the same title in your database they will all be added to the audience if you are importing a list of titles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaigns",
+                ":id",
+                "stores"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the campaign"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                "key": "Content-Disposition",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data, boundary=AaB03x"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "628f589e-78d6-428a-9532-55b515210a02",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaigns",
+                    ":id",
+                    "stores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the campaign"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                    "key": "Content-Disposition",
+                    "value": "form-data; name=\"file\"; filename=\"file.csv\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"campaign_id\": \"61c1af9dc9ee430037e6b622\",\n    \"title\": \"my campaign\",\n    \"type\": \"mission\",\n    \"storesQuery\": {\n      \"query\": {\n        \"where\": {\n          \"_id\": {\n            \"inq\": [\n              \"5f1ff8f221cd73003b84234a\",\n              \"5f4f6d4fb8d7fc003b62ef5c\"\n            ]\n          }\n        }\n      },\n      \"total\": 1,\n      \"mode\": \"selection\",\n      \"selectiondIds\": [\n        \"5f1ff8f221cd73003b84234a\",\n        \"5f4f6d4fb8d7fc003b62ef5c\"\n      ]\n    },\n    \"created_date\": \"2021-12-21T10:42:37.369Z\",\n    \"updated_date\": \"2021-12-21T14:52:13.216Z\"\n  },\n  \"errors\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55c428a5-1a24-4a24-87b3-2ce0d62497ac",
+          "name": "Import new campaigns from template",
+          "request": {
+            "name": "Import new campaigns from template",
+            "description": {
+              "content": "Generate multiple campaigns from an excel file containing the list of new campaigns you wish to create and the campaign template used as source for each.\n\n#### Fields\n\n| Field                 | Format  | Required | Description     |\n|-----------------------|---------|:--------:|-----------------|\n|`template_title`       |  string |    x     | The title of the source template you want to use for the new campaign  |\n|`campaign_title`       |  string |    x     | The title of the new campaign you are creating  |\n|`campaign_description` |  string |          | The description of the new campaign (Formatting HTML)  |\n|`tags`                 |  string |          | The list of tags (separated by commas) of the new campaign   |\n|`start_date`           |  string |          | The date from which the missions published from this campaign will be visible to your users. Note that you still need to publish the campaign even if you specify a start_date. The date has to be written in the ISO-8601 format   |\n|`end_date`             |  string |          | The date after which the missions will be paused for this campaign. The date has to be written in the ISO-8601 format   |\n|`due_date`             |  string |          | The due date indicated for all the missions published from this campaign. The date has to be written in the ISO-8601 format   |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaign-templates",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "{{type}}"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                "key": "Content-Disposition",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data, boundary=AaB03x"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "acfe80da-b99c-484f-a081-e4536710e7f0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaign-templates",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. form-data; name=\"file\"; filename=\"file.csv\"",
+                    "key": "Content-Disposition",
+                    "value": "form-data; name=\"file\"; filename=\"file.csv\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Import file\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:56:05.387Z\",\n  \"_id\": \"5b97e5954b99568b4b9101af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8095b15-7295-4207-8f39-69a23107d0e0",
+          "name": "Get All",
+          "request": {
+            "name": "Get All",
+            "description": {
+              "content": "Get all the campaigns.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaigns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "filter",
+                  "value": "{{filter}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "A valid JSON filter object"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bd5c0912-72c7-4482-9211-1ebee1083275",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "{}"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"campaign_id\": \"54ab03c6546847ee0d30086a\",\n    \"created_date\": \"2018-05-23T04:51:40.862Z\",\n    \"updated_date\": \"2018-05-23T04:51:40.862Z\",\n    \"title\": \"Rockets campaign 1\",\n    \"description\": \"campaign description here\",\n    \"tags\": [\n      \"tag1\",\n      \"tag2\"\n    ],\n    \"type\": \"mission\",\n    \"page_titles\": [\n      \"Page 1\"\n    ],\n    \"icon_url\": \"https://res.cloudinary.com/www-yoobic-com/image/upload/a_exif/v1569401814/ji2yhtw926naemtsj6xr.png\",\n    \"background_url\": \"https://res.cloudinary.com/www-yoobic-com/image/upload/a_exif/v1569401827/seuuqjbry1e4uusi0nta.png\",\n    \"questions\": [\n      {\n        \"question_id\": \"e8335f8d-109d-475f-b10b-113ce6876dc7\",\n        \"question_type\": \"number\",\n        \"question\": \"number of ice-cream flavors\",\n        \"page_number\": 1,\n        \"question_number\": 1\n      },\n      {\n        \"question_id\": \"e8335f8d-109d-475f-b10b-113ce6876dc8\",\n        \"question_type\": \"text\",\n        \"question\": \"ice-cream flavors\",\n        \"page_number\": 1,\n        \"question_number\": 2\n      }\n    ]\n  },\n  {\n    \"campaign_id\": \"54ab03c6546847ee0d30086b\",\n    \"created_date\": \"2018-05-23T04:51:40.862Z\",\n    \"updated_date\": \"2018-05-23T04:51:40.862Z\",\n    \"title\": \"Rockets campaign 2\",\n    \"description\": \"campaign description here\",\n    \"tags\": [\n      \"tag1\",\n      \"tag3\"\n    ],\n    \"type\": \"mission\",\n    \"page_titles\": [\n      \"Page 1\"\n    ],\n    \"icon_url\": \"https://res.cloudinary.com/www-yoobic-com/image/upload/a_exif/v1569401814/ji2yhtw926naemtsj6xr.png\",\n    \"background_url\": \"https://res.cloudinary.com/www-yoobic-com/image/upload/a_exif/v1569401827/seuuqjbry1e4uusi0nta.png\",\n    \"questions\": [\n      {\n        \"question_id\": \"e8335f8d-109d-475f-b10b-113ce6876dc7\",\n        \"question_type\": \"number\",\n        \"question\": \"number of ice-cream flavors\",\n        \"page_number\": 1,\n        \"question_number\": 1\n      },\n      {\n        \"question_id\": \"e8335f8d-109d-475f-b10b-113ce6876dc8\",\n        \"question_type\": \"text\",\n        \"question\": \"do you prefer sorbet?\",\n        \"page_number\": 2,\n        \"question_number\": 1\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b2b5245-b75e-4ffa-a014-04c0a2a773c3",
+          "name": "Count",
+          "request": {
+            "name": "Count",
+            "description": {
+              "content": "Count all the existing entities based on the where filter",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaigns",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "where",
+                  "value": "{{where}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "where",
+                  "value": "<string>",
+                  "description": "A valid JSON [Where filter](#section-api-requests-filter-where)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cda37795-cdf6-4b54-89a7-53cde075463a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaigns",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "where",
+                      "value": "{ \"property\": \"value\" }"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18b24f37-c3b5-453b-bfd1-037670a91a33",
+          "name": "Export",
+          "request": {
+            "name": "Export",
+            "description": {
+              "content": "Export all results as a file.    \nThis action is asynchronous and returns the id of a job. See [`jobs`](#group-jobs) endpoint to query the status of the job. The file will contain the results with all of the fields specified on the resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "campaigns",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "{{type}}"
+                },
+                {
+                  "key": "filter",
+                  "value": "{{filter}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "A valid JSON filter object (does not accept a `fields` filter)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Authorization\": {\n    \"Authorization\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "14228fed-a460-4133-a42a-6aeeb78996c0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "campaigns",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "{}"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "e.g. application/json",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Export file\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:56:05.387Z\",\n  \"_id\": \"5b97e5954b99568b4b9101af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://<base_url>/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The type of file, either `csv` (default value) or `excel`",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "type"
+    }
+  ],
+  "info": {
+    "_postman_id": "35978386-86d5-4ec7-b4e9-c2456a921079",
+    "name": "YOOBIC Public Answers Campaigns API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the **YOOBIC Public API** documentation.\n\nThe **YOOBIC Public API** is designed for developers and engineers who are interested in building custom applications or integrating with other systems or APIs.\nThe API allows you to manage resources in a simple, programmatic way using conventional HTTPS requests.\n\nThe endpoints are intuitive and powerful, allowing you to easily make calls to retrieve information or to execute actions.\n\nThe API documentation will start with a general overview about the design and technology that has been implemented, followed by reference information about specific endpoints.\n\n# Postman Collection\n\nA complete **YOOBIC Postman Collection** is available for download, containing all API endpoints organized by resource groups with pre-configured environments.\n\n**Download:** [YOOBIC Postman Collection](https://assets.yoobic.com/raw/upload/v1767016464/3c85c240-dd03-4981-9814-bc6e5e861fa0.zip)\n\nThis collection includes:\n\n- All API endpoints organized by resource groups\n\n- Pre-configured environments (sandbox, prod)\n\n- Automatic authentication handling\n\n- Example requests and responses\n\n- Ready-to-use test scripts\n\nImport the collection into Postman to quickly start testing the YOOBIC API endpoints.\n\n# What's new\n\nBelow is a list of recent enhancements/changes to the YOOBIC Public API.\n\n### July 21st, 2026\n\n* New [rate limit](#section-api-tech-requirements) for `DELETE` requests (120 per minute) across all endpoints, per client organization. See [Rate Limits](#section-api-tech-requirements).\n\n### June 3rd, 2026\n\n* Clarify `score` and `extra_scores` semantics in [missions](#group-missions) CSV import/export: the `score` column holds the numeric value only; `extra_scores` is export-only with one (translated) column per sub-score.\n\n### March 19th, 2026\n\n* Expand publish documentation on [campaigns](#group-campaigns): per-site/per-user mission creation, `user_ids` parameter, and request/response examples.\n\n* Document that a mission must be assigned before it can be booked on [missions](#group-missions).\n\n### March 4th, 2026\n\n* Document escaping of special characters in CSV import files using double quotes (see [Asynchronous Jobs](#section-async-jobs)).\n\n### January 25th, 2026\n\n* Clarify that `group_ids` on [files](#group-files) accepts an array of group ids, with an updated example.\n\n### December 29th, 2025\n\n* New automatic public api collections\n\n* Add [Bot Messages](#group-bot_messages) endpoint.\n\n* Add [Chats](#group-chats) endpoint.\n\n* Add [Upload file](#reference/files/single-file-api/create) on files.\n\n### April 10th, 2025\n\n* Add `folder_id` field on [`files`](#group-files).\n\n* Add `folder_name` field on [`files`](#group-files).\n\n### February 16th, 2025\n\n* Error messages now partially obscure usernames when relevant.\n\n### January 16th, 2025\n\n* Added support for [SCIM](#group-scim).\n\n### January 15th, 2025\n\n* Add [Communities](#group-communities) endpoint.\n\n* Add [Community Posts](#group-community-posts) endpoint.\n\n### January 1st, 2025\n\n* Add `address` field on [`events`](#group-events).\n\n* Add `virtual_event_link` field on [`events`](#group-events).\n\n* Add `total_users` field on [`events`](#group-events).\n\n### November 10th, 2024\n\n* Add `expires_in` field on [`login`](#reference/auth/group-security/Authentication) [auth](#group-security).\n\n### October 30th, 2024\n\n* Add [Export manager users](#reference/users/multiple-users-api/export-manager-users) endpoint.\n\n* Add [Import manager users](#reference/users/multiple-users-api/import-manager-users) endpoint.\n\n* Add `position` field on [users](#group-users).\n\n* Add `department` field on [users](#group-users).\n\n* Add `division` field on [users](#group-users).\n\n* Add `company` field on [users](#group-users).\n\n* Add `hiring_date` field on [users](#group-users).\n\n* Add `skills` field on [users](#group-users).\n\n* Add `cover` field on [users](#group-users).\n\n* Add `description` field on [users](#group-users).\n\n### August 1st, 2024\n\n* Add `trigger_on_every_match` field on [webhooks](#group-webhooks).\n\n### July 15, 2024\n\n* Add new type for import users `json` on [`import`](#reference/users/multiple-users-api/import) endpoint.\n\n### June 27, 2024\n\n* Add [Bots](#group-bots) endpoint.\n\n* Add `earned_points` field on [courses](#group-courses).\n\n* Add `duration` field on [courses](#group-courses).\n\n* Add `start_date` field on [courses](#group-courses).\n\n* Add `due_date` field on [courses](#group-courses).\n\n* Add `finished_date` field on [courses](#group-courses).\n\n### April 30, 2024\n\n* Add `notify` field on campaign [Publish](#reference/campaigns/single-campaign-api/publish).\n\n### April 17, 2024\n\n* New [rate limit](#section-api-tech-requirements) for `users` endpoint for POST, PATCH and DELETE requests\n\n### January 31, 2024\n\n* Add [Invite users](#reference/users/multiple-users-api/invite-users) endpoint.\n\n* Add [Export archived users](#reference/users/multiple-users-api/export-archived-users) endpoint. The exported file now includes custom fields.\n\n* Add [Export archived stores](#reference/stores/multiple-stores-api/export-archived-stores) endpoint. The exported file now includes custom fields.\n\n### November 3, 2023\n\n* Add [Mission-Comments](#group-mission_comments) endpoint.\n\n### October 23, 2023\n\n* Add `da`, `fi`, `nb` and `sv` fields on [translations](#group-translations).\n\n### August 15, 2023\n\n* Add [Import Users To Archive](#reference/users/multiple-users-api/import-users-to-archive) on users.\n\n* Add [Import Users To Un Archive](#reference/users/multiple-users-api/import-users-to-un-archive) on users.\n\n* Add [Import Stores To Archive](#reference/stores/multiple-stores-api/import-stores-to-archive) on stores.\n\n* Add [Import Stores To Un Archive](#reference/stores/multiple-stores-api/import-stores-to-un-archive) on stores.\n\n### July 26, 2023\n\n* Add extra security asymetric encryption for logins.\n\n### June 20, 2023\n\n* [webhooks](#group-webhooks) change in behavior on sandbox environment.\n\n### April 23, 2023\n\n* Add new supported topics to [webhooks](#group-webhooks).\n\n### April 18, 2023\n\n* Add [Invitees](#reference/events/single-events-api/invitees) endpoint on events.\n\n### March 2, 2023\n\n* Update `group_id` field on [groups](#group-groups).\n\n### February 7, 2023\n\n* Add `weekly_schedule` fields on [users](#group-users).\n\n* Add [Shifts](#group-shifts) endpoint.\n\n### December 20, 2022\n\n* Add `au`, `ido` and `vi` fields on [translations](#group-translations).\n\n### November 23, 2022\n\n* Add `images` field on [news](#group-news).\n\n* Removed `image` field on [news](#group-news) (deprecated).\n\n### October 31, 2022\n\n* Add [Roles](#group-roles) endpoint.\n\n### October 20, 2022\n\n* Add [Questions](#group-questions) endpoint.\n\n### October 13, 2022\n\n* Add [Answers](#group-answers) endpoint.\n\n### September 1, 2022\n\n* Add `client_ids` field on [users](#group-users).\n\n* Add `store_type_names` field on [users](#group-users).\n\n### June 26, 2022\n\n* [`Publish`](#reference/campaigns/single-campaign-api/publish) a campaign based on its current configured audience.\n\n### June 22, 2022\n\n* Add security for [webhooks](#group-webhooks).\n\n* Updated limit to the number of [`notifications`](#group-notifications) that can be sent at once to 50k.\n\n### June 14, 2022\n\n* Add [Events](#group-events) endpoint.\n\n### February 20, 2022\n\n* Add `custom_fields` field on [visits](#group-visits).\n\n### December 21, 2021\n\n* Add [Import audience](#reference/campaigns/single-campaign-api/import-audience) on campaigns.\n\n* Add [Import new campaigns from template](#reference/campaigns/single-campaign-api/import-new-campaigns-from-template) on campaigns.\n\n* Add [Get all archives](#reference/users/multiple-users-api/get-all-archives) on users.\n\n* Add [Get all archives](#reference/stores/multiple-stores-api/get-all-archives) on stores.\n\n### October 27, 2021\n\n* Add `active` field on [campaigns](#group-campaigns).\n\n* Add `archived` field on [campaigns](#group-campaigns).\n\n### September 9, 2021\n\n* Add [jobs](#group-jobs) fields' detail.\n\n* Updated the location of the file containing the errors to be under `error`.\n\n### August 15, 2021\n\n* Errors during an import job are now described in a file and returned as a `download_url` under `errors` in the job response.\n\n### May 12, 2021\n\n* Add [create question](#reference/campaigns/single-campaign-api/create-question) on campaigns.\n\n* Add [update question](#reference/campaigns/single-campaign-api/update-question) on campaigns.\n\n* Add [delete question](#reference/campaigns/single-campaign-api/delete-question) on campaigns.\n\n* Add [partial u pdate](#reference/campaigns/single-campaign-api/partial-update) on campaigns.\n\n### May 10, 2021\n\n* Add get and update a [missions](#reference/missions/single-mission-api/find-mission's-tasks) tasks.\n\n### April 7, 2021\n\n* Add ability to get the missions' answers [missions](#reference/missions/multiple-missions-api/get-all).\n\n### March 16, 2021\n\n* Add `out_of_stock` field on [products](#group-products).\n\n### March 1, 2021\n\n* Add [`Password History`](#reference/users/single-user-api/password-history) method for [users](#group-users)\n\n### January 17, 2021\n\n* Add `terms_of_acceptance_date` field on [users](#group-users).\n\n* Add [tenants](#group-tenants)\n\n### January 13, 2021\n\n* Add `vq_fields` object in [stores](#group-stores) description and endpoints to support virtual queuing\n\n### January 12, 2021\n\n* Add [webhooks](#group-webhooks) endpoint.\n\n### December 28, 2020\n\n* Add [custom-model-instances](#group-custom_model_instances)\n\n### December 7, 2020\n\n* Add `task_number` field on [missions](#group-missions) endpoint.\n\n### November 19, 2020\n\n* Add `capacity` field on [stores](#group-stores) endpoint.\n\n* Add `last_seen` field on [users](#group-users).\n\n* Add `mobile_version` field on [users](#group-users).\n\n* Add `desktop_version` field on [users](#group-users).\n\n### November 10, 2020\n\n* Add `group_ids` field on [inventory](#group-inventory).\n\n### October 26, 2020\n\n* Add [`unarchive`](#reference/stores/single-store-api/unarchive) method for [stores](#group-stores)\n\n* Add [`unarchive`](#reference/users/single-user-api/unarchive) method for [users](#group-users)\n\n### October 22, 2020\n\n* Add [`archive`](#reference/stores/single-store-api/archive) method for [stores](#group-stores)\n\n* Add [`archive`](#reference/users/single-user-api/archive) method for [users](#group-users)\n\n### October 14, 2020\n\n* Add `allow_local_login` field on [users](#group-news).\n\n### September 14, 2020\n\n* Add `tags` field on [news](#group-news).\n\n* Add POST, DELETE and PATCH endpoints for [news](#group-news).\n\n### September 10, 2020\n\n* Add `client_role_extension` field on [users](#group-users).\n\n### August 19, 2020\n\n* Add `action_plan_progress` field on [missions](#group-missions) table.\n\n### July 23, 2020\n\n* Add `available-slots` method on [waitlist-yoobic-visits](#group-waitlist-yoobic-visits) endpoint.\n\n* Update `waitlist-yoobic-visits` response to return store `client_id` and store `title` on [waitlist-yoobic-visits](#group-waitlist-yoobic-visits) endpoints.\n\n### July 05, 2020\n\n* Add [waitlist-yoobic-visits](#group-waitlist-yoobic-visits)\n\n### June 28, 2020\n\n* Add [waitlist-customers](#group-waitlist-customers)\n\n### May 18, 2020\n\n* Add BOOST endpoint ([incentives-kpi](#group-incentives-kpi))\n\n### May 11, 2020\n\n* Add `timezone` field on [stores](#group-stores) endpoint.\n\n### May 5, 2020\n\n* Add `page_titles` field on [campaigns](#group-campaigns) endpoint.\n\n### April 16, 2020\n\n* Add [`delete`](#reference/campaigns/single-campaign-api/delete) method for [campaigns](#group-campaigns)\n\n### February 19, 2020\n\n* Add to [campaigns](#group-campaigns) [`publish`](#reference/campaigns/single-campaign-api/publish) the ability to provide default answers.\n\n### February 13, 2020\n\n* Add [`assign`](#reference/plans/single-plan-api/assign) method for [plans](#group-plans)\n\n### February 5, 2020\n\n* Add `timezone` field on [stores](#group-stores) endpoint.\n\n### February 4, 2020\n\n* Add [`create`](#reference/visits/multiple-visits-api/create) method for [visits](#group-visits)\n\n* Add [`import`](#reference/visits/multiple-visits-api/import) method for [visits](#group-visits)\n\n### January 28, 2020\n\n* Add properties on [campaigns](#group-campaigns) [`publish`](#reference/campaigns/single-campaign-api/publish)\n\n### November 5, 2019\n\n* Add `create` method for [campaigns](#group-campaigns) endpoint.\n\n* Add `create` method for [photos](#group-photos) endpoint.\n\n### October 2, 2019\n\n* Add `store_id` field on [visit](#group-visits).\n\n* Add `user_id` field on [visit](#group-visits).\n\n* Add `creator_id` field on [visit](#group-visits).\n\n### September 5, 2019\n\n* Add [visit](#group-visits) endpoint.\n\n### September 3, 2019\n\n* Add `group_ids` field on [notifications](#group-notifications).\n\n### August 8, 2019\n\n* Add [inventory](#group-inventory) endpoint.\n\n### August 5, 2019\n\n* Add `scoring` field on [campaigns](#group-campaigns).\n\n* Add `recurring` field on [campaigns](#group-campaigns).\n\n* Add `body` field on [notifications](#group-notifications).\n\n* Add `user_ids` field on [notifications](#group-notifications).\n\n* Add `badge_type` field on [notifications](#group-notifications).\n\n* Add `manufacturer` field on [products](#group-products).\n\n* Add `brand` field on [products](#group-products).\n\n* Add `category` field on [products](#group-products).\n\n* Add `images` field on [products](#group-products).\n\n### July 9, 2019\n\n* Add `authorised_viewers` field on [news](#group-news).\n\n* Add `description` field on [news](#group-news).\n\n* Add `group_ids` field on [news](#group-news).\n\n### June 13, 2019\n\n* Add `available_on_book` field on [missions](#group-missions).\n\n* Add `available_on_finished` field on [missions](#group-missions).\n\n### June 3, 2019\n\n* Add `average_completed_lesson` field on [plans](#group-plans).\n\n* Add `photo` field on [stores](#group-stores).\n\n* Add `address` field on [users](#group-users).\n\n### May 16, 2019\n\n* Add `duration` field on [missions](#group-missions).\n\n* Add `duration` field on [lessons](#group-lessons).\n\n### May 8, 2019\n\n* Add `markup_url` field on [photos](#group-photos).\n\n### April 30, 2019\n\n* Add `catalog_title` field on [products](#group-products).\n\n### Mar 24, 2019\n\n* Add `vip` field on [stores](#group-stores).\n\n### Mar 11, 2019\n\n* Remove support for the replace (PUT) resource, in favor of partial update (PATCH).\n\n### Mar 6, 2019\n\n* Document [Current User API](#reference/users/current-user-api/get)\n\n* Document company name restriction on  `Groups` [`create`](#reference/groups/multiple-groups-api/create) and [`import`](#reference/groups/multiple-groups-api/import)\n\n### Feb 25, 2019\n\n* Add endpoint to get a store's [`Health Score`](#reference/stores/single-store-api/health-score-of-a-store-api)\n\n* Add BOOST endpoints ([plans](#group-plans), [courses](#group-courses), [lessons](#group-lessons))\n\n### API Resources Overview\n\n| Resource                                 | GET | POST | PATCH  | DELETE | IMPORT | EXPORT | COUNT |\n|------------------------------------------|:---:|:----:|:------:|:------:|:------:|:------:|:-----:|\n|[`auth`](#group-security)                 |     |  x   |        |        |        |        |       |\n|[`answers`](#group-answers)               |  x  |      |        |        |        |    x   |   x   |\n|[`badges`](#group-badges)                 |  x  |      |        |        |        |    x   |   x   |\n|[`bots`](#group-bots)                     |  x  |      |        |        |        |    x   |   x   |\n|[`bot-messages`](#group-bot_messages)     |     |      |        |        |        |    x   |       |\n|[`campaigns`](#group-campaigns)           |  x  |  x   |   x    |   x    |        |    x   |   x   |\n|[`catalogs`](#group-catalogs)             |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`chats`](#group-chats)                   |     |  x   |        |        |        |        |       |\n|[`comments`](#group-comments)             |  x  |      |        |        |        |    x   |   x   |\n|[`communities`](#group-communities)       |  x  |  x   |   x    |        |        |    x   |   x   |\n|[`community-posts`](#group-community-posts) |  x  |  x   |        |        |    x   |    x   |   x   |\n|[`competencies`](#group-competencies)     |  x  |      |        |        |        |    x   |   x   |\n|[`course-categories`](#group-course-categories)     |  x  |      |        |        |        |    x   |   x   |\n|[`courses`](#group-courses)               |  x  |      |        |        |        |    x   |   x   |\n|[`custom-model-instances`](#group-custom_model_instances)|  |   |    |   |   x    |    x   |       |\n|[`events`](#group-events)                 |  x  |  x   |   x    |   x    |   x    |    x   |   x   |\n|[`files`](#group-files)                   |  x  |  x   |        |        |        |    x   |   x   |\n|[`geofilters`](#group-geofilters)         |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`groups`](#group-groups)                 |  x  |  x   |        |   x    |   x    |    x   |   x   |\n|[`incentives-kpi`](#group-incentives-kpi) |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`inventory`](#group-inventory)           |  x  |      |        |        |        |    x   |   x   |\n|[`lessons`](#group-lessons)               |  x  |      |        |        |        |    x   |   x   |\n|[`missions`](#group-missions)             |  x  |      |    x   |   x    |   x    |    x   |   x   |\n|[`mission_comments`](#group-mission_comments)   |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`news`](#group-news)                     |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`notifications`](#group-notifications)   |  x  |  x   |        |        |        |    x   |   x   |\n|[`photos`](#group-photos)                 |  x  |  x   |        |        |        |    x   |   x   |\n|[`plans`](#group-plans)                   |  x  |      |        |        |        |    x   |   x   |\n|[`products`](#group-products)             |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`questions`](#group-questions)           |  x  |      |        |        |        |    x   |   x   |\n|[`roles`](#group-roles)                   |  x  |      |        |        |        |    x   |   x   |\n|[`salesdata`](#group-salesdata)           |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`shifts`](#group-shifts)                 |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`store-types`](#group-store_types)       |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`stores`](#group-stores)                 |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`tenants`](#group-tenants)               |  x  |      |        |        |        |        |       |\n|[`translations`](#group-translations)     |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`users`](#group-users)                   |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`visits`](#group-visits)                 |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`webhooks`](#group-webhooks)             |  x  |  x   |    x   |   x    |   x    |    x   |   x   |\n|[`jobs`](#group-jobs)                     |  x  |      |        |        |        |        |       |\n\n# Table of Contents\n\n- [API Help](#section-api-help) - We're here to help!\n\n- [API Access](#section-api-access) - API access authentication\n\n- [API Technical Requirements](#section-api-tech-requirements) - Technical requirements for communicating with the API - security protocols and rate limits\n\n- [API Requests](#section-api-requests) - Formatting of requests sent to the **RESTful** YOOBIC API\n    - [Filter](#section-api-requests-filter) - Filter the results using different criteria\n        - [Order](#section-api-requests-filter-order) - Ordering the results\n        - [Paging](#section-api-requests-filter-paging) - Paging through your results\n        - [Where](#section-api-requests-filter-where) - Matching your results\n        - [Fields](#section-api-requests-filter-fields) - including specific fields to your results\n    - [CRUD Requests](#section-api-requests-crud-requests) - Creating/updating/deleting resources\n\n- [API Responses](#section-api-responses) - The common response format of each request\n\n- [Asynchronous Jobs](#section-async-jobs) - How data is requested asynchronously for endpoints\n  - [Export file section](#section-export-jobs)\n  - [Import file section](#section-import-jobs)\n\n- [Endpoint Documentation](#section-endpoint-documentation) - Documentation specific for each endpoint. You may also use the links on the table on the sidebar to navigate to any endpoint.\n    - [Security](#group-security)\n    - [Answers](#group-answers)\n    - [Badges](#group-badges)\n    - [Bots](#group-bots)\n    - [Bot Messages](#group-bot_messages)\n    - [Campaigns](#group-campaigns)\n    - [Catalogs](#group-catalogs)\n    - [Chats](#group-chats)\n    - [Comments](#group-comments)\n    - [Communities](#group-communities)\n    - [Comments](#group-community-posts)\n    - [Competencies](#group-competencies)\n    - [Course-categories](#group-course-categories)\n    - [Courses](#group-courses)\n    - [Custom-model-instances](#group-custom_model_instances)\n    - [Events](#group-events)\n    - [Files](#group-files)\n    - [Geofilters](#group-geofilters)\n    - [Groups](#group-groups)\n    - [Incentives Kpi](#group-incentives-kpi)\n    - [Inventory](#group-inventory)\n    - [Lessons](#group-lessons)\n    - [Missions](#group-missions)\n    - [Missions](#group-mission_comments)\n    - [News](#group-news)\n    - [Notifications](#group-notifications)\n    - [Photos](#group-photos)\n    - [Plans](#group-plans)\n    - [Products](#group-products)\n    - [Questions](#group-questions)\n    - [Roles](#group-roles)\n    - [Salesdata](#group-salesdata)\n    - [SCIM](#group-scim)\n    - [Shifts](#group-shifts)\n    - [Store Types](#group-store_types)\n    - [Stores](#group-stores)\n    - [Tenants](#group-tenants)\n    - [Translations](#group-translations)\n    - [Users](#group-users)\n    - [Visits](#group-visits)\n    - [Webhooks](#group-webhooks)\n    - [Jobs](#group-async-jobs)\n\n<a id=\"section-api-help\"></a>\n\n## API Help\n\nHave questions or need support?\nEmail your YOOBIC Customer Success Manager or [support@yoobic.com](mailto:support@yoobic.com).\n\n<a id=\"section-api-access\"></a>\n\n## API Access\n\nAuthentication to the YOOBIC API uses JWT tokens. They are required for accessing API.    \nJWT tokens are set in the `Authorization` header for your requests as follows:\n\n```\nAuthorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\n```\n\nTo obtain a valid token you can either:\n\n- Use the [`auth/login`](#group-security) endpoint\n\n- Contact your YOOBIC Customer Success Manager or [support@yoobic.com](mailto:support@yoobic.com) to obtain credentials to use in the /auth/login endpoint.\n\n- Please note that in the case you are using a reverse proxy you must set the parameter `proxy_ssl_server_name` to on to successfully connect to the prod environment.\n\n<a id=\"section-api-tech-requirements\"></a>\n\n## API Technical Requirements\n\n### Protocol and Communication\n\n- The api is only accessible via HTTPS, using TLS 1.2 or better. We forward secrecy and AES-GCM, and prohibit insecure connections using SSL 3.0 or RC4.\n\n- Environments    \n      We provide both a Sandbox and a Production environment. Every Friday at 21:55 UTC, Sandbox is refreshed by taking a snapshot of the Production environment. Since this refresh process takes several hours, please avoid using Sandbox during that time. It is available for testing purposes outside of the refresh period.\n\n- Template structure of a request:   \n    - Base url Production: **https://api.yoobic.com/public/api**\n    - Base url Sandbox: **https://api-sandbox.yoobic.com/public/api**\n    - The `<base_url>` variable in the example requests is either `api.yoobic.com` or `api-sandbox.yoobic.com`.\n    - Get all (GET): `/{endpoint}?filter={ \"where\": { \"property\": \"value\" }, \"skip\": 0, \"limit\": 100, \"order\": \"updated_date DESC\", \"fields\": [\"property\"] }`\n    - Count (GET):  `/{endpoint}?where={ \"property\": \"value\" }`\n    - Create (POST): `/{endpoint}` should include a valid JSON object as the body.\n    - Update (PATCH): `/{endpoint}/:id` should include a valid JSON object as the body.\n    - Delete (DELETE): `/{endpoint}/:id`\n\n### Rate Limits\n\nAll limits are applied per client organization. Exceeding a limit returns HTTP error `429 Too Many Requests (Rate Limit Exceeded)`; wait for the current one-minute window to pass and retry.\n\n- **Interval Limit**: 10 requests per second overall. Send requests serially (one at a time); bursts of concurrent requests may be rejected.\n\n- **Delete Limit**: 120 `DELETE` requests per minute across all endpoints.\n\n- **Users Write Limit**: 180 requests per minute (3 per second) for `POST`, `PATCH` and `DELETE` on the `/users` endpoint. These requests also count toward the limits above.\n\n- **Daily Limit**: 100,000 requests per day.\nIf you need higher limits to support your specific use case, please contact your YOOBIC Customer Success Manager or [support@yoobic.com](mailto:support@yoobic.com) — limits can be adjusted per organization.\n\n<a id=\"section-api-requests\"></a>\n\n## API Requests\n\nRequests for the YOOBIC API are all RESTful, with parameters following the endpoint path or in request body.\nEach request in the documentation is displayed with the appropriate HTTP method and sample parameters.\nData may be sent in as parameters or in the request body as JSON.\nThe requests on the YOOBIC API allow for ordering, paging and filtering on a per entity basis.\n\n<a id=\"section-api-requests-filter\"></a>\n\n### Filter\n\nA where filter specifies criteria for returning data.\nWe supports the following kind of filters:\n\n- [Order filter](#section-api-requests-filter-order)\n\n- [Paging filter](#section-api-requests-filter-paging)\n\n- [Where filter](#section-api-requests-filter-where)\n\n- [Fields filter](#section-api-requests-filter-fields)\n\nA filter must be a JSON encoded string (`{\"something\":\"value\"}`).    \nTo do this, simply use the following syntax:\n\n```\n?filter={ Stringified-JSON }\n```\n\nIn the JSON all text keys/strings must be enclosed in quotes (\").\n\n**Important**:     \nWhen using stringified JSON, you must use an equal sign after ?filter in the query string.    \nFor example:\n\n```\nGET /entity?filter={\"where\": { \"entity_id\": 1234 }, \"order\": \"updated_date DESC\", \"limit\": 100, \"fields\": [\"property\", \"property\"] }\n```\n\n<a id=\"section-api-requests-filter-order\"></a>\n\n#### Order Filter\n\nAn *order* filter specifies how to sort the results: ascending (ASC) or descending (DESC) based on the specified property.   \nOrder by one property:\n\n```json\n{ \"order\": \"property <ASC|DESC>\" }\n```\n\nOrder by two or more properties:\n\n```json\n{ \"order\": [\"property <ASC|DESC>\", \"property <ASC|DESC>\",...] }\n```\n\nWhere:\n\n- *property* is the name of the property (field) to sort by.\n\n- *<ASC|DESC>* signifies either ASC for ascending order or DESC for descending order.\n\n**Important**:     \nBy default ordering will be performed according to the *updated_date* property.    \nEach endpoint's table, contains information, to the properties ordering could be performed on.\n\n<a id=\"section-api-requests-filter-paging\"></a>\n\n#### Paging Filter\n\nPaging can be achieved by a combination of *limit* and *skip* parameters.\n\n* *limit* filter limits the number of records returned to the specified number (or less).    \n    The maximum number of records that could be fetched is `1000`.    \n    For anything above that, you might want to consider using the [export](#section-async-jobs) endpoint.    \n    ```json\n        { \"limit\": 5 }\n    ```\n\n* *skip* filter omits the specified number of returned records.\n    ```json\n        { \"skip\": 5 } \n    ```\n\n* If `paging.total > paging.limit` in the response of a request:\n\n    It is possible to use the *skip* filter. Here is an example on how to use it with the users endpoint:    \n    `https://api-sandbox.yoobic.com/public/api/users?filter={\"skip\": 1000}`    \n    The recommended solution is to add a condition to the API script to loop requests if there are too many elements until all of them are returned.    \n    The condition would monitor that `paging.total - paging.limit <= paging.skip` in the response of each request, and if not send another request with `newSkip = Skip + 1000` after receiving the last one.    \n    The other way to manage large requests is to use asynchronous requests. For example with Users, it is possible to export a CSV file of all or some users. See the [export](#section-async-jobs) section for this.\n\n<a id=\"section-api-requests-filter-where\"></a>\n\n#### Where Filter\n\nA *where* filter specifies a set of logical conditions to match, similar to a WHERE clause in a SQL query.\n\nUse the first form below to test equivalence, that is, whether property equals value. Use the second form below for all other conditions.\n\n```json\n{ \"where\": { \"property\": value } }\n```\n\n```json\n{ \"where\": { \"property\": { \"op\" : value } } }\n```\n\n```json\n{ \"where\": { \"and|or\": [{ \"property\": { \"op\" : value } }, { \"property\": { \"op\" : value } }] } }\n```\n\nWhere:\n\n- *property* is the name of a property (field) in the model being queried.\n\n- *value* is a literal value.\n\n- *op* is one of the operators listed below.\n\n| Operator      | Description                                                                                                |\n|---------------|------------------------------------------------------------------------------------------------------------|\n|gt, gte        | Numerical greater than (>); greater than or equal (>=). Valid only for numerical and date values.| \n|lt, lte        | Numerical less than (<); less than or equal (<=). Valid only for numerical and date values. |\n|between        | True if the value is between the two specified values: greater than or equal to first value and less than or equal to second value.| \n|inq, nin       | In / not in an array of values.|\n|neq            | Not equal (!=) |\n\n<a id=\"section-api-requests-filter-fields\"></a>\n\n#### Fields Filter\n\nA *fields* filter specifies properties (fields) to include from the results.\n\n```json\n{ \"fields\": [\"property\", \"property\", ...] }\n```\n\nWhere:\n\n- *property* is the name of the proeprty (field) to include.\n\nBy default, queries return all properties in results. However, if you specify at least one fields filter, then by default the query will include only those you specifically include with filters.\n\n**Important**:     \nThe *export* resource for all endpoints does not allow the *fields* filter.\n\n<a id=\"section-api-requests-crud-requests\"></a>\n\n## CRUD Requests\n\nCreate, update and delete requests follow standard RESTful practices. While some fields\nare available on a resource, you may not be able to set values for *readonly* fields such as `created_date` during\na CREATE, UPDATE or DELETE action (it would just be ignored). The allowed parameters are listed at the beginning of each CRUD section for a particular resource.\n\n<a id=\"section-api-responses\"></a>\n\n## API Responses\n\nThe Response format varies depending on the type of request:\n\n- Single API requests - simple hash, whether it be an error or not.\n\n- Multiple API requests - a hash containing two lists \n  - `data` for successfull requests.\n  - `error` for failed requests.\n\nThe two correspond to the order in the request.\n\n```json\n{\n     \"data\": [],\n     \"error\": []\n}\n```\n\nFor find requests an `error` **or** `data` with an additional `paging` hash -\n\n```json\n{\n    \"data\": [],\n    \"error\": [],\n    \"paging\": {\n          \"skip\": 0,\n          \"limit\": 1000,\n          \"total\": 10000,\n    }\n}\n\n```\n\n- `skip` - The currently requested page. Defaults to `0` if no page is given in the request.\n\n- `limit` - The maximum amount of records that may be returned in this response. If not given in the filter parameter, defaults to `1000`.\n\n- `total` - The total records that match this request, regardless of current paging results.\n\n### Response Headers\n\n- content-type: application/json; charset=utf-8\n\n- status: 200 OK\n\n- ratelimit-limit: 1200\n\n- ratelimit-remaining: 1137\n\n- ratelimit-reset: 1415984218\n\n### Multiple Response Body\n\n#### Description Of Usual Server Responses:\n\n- 200 `OK` - the request was successful (some API calls may return 201 instead).\n\n- 201 `Created` - the request was successful and a resource was created.\n\n- 204 `No Content` - the request was successful but there is no representation to return (i.e. the response is empty).\n\n- 400 `Bad Request` - the request could not be understood or was missing required parameters.\n\n- 401 `Unauthorized` - authentication failed or user doesn't have permissions for requested operation.\n\n- 403 `Forbidden` - access denied.\n\n- 404 `Not Found` - resource was not found.\n\n- 405 `Method Not Allowed` - requested method is not supported for resource.\n\n- 429 `Too Many Requests` - rate limit exceeded.\n\n- 501 `Not Implemented` - the server lacks the ability to fulfill the request. Usually this implies future availability.\n\n<a id=\"section-async-jobs\"></a>\n\n## Asynchronous Jobs\n\nThere are 2 endpoints for async jobs\n\n- `/import`: Import a csv/excel file\n\n- `/export`: Export data as a csv/excel file\n\nBy default, all requests to the External API are synchronous and all data requested are returned within the same request/response cycle.\nOne limitation of this approach is that all responses are limited to a maximum number of records as defined in the [Paging section](#section-api-requests-filter-paging).\nTo enable returning an unlimited number of records, you are able to create a job to be executed asynchronously to return all records that match your current query.\n\n#### Async Jobs\n\n- `GET entity/export`\n\n- `POST entity/import`\n\nGiven the following request to get the stores:\n\n`https://api.yoobic.com/public/api/stores`\n\nIt can be converted into an asynchronous job:\n\n`https://api.yoobic.com/public/api/stores/export?type=csv`\n\n#### Response Structure and Return Codes\n\nWhen an asynchronous job is successfully created, a code of `200` will be returned. Any errors will result in a return code of `400` and error messages will be returned in the standard format.\n\nThe response structure of a requested asynchronous job includes a `job_id` that you use on the [Jobs endpoint](#group-jobs)\nto query for the current status of the endpoint. This structure is almost identical to what is returned from the [Jobs endpoint](#group-jobs).\nPlease refer to that endpoint for more details about obtaining the status of your job.\n\n```json\n{\n  \"name\": \"Export csv\",\n  \"type\": \"normal\",\n  \"priority\": 0,\n  \"nextRunAt\": \"2018-09-11T15:37:23.088Z\",\n  \"_id\": \"5b97e133952d1c8776c9e723\"\n}\n```\n\n#### Export File Format\n\n<a id=\"section-export-jobs\"></a>\n\nThe file formats supported for exporting all records via an asynchronous job are CSV or Excel (xlsx). Once a job is completed, the response\nbody of the [Jobs endpoint](#group-jobs) request will return the `download_url` key that is the URL of the CSV or Excel.\nFor example, the above request will result in a file containing example data delimited by the default delimiter, with headers as follows:\n\n```json\n{\n  \"job_id\": \"5b97e133952d1c8776c9e723\",\n  \"name\": \"Export file\",\n  \"data\": {\n    \"authorization\": \"\",\n    \"input\": {\n      \"filter\": null,\n      \"type\": \"csv\",\n      \"modelName\": \"stores\"\n    },\n    \"output\": {\n      \"errors\": [],\n      \"data\": {\n          \"download_url\": \"https://s3.eu-west-1.amazonaws.com/yoobic.transient-file-storage/stores_6b97e133952d1c8776c9e723.csv\"\n        }\n    },\n    \"stats\": {\n      \"execution_time_milliseconds\": 556.81776,\n      \"execution_time\": \"556.81776 ms\",\n      \"errors\": 0,\n      \"success\": 1\n    }\n  },\n  \"progress\": 1,\n  \"lastFinishedAt\": \"2018-09-11T15:37:28.496Z\"\n}\n```\n\n- Response \"data.input\" object\nThe input parameters when creating the job.\n\n- Response \"data.output.data\" object.    \nThe `data` object in the results hash may be either a hash or an array, depending on the endpoint action.\n\n- Response \"data.output.errors\" hash.    \nThe `errors` array only appears in results to inform the client of errors such as incorrect field formats, model validation errors or server errors.\n\n- Response \"data.stats\" hash.    \nThe `stats` object informs about the total execution time and number of errors and/or successes.\n\n##### Resulting CSV example:\n\n```\n    id; title; address; latitude; longitude; client_id; store_type_id; store_type_name; created_date; updated_date\n    5b97e017952d1c8776c9e71e; Home; Statue of Liberty, New York, USA; 40.6895453; -74.0449292; 001; 5b97e00411ec54f2e3a0936e; TEST; 2018-09-11T15:32:39.607Z; 2018-09-11T15:32:39.607Z\n```\n\n#### Resulting Excel example:\n\nIn case of a request to export an excel file `https://api.yoobic.com/public/api/stores/export?type=excel` it would result in:    \n<img src=\"https://res.cloudinary.com/www-yoobic-com/image/upload/v1554025223/export_excel_example.png\" >\n\n##### Export File Expiration\n\nCurrently all exports are set to expire **one day** after they are created at which point they will be inaccessible.\n\n#### Import File\n\n<a id=\"section-import-jobs\"></a>\n\n<a id=\"section-asynchronous-jobs-import\"></a>\nImport a CSV/Excel file.    \nThis action is asynchronous and returns the id of a job. See [`jobs`](#group-jobs) endpoint to query the status of the job.\nMake sure that you make a multipart/form-data query, passing the CSV/Excel file as named parameter `file`.\nWhen you create a CSV/Excel file to import, you'll probably generate this list from some other information management system or database. Most of these systems have some facility for creating a CSV/Excel export file. If you need to create the list from scratch you can use a program like Microsoft Excel or OpenOffice.org Calc.\n\n**Important**:\n\n- To ensure correct handling of special characters, you must generate the CSV/Excel file using the UTF-8 character encoding.\n\n- The first row of the file is the header row, and you must include it in the file.\n\n- The header row must contain any required fields in the table below, plus any other fields listed in the table below that you want to include.\n\n- Empty columns of data in the file will overwrite any existing data for that entity (empty column is treated as a *null* value).\n\n- For Excel files, array type fields (i.e.: `tags` for users or stores, `client_ids` for users…) must be comma separated string i.e.: Tag1,Tag2,Tag3 or Tag1, Tag2, Tag3\n\n- For CSV files, array type fields can be either comma separated strings (i.e.: Tag1,Tag2,Tag3 or Tag1, Tag2, Tag3) or JSON array with quotes (i.e.: `\"[\"Tag1\",\"Tag2\",\"Tag3\"]\"`)- In Addition for CSV the field separator is `;` and line separator is `line-break`.\n\n- Make sure there are no duplicates by the defined primary keys as there is no guarantee on the order in which the import iterates over the rows.\n\n- Date values should comply with the ISO format, i.e. 2019-12-31 or 2019-12-31T23:59:59:999.\n\n- Escape special characters in CSV files with double quotes, for example: `\"<a href=\"\"https://example.com\"\">Link</a>\"`.",
+      "type": "text/plain"
+    }
+  }
+}
