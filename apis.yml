@@ -41,6 +41,17 @@ tags:
 - Microlearning
 - Employee Experience
 - REST
+- Webhook
+- SCIM
+tags_raw:
+- Company
+- Retail
+- Frontline Operations
+- Task Management
+- Workforce
+- Microlearning
+- Employee Experience
+- REST
 - Webhooks
 - SCIM
 apis:
@@ -1187,6 +1198,8 @@ apis:
   humanURL: https://docs.yoobic.com/api.html
   baseURL: https://api.yoobic.com/public/api
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -1254,6 +1267,8 @@ apis:
   humanURL: https://docs.yoobic.com/api.html
   baseURL: https://api.yoobic.com/public/api
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -1409,6 +1424,8 @@ apis:
   humanURL: https://docs.yoobic.com/api.html
   baseURL: https://api.yoobic.com/public/api
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -1724,6 +1741,8 @@ apis:
   humanURL: https://docs.yoobic.com/api.html
   baseURL: https://api.yoobic.com/public/api
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -2172,6 +2191,8 @@ apis:
   humanURL: https://docs.yoobic.com/api.html
   baseURL: https://api.yoobic.com/public/api
   tags:
+  - Notification
+  tags_raw:
   - Notifications
   properties:
   - type: OpenAPI
@@ -2374,6 +2395,8 @@ apis:
   humanURL: https://docs.yoobic.com/api.html
   baseURL: https://api.yoobic.com/public/api
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -3104,6 +3127,8 @@ apis:
   humanURL: https://docs.yoobic.com/api.html
   baseURL: https://api.yoobic.com/public/api
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -3271,6 +3296,8 @@ apis:
   humanURL: https://docs.yoobic.com/api.html
   baseURL: https://api.yoobic.com/public/api
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
