@@ -9,6 +9,18 @@ description: >-
   API is a RESTful JSON API (OpenAPI 3.0, 230 paths / 265 operations across 41
   resource groups) for programmatically managing users, stores, missions,
   campaigns, learning, communities, and webhooks, secured with JWT bearer tokens.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -3329,6 +3341,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/yoobic-capability-edges.yml
+  name: Yoobic Business Capability Map
 - type: AgentSkill
   url: skills/yoobic-manage-missions.md
 - type: MCPServer
