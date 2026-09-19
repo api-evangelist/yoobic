@@ -572,6 +572,8 @@ apis:
   humanURL: https://docs.yoobic.com/api.html
   baseURL: https://api.yoobic.com/public/api
   tags:
+  - Catalog
+  tags_raw:
   - Catalogs
   properties:
   - type: OpenAPI
@@ -3011,6 +3013,8 @@ apis:
   humanURL: https://docs.yoobic.com/api.html
   baseURL: https://api.yoobic.com/public/api
   tags:
+  - Translation
+  tags_raw:
   - Translations
   properties:
   - type: OpenAPI
