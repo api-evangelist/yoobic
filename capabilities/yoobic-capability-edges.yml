@@ -1,0 +1,75 @@
+slug: yoobic
+provider: Yoobic
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Retail & Consumer Goods
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Courses
+  spec_file: yoobic-courses-api-openapi.yml
+  capability_id: BC-300.40
+  capability_id_l1: BC-300
+  capability_name: Learning & Development Management
+  confidence: 0.85
+  evidence: GET /public/api/courses/{id} Get; vendor 'unifies task management, internal communications,
+    and mobile microlearning'
+  reason: Courses are the learning objects of the microlearning module, plainly Learning & Development
+    Management.
+- tag: Course Categories
+  spec_file: yoobic-course-categories-api-openapi.yml
+  capability_id: BC-300.40
+  capability_id_l1: BC-300
+  capability_name: Learning & Development Management
+  confidence: 0.82
+  evidence: GET /public/api/course-categories?filter={filter} Get All — vendor offers 'mobile microlearning'
+  reason: Course taxonomy for the platform's microlearning module is training content organisation, i.e.
+    Learning & Development Management.
+- tag: Missions
+  spec_file: yoobic-missions-api-openapi.yml
+  capability_id: BC-2310.20
+  capability_id_l1: BC-2310
+  capability_name: In-Store Execution Management
+  confidence: 0.78
+  evidence: POST /public/api/missions/{id}/assign  Assign; POST /public/api/missions/{id}/finish  Finish;
+    POST /public/api/missions/{id}/validate  Validate; GET /public/api/missions/{id}/tasks  Find mission's
+    tasks
+  reason: Missions are assignable, bookable, completable store tasks with sub-tasks and validation — this
+    is retail in-store task execution management for frontline teams, per the vendor's retail operations
+    positioning.
+- tag: Lessons
+  spec_file: yoobic-lessons-api-openapi.yml
+  capability_id: BC-300.40
+  capability_id_l1: BC-300
+  capability_name: Learning & Development Management
+  confidence: 0.75
+  evidence: 'vendor: ''unifies task management, internal communications, and mobile microlearning''; operations
+    GET /public/api/lessons/{id}'
+  reason: Lessons are the microlearning training content objects of this frontline-enablement platform,
+    i.e. learning and development delivery to employees. Only CRUD/read operations, so confidence moderate.
+- tag: Roles
+  spec_file: yoobic-roles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: GET /public/api/acl-roles/{id}  Get
+  reason: The path 'acl-roles' shows these are access-control-list roles, i.e. authorisation role definitions
+    — identity and access management. Read-only surface so moderate confidence.
+- tag: Users
+  spec_file: yoobic-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: PATCH /public/api/users/{id}/password-change  Change Password; POST /public/api/users/{id}/archive  Archive
+  reason: User account lifecycle including creation, archival/unarchival and password change/history is
+    identity and access administration (joiners-movers-leavers), not HR record keeping — the surface exposes
+    credentials, not employment data.
