@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 6
+edge_count: 7
 edges:
 - tag: Courses
   spec_file: yoobic-courses-api-openapi.yml
@@ -73,3 +73,14 @@ edges:
   reason: User account lifecycle including creation, archival/unarchival and password change/history is
     identity and access administration (joiners-movers-leavers), not HR record keeping — the surface exposes
     credentials, not employment data.
+- tag: Webhooks
+  spec_file: yoobic-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.7
+  evidence: POST /public/api/webhooks  Create ... GET /public/api/webhooks?filter={filter}  Get All
+  reason: The endpoints manage outbound webhook subscription records exposed to integrators of the platform's
+    public API, matching Webhook & Event Subscription Management; still partly plumbing, hence moderate
+    confidence.
+  recovered_from: sweep-20260829T005356Z-edges.json
