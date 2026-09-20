@@ -3345,6 +3345,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Plans
+  url: plans/yoobic-plans-pricing.yml
 - type: CapabilityMap
   url: capabilities/yoobic-capability-edges.yml
   name: Yoobic Business Capability Map
