@@ -223,7 +223,7 @@ paths:
           description: OK
           headers: {}
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: Update a subset of properties of a mission
       tags:
       - Missions
@@ -290,6 +290,8 @@ paths:
                   page_number: 1
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
   /public/api/missions/{id}/tasks:
     get:
       responses:
@@ -358,7 +360,7 @@ paths:
                       tasks:
                       - value: TEST
       summary: Find mission's tasks
-      operationId: Find mission's tasks
+      operationId: FindMission'sTasks
       description: Find the tasks for missions of type `todo`
       tags:
       - Missions
@@ -372,13 +374,15 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Find mission's tasks
     put:
       responses:
         '200':
           description: OK
           headers: {}
       summary: Replace mission's tasks
-      operationId: Replace mission's tasks
+      operationId: ReplaceMission'sTasks
       description: 'Update the tasks on a mission of type `todo`.
 
         The `todo` object must contain *all* the tasks defined with the new values.
@@ -396,6 +400,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Replace mission's tasks
   /public/api/missions/{id}/book:
     post:
       responses:
@@ -1049,7 +1055,7 @@ paths:
                       user_id: 5a57539eb937d8003ba3d17f
                       date: '2024-12-30T09:11:51.315Z'
       summary: Find mission's workflow
-      operationId: Find mission's workflow
+      operationId: FindMission'sWorkflow
       description: 'Get information about the workflow of a mission.
 
 
@@ -1081,6 +1087,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Find mission's workflow
   /public/api/missions?filter={filter}:
     get:
       responses:
@@ -1288,7 +1296,7 @@ paths:
                     type: mission
                     task_number: 2
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the missions.
       tags:
       - Missions
@@ -1313,6 +1321,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/missions/count?where={where}:
     get:
       responses:

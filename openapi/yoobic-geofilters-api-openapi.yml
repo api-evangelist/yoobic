@@ -157,7 +157,7 @@ paths:
                     created_date: '2015-04-05T01:55:17.563Z'
                     updated_date: '2015-09-07T11:30:58.643Z'
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: Update a subset of properties of a geofilter
       tags:
       - Geofilters
@@ -184,6 +184,8 @@ paths:
                 - ice-cream-store-10
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
   /public/api/geofilters?filter={filter}:
     get:
       responses:
@@ -282,7 +284,7 @@ paths:
                       created_date: '2015-04-05T01:55:17.563Z'
                       updated_date: '2015-09-07T11:40:58.643Z'
       summary: Get all
-      operationId: Get all
+      operationId: GetAll
       description: Get all geofilters.
       tags:
       - Geofilters
@@ -303,6 +305,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get all
   /public/api/geofilters/count?where={where}:
     get:
       responses:

@@ -63,7 +63,7 @@ paths:
           description: OK
           headers: {}
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: Update a subset of properties of a mission comment
       tags:
       - Mission Comments
@@ -94,6 +94,8 @@ paths:
                 photo_url: https://assets-dev.yoobic.com/image/upload/v1675350130/development/nyjwh5zmbnjxdwtsqfyz.jpg
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
   /public/api/mission-comments?filter={filter}:
     get:
       responses:
@@ -101,7 +103,7 @@ paths:
           description: OK
           headers: {}
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the mission-comments.
       tags:
       - Mission Comments
@@ -122,6 +124,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/mission-comments/count?where={where}:
     get:
       responses:

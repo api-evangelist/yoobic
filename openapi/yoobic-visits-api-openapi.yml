@@ -121,7 +121,7 @@ paths:
                     end_time: '18:30'
                     compliant: true
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: Update a subset of properties of a visit
       tags:
       - Visits
@@ -142,6 +142,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
   /public/api/visits?filter={filter}:
     get:
       responses:
@@ -239,7 +241,7 @@ paths:
                     created_date: '2019-09-04T08:24:30.793Z'
                     updated_date: '2019-09-04T08:24:30.793Z'
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the visits.
       tags:
       - Visits
@@ -260,6 +262,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/visits/count?where={where}:
     get:
       responses:

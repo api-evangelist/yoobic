@@ -133,7 +133,7 @@ paths:
                     created_date: '2018-05-23T04:51:40.862Z'
                     updated_date: '2018-05-23T04:51:40.862Z'
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: Update a subset of properties of a catalog
       tags:
       - Catalogs
@@ -164,6 +164,8 @@ paths:
                 title: Houston Rockets catalog.
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
   /public/api/catalogs?filter={filter}:
     get:
       responses:
@@ -238,7 +240,7 @@ paths:
                     created_date: '2018-05-23T04:51:40.862Z'
                     updated_date: '2018-05-23T04:51:40.862Z'
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the catalogs.
       tags:
       - Catalogs
@@ -259,6 +261,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/catalogs/count?where={where}:
     get:
       responses:

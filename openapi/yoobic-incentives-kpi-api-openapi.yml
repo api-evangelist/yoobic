@@ -201,7 +201,7 @@ paths:
                     created_date: '2020-01-01T00:00:00.000Z'
                     updated_date: '2020-01-01T00:35:00.000Z'
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: Update a subset of properties of an incentive-kpi
       tags:
       - Incentives Kpi
@@ -242,6 +242,8 @@ paths:
                 count: 5
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
   /public/api/incentives-kpi?filter={filter}:
     get:
       responses:
@@ -400,7 +402,7 @@ paths:
                       created_date: '2020-05-11T07:21:56.182Z'
                       updated_date: '2020-05-11T08:21:56.182Z'
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the incentive-kpis.
       tags:
       - Incentives Kpi
@@ -421,6 +423,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/incentives-kpi/count?where={where}:
     get:
       responses:

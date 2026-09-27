@@ -85,7 +85,7 @@ paths:
           description: OK
           headers: {}
       summary: Get all posts
-      operationId: Get all posts
+      operationId: GetAllPosts
       description: Get all posts.
       tags:
       - Community Posts
@@ -106,6 +106,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get all posts
   /public/api/community-posts/{community_post_id}/comments?filter={filter}:
     get:
       responses:
@@ -113,7 +115,7 @@ paths:
           description: OK
           headers: {}
       summary: Get all post comments
-      operationId: Get all post comments
+      operationId: GetAllPostComments
       description: Get all post comments.
       tags:
       - Community Posts
@@ -134,6 +136,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get all post comments
   /public/api/community-posts:
     post:
       responses:
@@ -182,7 +186,7 @@ paths:
                     created_date: '2025-01-08T08:58:49.102Z'
                     updated_date: '2025-01-08T08:58:49.102Z'
       summary: Create a post
-      operationId: Create a post
+      operationId: CreateAPost
       tags:
       - Community Posts
       parameters:
@@ -217,6 +221,8 @@ paths:
                 publish_date: '2025-01-08T07:57:32.036Z'
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Create a post
   /public/api/community-posts/{community_post_id}/comments:
     post:
       responses:
@@ -265,7 +271,7 @@ paths:
                     created_date: '2025-01-08T09:02:59.728Z'
                     updated_date: '2025-01-08T09:02:59.728Z'
       summary: Create a post comment
-      operationId: Create a post comment
+      operationId: CreateAPostComment
       tags:
       - Community Posts
       parameters:
@@ -291,6 +297,8 @@ paths:
                 comment: Good to know :)
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Create a post comment
   /public/api/community-posts/count?where={where}:
     get:
       responses:
@@ -399,15 +407,6 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
 components:
-  schemas:
-    Default_Header:
-      type: object
-      required:
-      - Authorization
-      properties:
-        Authorization:
-          type: string
-          example: Bearer JWT
   requestBodies:
     Get_AllBody:
       content:
@@ -417,6 +416,15 @@ components:
             properties:
               Authorization:
                 $ref: '#/components/schemas/Default_Header'
+  schemas:
+    Default_Header:
+      type: object
+      required:
+      - Authorization
+      properties:
+        Authorization:
+          type: string
+          example: Bearer JWT
   securitySchemes:
     oauth2:
       type: oauth2

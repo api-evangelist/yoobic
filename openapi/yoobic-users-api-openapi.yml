@@ -176,7 +176,7 @@ paths:
                     created_date: '2019-02-10T17:20:11.531Z'
                     updated_date: '2020-11-10T12:11:15.439Z'
       summary: Get
-      operationId: Get
+      operationId: getPublicApiUsersById
       description: Get a user for the given id.
       tags:
       - Users
@@ -197,6 +197,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Get
     delete:
       responses:
         '204':
@@ -434,7 +436,7 @@ paths:
                         - from: 09:00
                           to: '13:00'
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: 'Update a subset of properties of an user.
 
         **Important** - `password` cannot be updated (will be ignored) via this endpoint.'
@@ -502,6 +504,8 @@ paths:
                       to: '13:00'
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
   /public/api/users/{id}/password-change:
     patch:
       responses:
@@ -509,7 +513,7 @@ paths:
           description: OK
           headers: {}
       summary: Change Password
-      operationId: Change Password
+      operationId: ChangePassword
       description: 'Update user''s `password`.
 
         Note - `dontSendMail` / boolean / not required / if `true` no email is sent to the user. If `false` or not specified, an email is sent to the user to inform them about the change.'
@@ -545,6 +549,8 @@ paths:
                 dontSendMail: true
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Change Password
   /public/api/users/{id}/password-change?filter={filter}:
     get:
       responses:
@@ -552,7 +558,7 @@ paths:
           description: OK
           headers: {}
       summary: Password History
-      operationId: Password History
+      operationId: PasswordHistory
       description: 'Get the dates on which a user changed his password.
 
         Note - currently only the `date` field exists, thus filtering is done solely on it.'
@@ -582,6 +588,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Password History
   /public/api/users/{id}/archive:
     post:
       responses:
@@ -943,7 +951,7 @@ paths:
                       created_date: '2018-05-23T04:55:50.862Z'
                       updated_date: '2018-05-23T04:55:50.862Z'
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: 'Get all the users.
 
         **Important:**
@@ -977,6 +985,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/users/archives?filter={filter}:
     get:
       responses:
@@ -1148,7 +1158,7 @@ paths:
                       created_date: '2018-05-23T04:55:50.862Z'
                       updated_date: '2018-05-23T04:55:50.862Z'
       summary: Get all archives
-      operationId: Get all archives
+      operationId: GetAllArchives
       description: Get all archived users. You can use the same filters as for the regular “Get all users” method
       tags:
       - Users
@@ -1169,6 +1179,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get all archives
   /public/api/users/count?where={where}:
     get:
       responses:
@@ -1426,7 +1438,7 @@ paths:
           description: OK
           headers: {}
       summary: Invite users
-      operationId: Invite users
+      operationId: InviteUsers
       description: 'Send account activation reminder
 
 
@@ -1459,6 +1471,8 @@ paths:
                 - 53fb03c6546847ee0d30086b
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Invite users
   /public/api/users/weekly-schedule/export?type={type}&filter={filter}:
     get:
       responses:
@@ -1495,7 +1509,7 @@ paths:
                     nextRunAt: '2018-09-11T15:56:05.387Z'
                     _id: 5b97e5954b99568b4b9101af
       summary: Export Weekly Schedule
-      operationId: Export Weekly Schedule
+      operationId: ExportWeeklySchedule
       description: 'Export all results as a file.
 
         This action is asynchronous and returns the id of a job. See `jobs` endpoint to query the status of the job. The file will contain the results with all of the fields specified on the resource.'
@@ -1525,6 +1539,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Export Weekly Schedule
   /public/api/users/weekly-schedule/import?type={type}:
     patch:
       responses:
@@ -1561,7 +1577,7 @@ paths:
                     nextRunAt: '2018-09-11T15:56:05.387Z'
                     _id: 5b97e5954b99568b4b9101af
       summary: Import Weekly Schedule
-      operationId: Import Weekly Schedule
+      operationId: ImportWeeklySchedule
       description: 'See the Import file section for more information.
 
 
@@ -1608,6 +1624,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/ImportBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Import Weekly Schedule
   /public/api/users/archive/import?type={type}:
     post:
       responses:
@@ -1644,7 +1662,7 @@ paths:
                     nextRunAt: '2018-09-11T15:56:05.387Z'
                     _id: 5b97e5954b99568b4b9101af
       summary: Import Users To Archive
-      operationId: Import Users To Archive
+      operationId: ImportUsersToArchive
       description: 'This method will archive all users found from the imported file.
 
 
@@ -1680,6 +1698,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/ImportBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Import Users To Archive
   /public/api/users_archived/export?type={type}&filter={filter}:
     get:
       responses:
@@ -1716,7 +1736,7 @@ paths:
                     nextRunAt: '2018-09-11T15:56:05.387Z'
                     _id: 5b97e5954b99568b4b9101af
       summary: Export archived users
-      operationId: Export archived users
+      operationId: ExportArchivedUsers
       description: 'Export all results as a file.
 
         This action is asynchronous and returns the id of a job. See `jobs` endpoint to query the status of the job. The file will contain the results with all of the fields specified on the resource.'
@@ -1746,6 +1766,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Export archived users
   /public/api/users/unarchive/import?type={type}:
     post:
       responses:
@@ -1782,7 +1804,7 @@ paths:
                     nextRunAt: '2018-09-11T15:56:05.387Z'
                     _id: 5b97e5954b99568b4b9101af
       summary: Import Users To Un Archive
-      operationId: Import Users To Un Archive
+      operationId: ImportUsersToUnArchive
       description: 'This method will unarchive all users found from the imported file.
 
 
@@ -1818,6 +1840,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/ImportBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Import Users To Un Archive
   /public/api/users/export?type={type}&filter={filter}:
     get:
       responses:
@@ -2096,7 +2120,7 @@ paths:
                     nextRunAt: '2018-09-11T15:56:05.387Z'
                     _id: 5b97e5954b99568b4b9101af
       summary: Export manager users
-      operationId: Export manager users
+      operationId: ExportManagerUsers
       description: 'User managers are used to replicate real-life hierarchy within the YOOBIC app. This enables the use of the Org Chart tab, which provides users with search and visualisation tools to find relationships between managers and their direct reports.
 
 
@@ -2129,6 +2153,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Export manager users
   /public/api/users/managers/import?type={type}:
     patch:
       responses:
@@ -2165,7 +2191,7 @@ paths:
                     nextRunAt: '2018-09-11T15:56:05.387Z'
                     _id: 5b97e5954b99568b4b9101af
       summary: Import manager users
-      operationId: Import manager users
+      operationId: ImportManagerUsers
       description: '### Fields
 
 
@@ -2207,6 +2233,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/ImportBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Import manager users
 components:
   requestBodies:
     ImportBody:

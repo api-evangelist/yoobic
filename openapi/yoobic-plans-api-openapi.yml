@@ -188,7 +188,7 @@ paths:
                       created_date: '2018-11-30T15:20:56.392Z'
                       updated_date: '2019-01-25T13:34:05.098Z'
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the plans.
       tags:
       - Plans
@@ -209,6 +209,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/plans/count?where={where}:
     get:
       responses:
@@ -317,15 +319,6 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
 components:
-  schemas:
-    Default_Header:
-      type: object
-      required:
-      - Authorization
-      properties:
-        Authorization:
-          type: string
-          example: Bearer JWT
   requestBodies:
     Get_AllBody:
       content:
@@ -335,6 +328,15 @@ components:
             properties:
               Authorization:
                 $ref: '#/components/schemas/Default_Header'
+  schemas:
+    Default_Header:
+      type: object
+      required:
+      - Authorization
+      properties:
+        Authorization:
+          type: string
+          example: Bearer JWT
   securitySchemes:
     oauth2:
       type: oauth2

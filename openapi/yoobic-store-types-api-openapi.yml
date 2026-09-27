@@ -114,7 +114,7 @@ paths:
                     created_date: '2016-02-02T14:51:14.644Z'
                     updated_date: '2016-07-15T14:18:41.750Z'
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: Update a subset of properties of a store type
       tags:
       - Store Types
@@ -138,6 +138,8 @@ paths:
                 name: ice-cream
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
   /public/api/store-types?filter={filter}:
     get:
       responses:
@@ -222,7 +224,7 @@ paths:
                       created_date: '2016-02-02T14:51:14.644Z'
                       updated_date: '2016-07-15T14:18:41.750Z'
       summary: Get all
-      operationId: Get all
+      operationId: GetAll
       description: Get all stores.
       tags:
       - Store Types
@@ -243,6 +245,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get all
   /public/api/store-types/count?where={where}:
     get:
       responses:

@@ -141,7 +141,7 @@ paths:
           description: OK
           headers: {}
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: 'Update a subset of properties of a campaign.
 
         If `questions` are passed, they will *replace* the existing.'
@@ -221,6 +221,8 @@ paths:
                     mandatory: false
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
     delete:
       responses:
         '204':
@@ -553,7 +555,7 @@ paths:
                     nextRunAt: '2018-09-11T15:56:05.387Z'
                     _id: 5b97e5954b99568b4b9101af
       summary: Export data for a Campaign
-      operationId: Export data for a Campaign
+      operationId: ExportDataForACampaign
       description: 'Exports the data from the missions that have been published for this campaign.
 
 
@@ -593,6 +595,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Export data for a Campaign
   /public/api/campaigns/{id}/import?type={type}:
     post:
       responses:
@@ -629,7 +633,7 @@ paths:
                     nextRunAt: '2018-09-11T15:56:05.387Z'
                     _id: 5b97e5954b99568b4b9101af
       summary: Import (update) data for a Campaign
-      operationId: Import (update) data for a Campaign
+      operationId: Import(update)DataForACampaign
       description: 'Imports the data to update missions that have been published for this campaign.
 
 
@@ -728,6 +732,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/ImportBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Import (update) data for a Campaign
   /public/api/campaigns/{id}/questions:
     post:
       responses:
@@ -735,7 +741,7 @@ paths:
           description: OK
           headers: {}
       summary: Create Question
-      operationId: Create Question
+      operationId: CreateQuestion
       description: 'Create a single question.
 
 
@@ -790,6 +796,8 @@ paths:
                   mandatory: false
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Create Question
   /public/api/campaigns/{id}/questions/{question_id}:
     put:
       responses:
@@ -797,7 +805,7 @@ paths:
           description: OK
           headers: {}
       summary: Update Question
-      operationId: Update Question
+      operationId: UpdateQuestion
       description: 'Replace a single question.
 
 
@@ -859,6 +867,8 @@ paths:
                   mandatory: false
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Question
     delete:
       responses:
         '200':
@@ -967,7 +977,7 @@ paths:
                       page_number: 1
                       question_number: 2
       summary: Delete Question
-      operationId: Delete Question
+      operationId: DeleteQuestion
       description: 'Delete a single question.
 
 
@@ -994,6 +1004,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete Question
   /public/api/campaigns/{id}/stores:
     put:
       responses:
@@ -1088,7 +1100,7 @@ paths:
                       updated_date: '2021-12-21T14:52:13.216Z'
                     errors: {}
       summary: Import audience
-      operationId: Import audience
+      operationId: ImportAudience
       description: 'Import a simple list of `client_ids` or `titles` of your sites to use it as the audience of an existing campaign.
 
 
@@ -1128,6 +1140,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/ImportBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Import audience
   /public/api/campaign-templates/import?type={type}:
     post:
       responses:
@@ -1164,7 +1178,7 @@ paths:
                     nextRunAt: '2018-09-11T15:56:05.387Z'
                     _id: 5b97e5954b99568b4b9101af
       summary: Import new campaigns from template
-      operationId: Import new campaigns from template
+      operationId: ImportNewCampaignsFromTemplate
       description: 'Generate multiple campaigns from an excel file containing the list of new campaigns you wish to create and the campaign template used as source for each.
 
 
@@ -1207,6 +1221,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/ImportBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Import new campaigns from template
   /public/api/campaigns?filter={filter}:
     get:
       responses:
@@ -1378,7 +1394,7 @@ paths:
                       page_number: 2
                       question_number: 1
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the campaigns.
       tags:
       - Campaigns
@@ -1399,6 +1415,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/campaigns/count?where={where}:
     get:
       responses:

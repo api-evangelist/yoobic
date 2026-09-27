@@ -254,7 +254,7 @@ paths:
                     client_id: VT008
                     username: newgeofilter1
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: Update a subset of properties of a shift
       tags:
       - Shifts
@@ -275,6 +275,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
   /public/api/shifts?filter={filter}:
     get:
       responses:
@@ -378,7 +380,7 @@ paths:
                     client_id: VT008
                     username: newgeofilter1
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the shifts.
       tags:
       - Shifts
@@ -399,6 +401,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/shifts/count?where={where}:
     get:
       responses:

@@ -297,7 +297,7 @@ paths:
                     short_desc: Mission
                     entity_id: 54ab03c6546847ee0d30072b
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the photos.
       tags:
       - Photos
@@ -318,6 +318,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/photos/count?where={where}:
     get:
       responses:
@@ -426,15 +428,6 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
 components:
-  schemas:
-    Default_Header:
-      type: object
-      required:
-      - Authorization
-      properties:
-        Authorization:
-          type: string
-          example: Bearer JWT
   requestBodies:
     Get_AllBody:
       content:
@@ -444,6 +437,15 @@ components:
             properties:
               Authorization:
                 $ref: '#/components/schemas/Default_Header'
+  schemas:
+    Default_Header:
+      type: object
+      required:
+      - Authorization
+      properties:
+        Authorization:
+          type: string
+          example: Bearer JWT
   securitySchemes:
     oauth2:
       type: oauth2

@@ -16,7 +16,7 @@ paths:
           description: OK
           headers: {}
       summary: View Status of a Job
-      operationId: View Status of a Job
+      operationId: ViewStatusOfAJob
       description: ''
       tags:
       - Jobs
@@ -30,6 +30,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: View Status of a Job
 components:
   securitySchemes:
     oauth2:

@@ -126,7 +126,7 @@ paths:
                     description: My New Company Description
                     icon_url: https://res.cloudinary.com/www-yoobic-com/image/upload/a_exif/v1581436892/klsrdxjtz44dtnlsquzc.png
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: 'Update a subset of properties of a group.
 
 
@@ -161,6 +161,8 @@ paths:
                 icon_url: https://res.cloudinary.com/www-yoobic-com/image/upload/a_exif/v1581436892/klsrdxjtz44dtnlsquzc.png
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
   /public/api/groups/{id}/groups:
     post:
       responses:
@@ -209,7 +211,7 @@ paths:
                     updated_date: '2018-10-08T10:15:22.100Z'
                     created_date: '2018-05-22T11:45:22.100Z'
       summary: Add Groups to Group
-      operationId: Add Groups to Group
+      operationId: AddGroupsToGroup
       description: Add groups to a group
       tags:
       - Groups
@@ -223,6 +225,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Add Groups to Group
     delete:
       responses:
         '200':
@@ -260,7 +264,7 @@ paths:
                     updated_date: '2018-10-08T10:15:22.100Z'
                     created_date: '2018-05-22T11:45:22.100Z'
       summary: Remove Groups from Group
-      operationId: Remove Groups from Group
+      operationId: RemoveGroupsFromGroup
       description: Remove groups from a group
       tags:
       - Groups
@@ -274,6 +278,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Remove Groups from Group
   /public/api/groups/{id}/users:
     post:
       responses:
@@ -316,7 +322,7 @@ paths:
                     updated_date: '2018-10-08T10:15:22.100Z'
                     created_date: '2018-05-22T11:45:22.100Z'
       summary: Add Users to Group
-      operationId: Add Users to Group
+      operationId: AddUsersToGroup
       description: Add users to a group
       tags:
       - Groups
@@ -330,6 +336,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Add Users to Group
     delete:
       responses:
         '200':
@@ -367,7 +375,7 @@ paths:
                     updated_date: '2018-10-08T10:15:22.100Z'
                     created_date: '2018-05-22T11:45:22.100Z'
       summary: Remove Users from Group
-      operationId: Remove Users from Group
+      operationId: RemoveUsersFromGroup
       description: Remove users from a group
       tags:
       - Groups
@@ -381,6 +389,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Remove Users from Group
   /public/api/groups?filter={filter}:
     get:
       responses:
@@ -472,7 +482,7 @@ paths:
                       updated_date: '2018-10-08T10:15:22.100Z'
                       created_date: '2018-05-22T11:45:22.100Z'
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the groups.
       tags:
       - Groups
@@ -493,6 +503,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/group/count?where={where}:
     get:
       responses:

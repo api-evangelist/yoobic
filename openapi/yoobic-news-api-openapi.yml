@@ -211,7 +211,7 @@ paths:
                     - rockets_pr
                     - rockets_employees
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: Update a subset of properties of a news object
       tags:
       - News
@@ -239,6 +239,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
   /public/api/news?filter={filter}:
     get:
       responses:
@@ -355,7 +357,7 @@ paths:
                     - rockets_pr
                     - rockets_employees
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the news.
       tags:
       - News
@@ -376,6 +378,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/news/count?where={where}:
     get:
       responses:
@@ -597,15 +601,6 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
 components:
-  schemas:
-    Default_Header:
-      type: object
-      required:
-      - Authorization
-      properties:
-        Authorization:
-          type: string
-          example: Bearer JWT
   requestBodies:
     Get_AllBody:
       content:
@@ -615,6 +610,15 @@ components:
             properties:
               Authorization:
                 $ref: '#/components/schemas/Default_Header'
+  schemas:
+    Default_Header:
+      type: object
+      required:
+      - Authorization
+      properties:
+        Authorization:
+          type: string
+          example: Bearer JWT
   securitySchemes:
     oauth2:
       type: oauth2

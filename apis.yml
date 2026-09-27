@@ -760,6 +760,8 @@ apis:
   humanURL: https://docs.yoobic.com/api.html
   baseURL: https://api.yoobic.com/public/api
   tags:
+  - Community
+  tags_raw:
   - Communities
   properties:
   - type: OpenAPI

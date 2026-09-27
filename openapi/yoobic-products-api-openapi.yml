@@ -119,7 +119,7 @@ paths:
           description: OK
           headers: {}
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the products.
       tags:
       - Products
@@ -140,6 +140,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/products/count?where={where}:
     get:
       responses:

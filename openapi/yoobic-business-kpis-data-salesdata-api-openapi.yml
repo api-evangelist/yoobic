@@ -161,7 +161,7 @@ paths:
                     created_date: '2018-05-23T04:51:40.862Z'
                     updated_date: '2018-05-23T04:51:40.862Z'
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: Update a subset of properties of a salesdata
       tags:
       - Business KPIs data - salesdata
@@ -195,6 +195,8 @@ paths:
                 value_frequency: yearly
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
   /public/api/salesdata?filter={filter}:
     get:
       responses:
@@ -306,7 +308,7 @@ paths:
                       created_date: '2018-05-21T04:51:40.862Z'
                       updated_date: '2018-05-21T04:51:40.862Z'
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the salesdata.
       tags:
       - Business KPIs data - salesdata
@@ -327,6 +329,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/salesdata/count?where={where}:
     get:
       responses:

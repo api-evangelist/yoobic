@@ -157,7 +157,7 @@ paths:
                       created_date: '2024-06-13T09:32:10.859Z'
                       updated_date: '2024-06-13T09:32:10.859Z'
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the bots.
       tags:
       - Bots
@@ -178,6 +178,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/bots/count?where={where}:
     get:
       responses:
@@ -286,15 +288,6 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
 components:
-  schemas:
-    Default_Header:
-      type: object
-      required:
-      - Authorization
-      properties:
-        Authorization:
-          type: string
-          example: Bearer JWT
   requestBodies:
     Get_AllBody:
       content:
@@ -304,6 +297,15 @@ components:
             properties:
               Authorization:
                 $ref: '#/components/schemas/Default_Header'
+  schemas:
+    Default_Header:
+      type: object
+      required:
+      - Authorization
+      properties:
+        Authorization:
+          type: string
+          example: Bearer JWT
   securitySchemes:
     oauth2:
       type: oauth2

@@ -45,7 +45,7 @@ paths:
                     nextRunAt: '2018-09-11T15:56:05.387Z'
                     _id: 5b97e5954b99568b4b9101af
       summary: Get with no answer
-      operationId: Get with no answer
+      operationId: GetWithNoAnswer
       description: Get analytics for a single bot where there is no answer (equivalent to ‘I don’t know' response from the bot).
       tags:
       - Bot Messages
@@ -66,6 +66,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Get with no answer
   /public/api/bot-messages/{id}/export?type=excel&dislike=true:
     get:
       responses:
@@ -102,7 +104,7 @@ paths:
                     nextRunAt: '2018-09-11T15:56:05.387Z'
                     _id: 5b97e5954b99568b4b9101af
       summary: Get with negative feedback
-      operationId: Get with negative feedback
+      operationId: GetWithNegativeFeedback
       description: Get analytics for a single bot where the feedback is negative.
       tags:
       - Bot Messages
@@ -123,6 +125,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Get with negative feedback
   /public/api/bot-messages/export?type={type}&filter={filter}:
     get:
       responses:

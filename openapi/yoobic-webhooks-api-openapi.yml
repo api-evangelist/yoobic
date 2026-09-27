@@ -145,7 +145,7 @@ paths:
                     created_date: '2020-04-27T07:28:54.324Z'
                     updated_date: '2020-04-27T07:28:54.324Z'
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: Update a subset of properties of a webhook
       tags:
       - Webhooks
@@ -176,6 +176,8 @@ paths:
                 is_active: false
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
   /public/api/webhooks?filter={filter}:
     get:
       responses:
@@ -243,7 +245,7 @@ paths:
                     created_date: '2020-04-27T07:28:54.324Z'
                     updated_date: '2020-04-27T07:28:54.324Z'
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the webhooks.
       tags:
       - Webhooks
@@ -264,6 +266,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/webhooks:
     post:
       responses:

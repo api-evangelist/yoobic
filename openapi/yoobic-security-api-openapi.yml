@@ -234,7 +234,7 @@ paths:
                     username: mycompany+yoobicserviceaccount@mycompany.com
                     tenant: mycompany
       summary: Invalidate Token
-      operationId: Invalidate Token
+      operationId: InvalidateToken
       description: Invalidates the existing JSON Web Token (JWT) for the API provided in the Authorization header.
       tags:
       - Security
@@ -248,6 +248,8 @@ paths:
           type: string
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Invalidate Token
 components:
   securitySchemes:
     oauth2:

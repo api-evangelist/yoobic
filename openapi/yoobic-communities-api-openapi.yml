@@ -93,7 +93,7 @@ paths:
           description: OK
           headers: {}
       summary: Get all communitites
-      operationId: Get all communitites
+      operationId: GetAllCommunitites
       description: Get all communities.
       tags:
       - Communities
@@ -114,6 +114,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get all communitites
   /public/api/communities:
     post:
       responses:
@@ -231,7 +233,7 @@ paths:
                   value:
                     message: 662a4534fb6cd214b1fab989 is now a manager of 668d495b335f79001d10cfd7 community
       summary: Nominate a community manager
-      operationId: Nominate a community manager
+      operationId: NominateACommunityManager
       description: Nominate the manager of a community
       tags:
       - Communities
@@ -250,6 +252,8 @@ paths:
         example: 662a4534fb6cd214b1fab989
         schema:
           type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Nominate a community manager
   /public/api/communities/count?where={where}:
     get:
       responses:
@@ -358,15 +362,6 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
 components:
-  schemas:
-    Default_Header:
-      type: object
-      required:
-      - Authorization
-      properties:
-        Authorization:
-          type: string
-          example: Bearer JWT
   requestBodies:
     Get_AllBody:
       content:
@@ -376,6 +371,15 @@ components:
             properties:
               Authorization:
                 $ref: '#/components/schemas/Default_Header'
+  schemas:
+    Default_Header:
+      type: object
+      required:
+      - Authorization
+      properties:
+        Authorization:
+          type: string
+          example: Bearer JWT
   securitySchemes:
     oauth2:
       type: oauth2

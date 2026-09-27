@@ -115,7 +115,7 @@ paths:
                     - event_tag
                     timezone: America/New_York
       summary: Partial Update
-      operationId: Partial Update
+      operationId: PartialUpdate
       description: Update a subset of properties of an event
       tags:
       - Events
@@ -162,6 +162,8 @@ paths:
                 timezone: America/New_York
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Partial Update
     delete:
       responses:
         '204':
@@ -382,7 +384,7 @@ paths:
                       group_ids:
                       - documetation_api
       summary: Get All
-      operationId: Get All
+      operationId: GetAll
       description: Get all the events.
       tags:
       - Events
@@ -403,6 +405,8 @@ paths:
           type: string
       requestBody:
         $ref: '#/components/requestBodies/Get_AllBody'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All
   /public/api/events:
     post:
       responses:
