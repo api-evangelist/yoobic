@@ -40,15 +40,6 @@ paths:
       x-operation-id-source: normalized
       x-operation-id-original: Get All
 components:
-  requestBodies:
-    Get_AllBody:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Authorization:
-                $ref: '#/components/schemas/Default_Header'
   schemas:
     Default_Header:
       type: object
@@ -58,6 +49,15 @@ components:
         Authorization:
           type: string
           example: Bearer JWT
+  requestBodies:
+    Get_AllBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Authorization:
+                $ref: '#/components/schemas/Default_Header'
   securitySchemes:
     oauth2:
       type: oauth2

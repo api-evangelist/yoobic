@@ -1526,17 +1526,17 @@ paths:
         $ref: '#/components/requestBodies/Get_AllBody'
 components:
   requestBodies:
-    Get_AllBody:
+    ImportBody:
       content:
-        application/json:
+        multipart/form-data, boundary=AaB03x:
           schema:
             type: object
             properties:
               Authorization:
                 $ref: '#/components/schemas/Default_Header'
-    ImportBody:
+    Get_AllBody:
       content:
-        multipart/form-data, boundary=AaB03x:
+        application/json:
           schema:
             type: object
             properties:
