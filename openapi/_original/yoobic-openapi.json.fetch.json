@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.yoobic.com/openapi.yaml",
+ "requested_url": "https://docs.yoobic.com/openapi.yaml",
+ "status": 200,
+ "content_type": "text/yaml",
+ "bytes": 907769,
+ "sha256": "dd068ccfa609e18b9eabb71c15ce6b3c5f886fd865767c06850476772f06e01e",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.993), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
